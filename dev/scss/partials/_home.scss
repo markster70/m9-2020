@@ -1,0 +1,56 @@
+.mn-section-home .mn-section-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  padding-top: 10%;
+
+}
+
+
+.mn-section-home-logo {
+  max-width: 120px;
+  height: auto;
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
+
+.mn-section-home-strap {
+  text-align: center;
+  @include font-size(22);
+  font-weight: 400;
+  color: $primary-accent;
+  text-transform: uppercase;
+  letter-spacing: 1rem;
+}
+
+.mn-section-home-hello {
+  text-align: center;
+  @include font-size(36);
+  color: $secondary-accent;
+  text-transform: uppercase;
+  letter-spacing: 2rem;
+  font-weight: 500;
+}
+
+.mn-section-home-copy {
+  text-align: center;
+  max-width: 85%;
+  margin: 0 auto;
+
+  @include breakpoint($bp-xl) {
+    max-width: 40%;
+  }
+}
+
+.mn-section-home-copy-emphasise {
+  @include font-size(18);
+  font-weight: $font-weight-medium;
+  color: $primary-accent;
+  text-transform: uppercase;
+  padding: 0 8px;
+  display: inline-block;
+}

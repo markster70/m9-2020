@@ -1,0 +1,32 @@
+html {
+  font-size: 100%;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  //-webkit-font-smoothing: antialiased;
+}
+
+h1,h2,h3,h4,h5,h6, p, li, button, a.btn, nav a, span, label, input, a, td, th, address, dt,dd {
+  font-family: $base-font-family;
+}
+
+
+h1,h2,h3,h4,h5,h6, p, li, button, a.btn, nav a, span, label, input {
+  line-height: 1.5;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  font-weight: $font-weight-regular;
+}
+
+.mn-body-copy {
+  color : $body-copy-color;
+}
+
+.mn-copy-light {
+  font-weight: $font-weight-light;
+}
+
+

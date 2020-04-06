@@ -1,0 +1,26 @@
+
+
+@mixin font-size($size) {
+
+  font-size: 0px + $size;
+  font-size: 0rem + $size / $base-font-size;
+}
+
+@mixin breakpoint($bp, $min-max: min-width) {
+  $em: $bp/$base-font-size;
+  @media(#{$min-max}: #{$em}em) { @content; }
+}
+
+@mixin ssLandscape() {
+  @media (max-device-width: 799px) and (orientation: landscape) {
+    @content;
+  }
+}
+
+@mixin std-transitions($property:all, $speed: 300ms, $ease: ease 0s) {
+
+  -webkit-transition: $property $speed $ease;
+  -moz-transition: $property $speed $ease;
+  -o-transition: $property $speed $ease;
+  transition: $property $speed $ease;
+}

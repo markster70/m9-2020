@@ -1,0 +1,4 @@
+/dist
+*.css
+.idea/
+node_modules/
