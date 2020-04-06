@@ -1,4 +1,6 @@
-/dist
+dist/css
+dist/video
+dist/images
 *.css
 .idea/
 node_modules/
