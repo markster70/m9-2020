@@ -1,5 +1,7 @@
 const mNineDScript = {};
 
+
+
 mNineDScript.start = {
 
     'config': {
@@ -21,6 +23,9 @@ mNineDScript.start = {
         }
 
         this.runNav();
+        this.runParralax();
+        this.runScrollAnimations();
+        this.scrollToSection();
 
     },
     cursorSetup () {
@@ -147,7 +152,7 @@ mNineDScript.start = {
         const navWrapper = $1('.mn-site-nav');
         const navItems = $('.mn-site-nav-link-item');
         const bodyEl = $1('body');
-        //const navVideoWrap = $1('.mn-site-nav-video-bg');
+        const navVideoWrap = $1('.mn-site-nav-video-bg');
         const navTitle = $1('.mn-site-nav-contact-title');
         const navCopy = $1('.mn-site-nav-contact-txt');
         const navLinks = $('.mn-site-nav-contact-link');
@@ -196,7 +201,7 @@ mNineDScript.start = {
                 if(!tl.isActive()) {
 
                     tl.call(toggleNavTriggerClass);
-                    //tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
+                    tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
                     tl.to(navLinks, {opacity: 0, duration: 0.3});
                     tl.to(navTitle, {opacity: 0, top: -200, duration: 0.5, ease: "expo.out"});
                     tl.to(navCopy, {opacity: 0, left: -50, duration : 0.4,  ease: "circ.out"}, ">-0.3");
@@ -215,24 +220,75 @@ mNineDScript.start = {
                     tl.to(navCopy, {opacity: 1, left: 0, duration : 0.5,  ease: "circ.out"}, ">-0.4");
                     tl.to(navItems, {left: 0, opacity : 1, duration: 0.35, stagger: 0.35, ease: "circ.Out", onStart : addVisibleNavItemClass}, ">-0.4");
                     tl.to(navLinks, {opacity: 1, duration: 0.5});
-                    //tl.to(navVideoWrap, {opacity: 0.5, duration: 0.7, ease: "circ.inOut"});
+                    tl.to(navVideoWrap, {opacity: 1, duration: 2, ease: "circ.inOut"});
 
                 }
             }
 
         });
 
+    },
+    runParralax () {
+        //let rellax = new Rellax('.mn-rellax-el');
+    },
+    runScrollAnimations () {
+
+        const scrollController = new ScrollMagic.Controller();
+        const aboutTl = gsap.timeline({paused: true});
+        let aboutTextTween = aboutTl.to('.mn-about-parralax-text', {opacity: 1, duration: 1.2, x : 0, y : 0, z : 0, ease: "expo.out"});
+        let aboutBgTween = aboutTl.to('.mn-about-parralax-el', {scale: 1.35, duration : 1.0, ease: "circ.inOut"}, ">-1.0");
 
 
 
-    }
+
+        let scene = new ScrollMagic.Scene({
+                triggerElement : '#js-about-top',
+                offset: -500,
+            })
+            .on("enter", function (e) {
+                aboutTl.play();
+
+            })
+            .on("leave", function (e) {
+                aboutTl.reverse();
+            })
+            .addTo(scrollController);
+
+
+    },
+    scrollToSection () {
+
+        let self = this;
+
+        let scrollTriggers = $('.mn-scroll-trig');
+
+        for (let i = 0; i < scrollTriggers.length; i++) {
+            scrollTriggers[i].addEventListener('click', function (e) {
+
+                e.preventDefault();
+
+                let target = this.getAttribute("href");
+
+                self.doPageScroll(target);
+
+            });
+        }
+    },
+    doPageScroll (scrollTarget) {
+
+        gsap.to(window, {duration: 1.3, scrollTo: {y: scrollTarget, autoKill: false}, ease: "circ.inOut"});
+    },
 
 };
 
 
 window.addEventListener('DOMContentLoaded', () => {
 
+    gsap.registerPlugin(ScrollToPlugin);
+
     // dom is loaded!
     mNineDScript.start.init();
+
+
 
 });

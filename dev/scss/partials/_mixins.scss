@@ -24,3 +24,10 @@
   -o-transition: $property $speed $ease;
   transition: $property $speed $ease;
 }
+
+@mixin button-reset () {
+
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}

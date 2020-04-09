@@ -10,6 +10,7 @@
 <?php include 'site-partials/_burger.html'; ?>
 <?php include 'site-partials/_navigation.html'; ?>
 <?php include 'site-partials/_home.html'; ?>
+<?php include 'site-partials/_about.html'; ?>
 <script src="dist/js/m9-2020-concat-script.js"></script>
 
 <div class="cursor-dot-outline"></div>

@@ -5271,6 +5271,1019 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
     delete e["default"];
   }
 });
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+(function (q, g) {
+  "function" === typeof define && define.amd ? define([], g) : "object" === (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports ? module.exports = g() : q.Rellax = g();
+})("undefined" !== typeof window ? window : global, function () {
+  var q = function q(g, u) {
+    function C() {
+      if (3 === a.options.breakpoints.length && Array.isArray(a.options.breakpoints)) {
+        var f = !0,
+            c = !0,
+            b;
+        a.options.breakpoints.forEach(function (a) {
+          "number" !== typeof a && (c = !1);
+          null !== b && a < b && (f = !1);
+          b = a;
+        });
+        if (f && c) return;
+      }
+
+      a.options.breakpoints = [576, 768, 1201];
+      console.warn("Rellax: You must pass an array of 3 numbers in ascending order to the breakpoints option. Defaults reverted");
+    }
+
+    var a = Object.create(q.prototype),
+        l = 0,
+        v = 0,
+        m = 0,
+        n = 0,
+        d = [],
+        w = !0,
+        A = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function (a) {
+      return setTimeout(a, 1E3 / 60);
+    },
+        p = null,
+        x = !1;
+
+    try {
+      var k = Object.defineProperty({}, "passive", {
+        get: function get() {
+          x = !0;
+        }
+      });
+      window.addEventListener("testPassive", null, k);
+      window.removeEventListener("testPassive", null, k);
+    } catch (f) {}
+
+    var D = window.cancelAnimationFrame || window.mozCancelAnimationFrame || clearTimeout,
+        E = window.transformProp || function () {
+      var a = document.createElement("div");
+
+      if (null === a.style.transform) {
+        var c = ["Webkit", "Moz", "ms"],
+            b;
+
+        for (b in c) {
+          if (void 0 !== a.style[c[b] + "Transform"]) return c[b] + "Transform";
+        }
+      }
+
+      return "transform";
+    }();
+
+    a.options = {
+      speed: -2,
+      verticalSpeed: null,
+      horizontalSpeed: null,
+      breakpoints: [576, 768, 1201],
+      center: !1,
+      wrapper: null,
+      relativeToWrapper: !1,
+      round: !0,
+      vertical: !0,
+      horizontal: !1,
+      verticalScrollAxis: "y",
+      horizontalScrollAxis: "x",
+      callback: function callback() {}
+    };
+    u && Object.keys(u).forEach(function (d) {
+      a.options[d] = u[d];
+    });
+    u && u.breakpoints && C();
+    g || (g = ".rellax");
+    k = "string" === typeof g ? document.querySelectorAll(g) : [g];
+
+    if (0 < k.length) {
+      a.elems = k;
+      if (a.options.wrapper && !a.options.wrapper.nodeType) if (k = document.querySelector(a.options.wrapper)) a.options.wrapper = k;else {
+        console.warn("Rellax: The wrapper you're trying to use doesn't exist.");
+        return;
+      }
+
+      var F,
+          B = function B() {
+        for (var f = 0; f < d.length; f++) {
+          a.elems[f].style.cssText = d[f].style;
+        }
+
+        d = [];
+        v = window.innerHeight;
+        n = window.innerWidth;
+        f = a.options.breakpoints;
+        F = n < f[0] ? "xs" : n >= f[0] && n < f[1] ? "sm" : n >= f[1] && n < f[2] ? "md" : "lg";
+        H();
+
+        for (f = 0; f < a.elems.length; f++) {
+          var c = void 0,
+              b = a.elems[f],
+              e = b.getAttribute("data-rellax-percentage"),
+              y = b.getAttribute("data-rellax-speed"),
+              t = b.getAttribute("data-rellax-xs-speed"),
+              g = b.getAttribute("data-rellax-mobile-speed"),
+              h = b.getAttribute("data-rellax-tablet-speed"),
+              k = b.getAttribute("data-rellax-desktop-speed"),
+              l = b.getAttribute("data-rellax-vertical-speed"),
+              m = b.getAttribute("data-rellax-horizontal-speed"),
+              p = b.getAttribute("data-rellax-vertical-scroll-axis"),
+              q = b.getAttribute("data-rellax-horizontal-scroll-axis"),
+              u = b.getAttribute("data-rellax-zindex") || 0,
+              x = b.getAttribute("data-rellax-min"),
+              A = b.getAttribute("data-rellax-max"),
+              C = b.getAttribute("data-rellax-min-x"),
+              D = b.getAttribute("data-rellax-max-x"),
+              E = b.getAttribute("data-rellax-min-y"),
+              L = b.getAttribute("data-rellax-max-y"),
+              r = !0;
+          t || g || h || k ? c = {
+            xs: t,
+            sm: g,
+            md: h,
+            lg: k
+          } : r = !1;
+          t = a.options.wrapper ? a.options.wrapper.scrollTop : window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
+          a.options.relativeToWrapper && (t = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) - a.options.wrapper.offsetTop);
+          var z = a.options.vertical ? e || a.options.center ? t : 0 : 0,
+              I = a.options.horizontal ? e || a.options.center ? a.options.wrapper ? a.options.wrapper.scrollLeft : window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft : 0 : 0;
+          t = z + b.getBoundingClientRect().top;
+          g = b.clientHeight || b.offsetHeight || b.scrollHeight;
+          h = I + b.getBoundingClientRect().left;
+          k = b.clientWidth || b.offsetWidth || b.scrollWidth;
+          z = e ? e : (z - t + v) / (g + v);
+          e = e ? e : (I - h + n) / (k + n);
+          a.options.center && (z = e = .5);
+          c = r && null !== c[F] ? Number(c[F]) : y ? y : a.options.speed;
+          l = l ? l : a.options.verticalSpeed;
+          m = m ? m : a.options.horizontalSpeed;
+          p = p ? p : a.options.verticalScrollAxis;
+          q = q ? q : a.options.horizontalScrollAxis;
+          y = J(e, z, c, l, m);
+          b = b.style.cssText;
+          r = "";
+          if (e = /transform\s*:/i.exec(b)) r = b.slice(e.index), r = (e = r.indexOf(";")) ? " " + r.slice(11, e).replace(/\s/g, "") : " " + r.slice(11).replace(/\s/g, "");
+          d.push({
+            baseX: y.x,
+            baseY: y.y,
+            top: t,
+            left: h,
+            height: g,
+            width: k,
+            speed: c,
+            verticalSpeed: l,
+            horizontalSpeed: m,
+            verticalScrollAxis: p,
+            horizontalScrollAxis: q,
+            style: b,
+            transform: r,
+            zindex: u,
+            min: x,
+            max: A,
+            minX: C,
+            maxX: D,
+            minY: E,
+            maxY: L
+          });
+        }
+
+        K();
+        w && (window.addEventListener("resize", B), w = !1, G());
+      },
+          H = function H() {
+        var d = l,
+            c = m;
+        l = a.options.wrapper ? a.options.wrapper.scrollTop : (document.documentElement || document.body.parentNode || document.body).scrollTop || window.pageYOffset;
+        m = a.options.wrapper ? a.options.wrapper.scrollLeft : (document.documentElement || document.body.parentNode || document.body).scrollLeft || window.pageXOffset;
+        a.options.relativeToWrapper && (l = ((document.documentElement || document.body.parentNode || document.body).scrollTop || window.pageYOffset) - a.options.wrapper.offsetTop);
+        return d != l && a.options.vertical || c != m && a.options.horizontal ? !0 : !1;
+      },
+          J = function J(d, c, b, e, g) {
+        var f = {};
+        d = 100 * (g ? g : b) * (1 - d);
+        c = 100 * (e ? e : b) * (1 - c);
+        f.x = a.options.round ? Math.round(d) : Math.round(100 * d) / 100;
+        f.y = a.options.round ? Math.round(c) : Math.round(100 * c) / 100;
+        return f;
+      },
+          h = function h() {
+        window.removeEventListener("resize", h);
+        window.removeEventListener("orientationchange", h);
+        (a.options.wrapper ? a.options.wrapper : window).removeEventListener("scroll", h);
+        (a.options.wrapper ? a.options.wrapper : document).removeEventListener("touchmove", h);
+        p = A(G);
+      },
+          G = function G() {
+        H() && !1 === w ? (K(), p = A(G)) : (p = null, window.addEventListener("resize", h), window.addEventListener("orientationchange", h), (a.options.wrapper ? a.options.wrapper : window).addEventListener("scroll", h, x ? {
+          passive: !0
+        } : !1), (a.options.wrapper ? a.options.wrapper : document).addEventListener("touchmove", h, x ? {
+          passive: !0
+        } : !1));
+      },
+          K = function K() {
+        for (var f, c = 0; c < a.elems.length; c++) {
+          var b = d[c].verticalScrollAxis.toLowerCase(),
+              e = d[c].horizontalScrollAxis.toLowerCase();
+          f = -1 != b.indexOf("x") ? l : 0;
+          b = -1 != b.indexOf("y") ? l : 0;
+          var g = -1 != e.indexOf("x") ? m : 0;
+          e = -1 != e.indexOf("y") ? m : 0;
+          f = J((f + g - d[c].left + n) / (d[c].width + n), (b + e - d[c].top + v) / (d[c].height + v), d[c].speed, d[c].verticalSpeed, d[c].horizontalSpeed);
+          e = f.y - d[c].baseY;
+          b = f.x - d[c].baseX;
+          null !== d[c].min && (a.options.vertical && !a.options.horizontal && (e = e <= d[c].min ? d[c].min : e), a.options.horizontal && !a.options.vertical && (b = b <= d[c].min ? d[c].min : b));
+          null != d[c].minY && (e = e <= d[c].minY ? d[c].minY : e);
+          null != d[c].minX && (b = b <= d[c].minX ? d[c].minX : b);
+          null !== d[c].max && (a.options.vertical && !a.options.horizontal && (e = e >= d[c].max ? d[c].max : e), a.options.horizontal && !a.options.vertical && (b = b >= d[c].max ? d[c].max : b));
+          null != d[c].maxY && (e = e >= d[c].maxY ? d[c].maxY : e);
+          null != d[c].maxX && (b = b >= d[c].maxX ? d[c].maxX : b);
+          a.elems[c].style[E] = "translate3d(" + (a.options.horizontal ? b : "0") + "px," + (a.options.vertical ? e : "0") + "px," + d[c].zindex + "px) " + d[c].transform;
+        }
+
+        a.options.callback(f);
+      };
+
+      a.destroy = function () {
+        for (var f = 0; f < a.elems.length; f++) {
+          a.elems[f].style.cssText = d[f].style;
+        }
+
+        w || (window.removeEventListener("resize", B), w = !0);
+        D(p);
+        p = null;
+      };
+
+      B();
+      a.refresh = B;
+      return a;
+    }
+
+    console.warn("Rellax: The elements you're trying to select don't exist.");
+  };
+
+  return q;
+});
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+/*! ScrollMagic v2.0.7 | (c) 2019 Jan Paepke (@janpaepke) | license & info: http://scrollmagic.io */
+!function (e, t) {
+  "function" == typeof define && define.amd ? define(t) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = t() : e.ScrollMagic = t();
+}(this, function () {
+  "use strict";
+
+  var _ = function _() {};
+
+  _.version = "2.0.7", window.addEventListener("mousewheel", function () {});
+  var P = "data-scrollmagic-pin-spacer";
+
+  _.Controller = function (e) {
+    var n,
+        r,
+        i = "REVERSE",
+        t = "PAUSED",
+        o = z.defaults,
+        s = this,
+        a = R.extend({}, o, e),
+        l = [],
+        c = !1,
+        f = 0,
+        u = t,
+        d = !0,
+        h = 0,
+        p = !0,
+        g = function g() {
+      0 < a.refreshInterval && (r = window.setTimeout(E, a.refreshInterval));
+    },
+        v = function v() {
+      return a.vertical ? R.get.scrollTop(a.container) : R.get.scrollLeft(a.container);
+    },
+        m = function m() {
+      return a.vertical ? R.get.height(a.container) : R.get.width(a.container);
+    },
+        w = this._setScrollPos = function (e) {
+      a.vertical ? d ? window.scrollTo(R.get.scrollLeft(), e) : a.container.scrollTop = e : d ? window.scrollTo(e, R.get.scrollTop()) : a.container.scrollLeft = e;
+    },
+        y = function y() {
+      if (p && c) {
+        var e = R.type.Array(c) ? c : l.slice(0);
+        c = !1;
+        var t = f,
+            n = (f = s.scrollPos()) - t;
+        0 !== n && (u = 0 < n ? "FORWARD" : i), u === i && e.reverse(), e.forEach(function (e, t) {
+          e.update(!0);
+        });
+      }
+    },
+        S = function S() {
+      n = R.rAF(y);
+    },
+        b = function b(e) {
+      "resize" == e.type && (h = m(), u = t), !0 !== c && (c = !0, S());
+    },
+        E = function E() {
+      if (!d && h != m()) {
+        var t;
+
+        try {
+          t = new Event("resize", {
+            bubbles: !1,
+            cancelable: !1
+          });
+        } catch (e) {
+          (t = document.createEvent("Event")).initEvent("resize", !1, !1);
+        }
+
+        a.container.dispatchEvent(t);
+      }
+
+      l.forEach(function (e, t) {
+        e.refresh();
+      }), g();
+    };
+
+    this._options = a;
+
+    var x = function x(e) {
+      if (e.length <= 1) return e;
+      var t = e.slice(0);
+      return t.sort(function (e, t) {
+        return e.scrollOffset() > t.scrollOffset() ? 1 : -1;
+      }), t;
+    };
+
+    return this.addScene = function (e) {
+      if (R.type.Array(e)) e.forEach(function (e, t) {
+        s.addScene(e);
+      });else if (e instanceof _.Scene) if (e.controller() !== s) e.addTo(s);else if (l.indexOf(e) < 0) for (var t in l.push(e), l = x(l), e.on("shift.controller_sort", function () {
+        l = x(l);
+      }), a.globalSceneOptions) {
+        e[t] && e[t].call(e, a.globalSceneOptions[t]);
+      }
+      return s;
+    }, this.removeScene = function (e) {
+      if (R.type.Array(e)) e.forEach(function (e, t) {
+        s.removeScene(e);
+      });else {
+        var t = l.indexOf(e);
+        -1 < t && (e.off("shift.controller_sort"), l.splice(t, 1), e.remove());
+      }
+      return s;
+    }, this.updateScene = function (e, n) {
+      return R.type.Array(e) ? e.forEach(function (e, t) {
+        s.updateScene(e, n);
+      }) : n ? e.update(!0) : !0 !== c && e instanceof _.Scene && (-1 == (c = c || []).indexOf(e) && c.push(e), c = x(c), S()), s;
+    }, this.update = function (e) {
+      return b({
+        type: "resize"
+      }), e && y(), s;
+    }, this.scrollTo = function (e, t) {
+      if (R.type.Number(e)) w.call(a.container, e, t);else if (e instanceof _.Scene) e.controller() === s && s.scrollTo(e.scrollOffset(), t);else if (R.type.Function(e)) w = e;else {
+        var n = R.get.elements(e)[0];
+
+        if (n) {
+          for (; n.parentNode.hasAttribute(P);) {
+            n = n.parentNode;
+          }
+
+          var r = a.vertical ? "top" : "left",
+              i = R.get.offset(a.container),
+              o = R.get.offset(n);
+          d || (i[r] -= s.scrollPos()), s.scrollTo(o[r] - i[r], t);
+        }
+      }
+      return s;
+    }, this.scrollPos = function (e) {
+      return arguments.length ? (R.type.Function(e) && (v = e), s) : v.call(s);
+    }, this.info = function (e) {
+      var t = {
+        size: h,
+        vertical: a.vertical,
+        scrollPos: f,
+        scrollDirection: u,
+        container: a.container,
+        isDocument: d
+      };
+      return arguments.length ? void 0 !== t[e] ? t[e] : void 0 : t;
+    }, this.loglevel = function (e) {
+      return s;
+    }, this.enabled = function (e) {
+      return arguments.length ? (p != e && (p = !!e, s.updateScene(l, !0)), s) : p;
+    }, this.destroy = function (e) {
+      window.clearTimeout(r);
+
+      for (var t = l.length; t--;) {
+        l[t].destroy(e);
+      }
+
+      return a.container.removeEventListener("resize", b), a.container.removeEventListener("scroll", b), R.cAF(n), null;
+    }, function () {
+      for (var e in a) {
+        o.hasOwnProperty(e) || delete a[e];
+      }
+
+      if (a.container = R.get.elements(a.container)[0], !a.container) throw "ScrollMagic.Controller init failed.";
+      (d = a.container === window || a.container === document.body || !document.body.contains(a.container)) && (a.container = window), h = m(), a.container.addEventListener("resize", b), a.container.addEventListener("scroll", b);
+      var t = parseInt(a.refreshInterval, 10);
+      a.refreshInterval = R.type.Number(t) ? t : o.refreshInterval, g();
+    }(), s;
+  };
+
+  var z = {
+    defaults: {
+      container: window,
+      vertical: !0,
+      globalSceneOptions: {},
+      loglevel: 2,
+      refreshInterval: 100
+    }
+  };
+  _.Controller.addOption = function (e, t) {
+    z.defaults[e] = t;
+  }, _.Controller.extend = function (e) {
+    var t = this;
+    _.Controller = function () {
+      return t.apply(this, arguments), this.$super = R.extend({}, this), e.apply(this, arguments) || this;
+    }, R.extend(_.Controller, t), _.Controller.prototype = t.prototype, _.Controller.prototype.constructor = _.Controller;
+  }, _.Scene = function (e) {
+    var n,
+        l,
+        c = "BEFORE",
+        f = "DURING",
+        u = "AFTER",
+        r = D.defaults,
+        d = this,
+        h = R.extend({}, r, e),
+        p = c,
+        g = 0,
+        a = {
+      start: 0,
+      end: 0
+    },
+        v = 0,
+        i = !0,
+        s = {};
+    this.on = function (e, i) {
+      return R.type.Function(i) && (e = e.trim().split(" ")).forEach(function (e) {
+        var t = e.split("."),
+            n = t[0],
+            r = t[1];
+        "*" != n && (s[n] || (s[n] = []), s[n].push({
+          namespace: r || "",
+          callback: i
+        }));
+      }), d;
+    }, this.off = function (e, o) {
+      return e && (e = e.trim().split(" ")).forEach(function (e, t) {
+        var n = e.split("."),
+            r = n[0],
+            i = n[1] || "";
+        ("*" === r ? Object.keys(s) : [r]).forEach(function (e) {
+          for (var t = s[e] || [], n = t.length; n--;) {
+            var r = t[n];
+            !r || i !== r.namespace && "*" !== i || o && o != r.callback || t.splice(n, 1);
+          }
+
+          t.length || delete s[e];
+        });
+      }), d;
+    }, this.trigger = function (e, n) {
+      if (e) {
+        var t = e.trim().split("."),
+            r = t[0],
+            i = t[1],
+            o = s[r];
+        o && o.forEach(function (e, t) {
+          i && i !== e.namespace || e.callback.call(d, new _.Event(r, e.namespace, d, n));
+        });
+      }
+
+      return d;
+    }, d.on("change.internal", function (e) {
+      "loglevel" !== e.what && "tweenChanges" !== e.what && ("triggerElement" === e.what ? y() : "reverse" === e.what && d.update());
+    }).on("shift.internal", function (e) {
+      t(), d.update();
+    }), this.addTo = function (e) {
+      return e instanceof _.Controller && l != e && (l && l.removeScene(d), l = e, E(), o(!0), y(!0), t(), l.info("container").addEventListener("resize", S), e.addScene(d), d.trigger("add", {
+        controller: l
+      }), d.update()), d;
+    }, this.enabled = function (e) {
+      return arguments.length ? (i != e && (i = !!e, d.update(!0)), d) : i;
+    }, this.remove = function () {
+      if (l) {
+        l.info("container").removeEventListener("resize", S);
+        var e = l;
+        l = void 0, e.removeScene(d), d.trigger("remove");
+      }
+
+      return d;
+    }, this.destroy = function (e) {
+      return d.trigger("destroy", {
+        reset: e
+      }), d.remove(), d.off("*.*"), null;
+    }, this.update = function (e) {
+      if (l) if (e) {
+        if (l.enabled() && i) {
+          var t,
+              n = l.info("scrollPos");
+          t = 0 < h.duration ? (n - a.start) / (a.end - a.start) : n >= a.start ? 1 : 0, d.trigger("update", {
+            startPos: a.start,
+            endPos: a.end,
+            scrollPos: n
+          }), d.progress(t);
+        } else m && p === f && C(!0);
+      } else l.updateScene(d, !1);
+      return d;
+    }, this.refresh = function () {
+      return o(), y(), d;
+    }, this.progress = function (e) {
+      if (arguments.length) {
+        var t = !1,
+            n = p,
+            r = l ? l.info("scrollDirection") : "PAUSED",
+            i = h.reverse || g <= e;
+
+        if (0 === h.duration ? (t = g != e, p = 0 === (g = e < 1 && i ? 0 : 1) ? c : f) : e < 0 && p !== c && i ? (p = c, t = !(g = 0)) : 0 <= e && e < 1 && i ? (g = e, p = f, t = !0) : 1 <= e && p !== u ? (g = 1, p = u, t = !0) : p !== f || i || C(), t) {
+          var o = {
+            progress: g,
+            state: p,
+            scrollDirection: r
+          },
+              s = p != n,
+              a = function a(e) {
+            d.trigger(e, o);
+          };
+
+          s && n !== f && (a("enter"), a(n === c ? "start" : "end")), a("progress"), s && p !== f && (a(p === c ? "start" : "end"), a("leave"));
+        }
+
+        return d;
+      }
+
+      return g;
+    };
+
+    var m,
+        w,
+        t = function t() {
+      a = {
+        start: v + h.offset
+      }, l && h.triggerElement && (a.start -= l.info("size") * h.triggerHook), a.end = a.start + h.duration;
+    },
+        o = function o(e) {
+      if (n) {
+        var t = "duration";
+        x(t, n.call(d)) && !e && (d.trigger("change", {
+          what: t,
+          newval: h[t]
+        }), d.trigger("shift", {
+          reason: t
+        }));
+      }
+    },
+        y = function y(e) {
+      var t = 0,
+          n = h.triggerElement;
+
+      if (l && (n || 0 < v)) {
+        if (n) if (n.parentNode) {
+          for (var r = l.info(), i = R.get.offset(r.container), o = r.vertical ? "top" : "left"; n.parentNode.hasAttribute(P);) {
+            n = n.parentNode;
+          }
+
+          var s = R.get.offset(n);
+          r.isDocument || (i[o] -= l.scrollPos()), t = s[o] - i[o];
+        } else d.triggerElement(void 0);
+        var a = t != v;
+        v = t, a && !e && d.trigger("shift", {
+          reason: "triggerElementPosition"
+        });
+      }
+    },
+        S = function S(e) {
+      0 < h.triggerHook && d.trigger("shift", {
+        reason: "containerResize"
+      });
+    },
+        b = R.extend(D.validate, {
+      duration: function duration(t) {
+        if (R.type.String(t) && t.match(/^(\.|\d)*\d+%$/)) {
+          var e = parseFloat(t) / 100;
+
+          t = function t() {
+            return l ? l.info("size") * e : 0;
+          };
+        }
+
+        if (R.type.Function(t)) {
+          n = t;
+
+          try {
+            t = parseFloat(n.call(d));
+          } catch (e) {
+            t = -1;
+          }
+        }
+
+        if (t = parseFloat(t), !R.type.Number(t) || t < 0) throw n && (n = void 0), 0;
+        return t;
+      }
+    }),
+        E = function E(e) {
+      (e = arguments.length ? [e] : Object.keys(b)).forEach(function (t, e) {
+        var n;
+        if (b[t]) try {
+          n = b[t](h[t]);
+        } catch (e) {
+          n = r[t];
+        } finally {
+          h[t] = n;
+        }
+      });
+    },
+        x = function x(e, t) {
+      var n = !1,
+          r = h[e];
+      return h[e] != t && (h[e] = t, E(e), n = r != h[e]), n;
+    },
+        z = function z(t) {
+      d[t] || (d[t] = function (e) {
+        return arguments.length ? ("duration" === t && (n = void 0), x(t, e) && (d.trigger("change", {
+          what: t,
+          newval: h[t]
+        }), -1 < D.shifts.indexOf(t) && d.trigger("shift", {
+          reason: t
+        })), d) : h[t];
+      });
+    };
+
+    this.controller = function () {
+      return l;
+    }, this.state = function () {
+      return p;
+    }, this.scrollOffset = function () {
+      return a.start;
+    }, this.triggerPosition = function () {
+      var e = h.offset;
+      return l && (h.triggerElement ? e += v : e += l.info("size") * d.triggerHook()), e;
+    }, d.on("shift.internal", function (e) {
+      var t = "duration" === e.reason;
+      (p === u && t || p === f && 0 === h.duration) && C(), t && F();
+    }).on("progress.internal", function (e) {
+      C();
+    }).on("add.internal", function (e) {
+      F();
+    }).on("destroy.internal", function (e) {
+      d.removePin(e.reset);
+    });
+
+    var C = function C(e) {
+      if (m && l) {
+        var t = l.info(),
+            n = w.spacer.firstChild;
+
+        if (e || p !== f) {
+          var r = {
+            position: w.inFlow ? "relative" : "absolute",
+            top: 0,
+            left: 0
+          },
+              i = R.css(n, "position") != r.position;
+          w.pushFollowers ? 0 < h.duration && (p === u && 0 === parseFloat(R.css(w.spacer, "padding-top")) ? i = !0 : p === c && 0 === parseFloat(R.css(w.spacer, "padding-bottom")) && (i = !0)) : r[t.vertical ? "top" : "left"] = h.duration * g, R.css(n, r), i && F();
+        } else {
+          "fixed" != R.css(n, "position") && (R.css(n, {
+            position: "fixed"
+          }), F());
+          var o = R.get.offset(w.spacer, !0),
+              s = h.reverse || 0 === h.duration ? t.scrollPos - a.start : Math.round(g * h.duration * 10) / 10;
+          o[t.vertical ? "top" : "left"] += s, R.css(w.spacer.firstChild, {
+            top: o.top,
+            left: o.left
+          });
+        }
+      }
+    },
+        F = function F() {
+      if (m && l && w.inFlow) {
+        var e = p === f,
+            t = l.info("vertical"),
+            n = w.spacer.firstChild,
+            r = R.isMarginCollapseType(R.css(w.spacer, "display")),
+            i = {};
+        w.relSize.width || w.relSize.autoFullWidth ? e ? R.css(m, {
+          width: R.get.width(w.spacer)
+        }) : R.css(m, {
+          width: "100%"
+        }) : (i["min-width"] = R.get.width(t ? m : n, !0, !0), i.width = e ? i["min-width"] : "auto"), w.relSize.height ? e ? R.css(m, {
+          height: R.get.height(w.spacer) - (w.pushFollowers ? h.duration : 0)
+        }) : R.css(m, {
+          height: "100%"
+        }) : (i["min-height"] = R.get.height(t ? n : m, !0, !r), i.height = e ? i["min-height"] : "auto"), w.pushFollowers && (i["padding" + (t ? "Top" : "Left")] = h.duration * g, i["padding" + (t ? "Bottom" : "Right")] = h.duration * (1 - g)), R.css(w.spacer, i);
+      }
+    },
+        L = function L() {
+      l && m && p === f && !l.info("isDocument") && C();
+    },
+        T = function T() {
+      l && m && p === f && ((w.relSize.width || w.relSize.autoFullWidth) && R.get.width(window) != R.get.width(w.spacer.parentNode) || w.relSize.height && R.get.height(window) != R.get.height(w.spacer.parentNode)) && F();
+    },
+        A = function A(e) {
+      l && m && p === f && !l.info("isDocument") && (e.preventDefault(), l._setScrollPos(l.info("scrollPos") - ((e.wheelDelta || e[l.info("vertical") ? "wheelDeltaY" : "wheelDeltaX"]) / 3 || 30 * -e.detail)));
+    };
+
+    this.setPin = function (e, t) {
+      if (t = R.extend({}, {
+        pushFollowers: !0,
+        spacerClass: "scrollmagic-pin-spacer"
+      }, t), !(e = R.get.elements(e)[0])) return d;
+      if ("fixed" === R.css(e, "position")) return d;
+
+      if (m) {
+        if (m === e) return d;
+        d.removePin();
+      }
+
+      var n = (m = e).parentNode.style.display,
+          r = ["top", "left", "bottom", "right", "margin", "marginLeft", "marginRight", "marginTop", "marginBottom"];
+      m.parentNode.style.display = "none";
+      var i = "absolute" != R.css(m, "position"),
+          o = R.css(m, r.concat(["display"])),
+          s = R.css(m, ["width", "height"]);
+      m.parentNode.style.display = n, !i && t.pushFollowers && (t.pushFollowers = !1);
+      var a = m.parentNode.insertBefore(document.createElement("div"), m),
+          l = R.extend(o, {
+        position: i ? "relative" : "absolute",
+        boxSizing: "content-box",
+        mozBoxSizing: "content-box",
+        webkitBoxSizing: "content-box"
+      });
+
+      if (i || R.extend(l, R.css(m, ["width", "height"])), R.css(a, l), a.setAttribute(P, ""), R.addClass(a, t.spacerClass), w = {
+        spacer: a,
+        relSize: {
+          width: "%" === s.width.slice(-1),
+          height: "%" === s.height.slice(-1),
+          autoFullWidth: "auto" === s.width && i && R.isMarginCollapseType(o.display)
+        },
+        pushFollowers: t.pushFollowers,
+        inFlow: i
+      }, !m.___origStyle) {
+        m.___origStyle = {};
+        var c = m.style;
+        r.concat(["width", "height", "position", "boxSizing", "mozBoxSizing", "webkitBoxSizing"]).forEach(function (e) {
+          m.___origStyle[e] = c[e] || "";
+        });
+      }
+
+      return w.relSize.width && R.css(a, {
+        width: s.width
+      }), w.relSize.height && R.css(a, {
+        height: s.height
+      }), a.appendChild(m), R.css(m, {
+        position: i ? "relative" : "absolute",
+        margin: "auto",
+        top: "auto",
+        left: "auto",
+        bottom: "auto",
+        right: "auto"
+      }), (w.relSize.width || w.relSize.autoFullWidth) && R.css(m, {
+        boxSizing: "border-box",
+        mozBoxSizing: "border-box",
+        webkitBoxSizing: "border-box"
+      }), window.addEventListener("scroll", L), window.addEventListener("resize", L), window.addEventListener("resize", T), m.addEventListener("mousewheel", A), m.addEventListener("DOMMouseScroll", A), C(), d;
+    }, this.removePin = function (e) {
+      if (m) {
+        if (p === f && C(!0), e || !l) {
+          var t = w.spacer.firstChild;
+
+          if (t.hasAttribute(P)) {
+            var n = w.spacer.style,
+                r = {};
+            ["margin", "marginLeft", "marginRight", "marginTop", "marginBottom"].forEach(function (e) {
+              r[e] = n[e] || "";
+            }), R.css(t, r);
+          }
+
+          w.spacer.parentNode.insertBefore(t, w.spacer), w.spacer.parentNode.removeChild(w.spacer), m.parentNode.hasAttribute(P) || (R.css(m, m.___origStyle), delete m.___origStyle);
+        }
+
+        window.removeEventListener("scroll", L), window.removeEventListener("resize", L), window.removeEventListener("resize", T), m.removeEventListener("mousewheel", A), m.removeEventListener("DOMMouseScroll", A), m = void 0;
+      }
+
+      return d;
+    };
+    var N,
+        O = [];
+    return d.on("destroy.internal", function (e) {
+      d.removeClassToggle(e.reset);
+    }), this.setClassToggle = function (e, t) {
+      var n = R.get.elements(e);
+      return 0 !== n.length && R.type.String(t) && (0 < O.length && d.removeClassToggle(), N = t, O = n, d.on("enter.internal_class leave.internal_class", function (e) {
+        var n = "enter" === e.type ? R.addClass : R.removeClass;
+        O.forEach(function (e, t) {
+          n(e, N);
+        });
+      })), d;
+    }, this.removeClassToggle = function (e) {
+      return e && O.forEach(function (e, t) {
+        R.removeClass(e, N);
+      }), d.off("start.internal_class end.internal_class"), N = void 0, O = [], d;
+    }, function () {
+      for (var e in h) {
+        r.hasOwnProperty(e) || delete h[e];
+      }
+
+      for (var t in r) {
+        z(t);
+      }
+
+      E();
+    }(), d;
+  };
+  var D = {
+    defaults: {
+      duration: 0,
+      offset: 0,
+      triggerElement: void 0,
+      triggerHook: .5,
+      reverse: !0,
+      loglevel: 2
+    },
+    validate: {
+      offset: function offset(e) {
+        if (e = parseFloat(e), !R.type.Number(e)) throw 0;
+        return e;
+      },
+      triggerElement: function triggerElement(e) {
+        if (e = e || void 0) {
+          var t = R.get.elements(e)[0];
+          if (!t || !t.parentNode) throw 0;
+          e = t;
+        }
+
+        return e;
+      },
+      triggerHook: function triggerHook(e) {
+        var t = {
+          onCenter: .5,
+          onEnter: 1,
+          onLeave: 0
+        };
+        if (R.type.Number(e)) e = Math.max(0, Math.min(parseFloat(e), 1));else {
+          if (!(e in t)) throw 0;
+          e = t[e];
+        }
+        return e;
+      },
+      reverse: function reverse(e) {
+        return !!e;
+      }
+    },
+    shifts: ["duration", "offset", "triggerHook"]
+  };
+  _.Scene.addOption = function (e, t, n, r) {
+    e in D.defaults || (D.defaults[e] = t, D.validate[e] = n, r && D.shifts.push(e));
+  }, _.Scene.extend = function (e) {
+    var t = this;
+    _.Scene = function () {
+      return t.apply(this, arguments), this.$super = R.extend({}, this), e.apply(this, arguments) || this;
+    }, R.extend(_.Scene, t), _.Scene.prototype = t.prototype, _.Scene.prototype.constructor = _.Scene;
+  }, _.Event = function (e, t, n, r) {
+    for (var i in r = r || {}) {
+      this[i] = r[i];
+    }
+
+    return this.type = e, this.target = this.currentTarget = n, this.namespace = t || "", this.timeStamp = this.timestamp = Date.now(), this;
+  };
+
+  var R = _._util = function (s) {
+    var n,
+        e = {},
+        a = function a(e) {
+      return parseFloat(e) || 0;
+    },
+        l = function l(e) {
+      return e.currentStyle ? e.currentStyle : s.getComputedStyle(e);
+    },
+        r = function r(e, t, n, _r) {
+      if ((t = t === document ? s : t) === s) _r = !1;else if (!u.DomElement(t)) return 0;
+      e = e.charAt(0).toUpperCase() + e.substr(1).toLowerCase();
+      var i = (n ? t["offset" + e] || t["outer" + e] : t["client" + e] || t["inner" + e]) || 0;
+
+      if (n && _r) {
+        var o = l(t);
+        i += "Height" === e ? a(o.marginTop) + a(o.marginBottom) : a(o.marginLeft) + a(o.marginRight);
+      }
+
+      return i;
+    },
+        c = function c(e) {
+      return e.replace(/^[^a-z]+([a-z])/g, "$1").replace(/-([a-z])/g, function (e) {
+        return e[1].toUpperCase();
+      });
+    };
+
+    e.extend = function (e) {
+      for (e = e || {}, n = 1; n < arguments.length; n++) {
+        if (arguments[n]) for (var t in arguments[n]) {
+          arguments[n].hasOwnProperty(t) && (e[t] = arguments[n][t]);
+        }
+      }
+
+      return e;
+    }, e.isMarginCollapseType = function (e) {
+      return -1 < ["block", "flex", "list-item", "table", "-webkit-box"].indexOf(e);
+    };
+    var i = 0,
+        t = ["ms", "moz", "webkit", "o"],
+        o = s.requestAnimationFrame,
+        f = s.cancelAnimationFrame;
+
+    for (n = 0; !o && n < 4; ++n) {
+      o = s[t[n] + "RequestAnimationFrame"], f = s[t[n] + "CancelAnimationFrame"] || s[t[n] + "CancelRequestAnimationFrame"];
+    }
+
+    o || (o = function o(e) {
+      var t = new Date().getTime(),
+          n = Math.max(0, 16 - (t - i)),
+          r = s.setTimeout(function () {
+        e(t + n);
+      }, n);
+      return i = t + n, r;
+    }), f || (f = function f(e) {
+      s.clearTimeout(e);
+    }), e.rAF = o.bind(s), e.cAF = f.bind(s);
+
+    var u = e.type = function (e) {
+      return Object.prototype.toString.call(e).replace(/^\[object (.+)\]$/, "$1").toLowerCase();
+    };
+
+    u.String = function (e) {
+      return "string" === u(e);
+    }, u.Function = function (e) {
+      return "function" === u(e);
+    }, u.Array = function (e) {
+      return Array.isArray(e);
+    }, u.Number = function (e) {
+      return !u.Array(e) && 0 <= e - parseFloat(e) + 1;
+    }, u.DomElement = function (e) {
+      return "object" == (typeof HTMLElement === "undefined" ? "undefined" : _typeof(HTMLElement)) || "function" == typeof HTMLElement ? e instanceof HTMLElement || e instanceof SVGElement : e && "object" == _typeof(e) && null !== e && 1 === e.nodeType && "string" == typeof e.nodeName;
+    };
+    var d = e.get = {};
+    return d.elements = function (e) {
+      var t = [];
+      if (u.String(e)) try {
+        e = document.querySelectorAll(e);
+      } catch (e) {
+        return t;
+      }
+      if ("nodelist" === u(e) || u.Array(e) || e instanceof NodeList) for (var n = 0, r = t.length = e.length; n < r; n++) {
+        var i = e[n];
+        t[n] = u.DomElement(i) ? i : d.elements(i);
+      } else (u.DomElement(e) || e === document || e === s) && (t = [e]);
+      return t;
+    }, d.scrollTop = function (e) {
+      return e && "number" == typeof e.scrollTop ? e.scrollTop : s.pageYOffset || 0;
+    }, d.scrollLeft = function (e) {
+      return e && "number" == typeof e.scrollLeft ? e.scrollLeft : s.pageXOffset || 0;
+    }, d.width = function (e, t, n) {
+      return r("width", e, t, n);
+    }, d.height = function (e, t, n) {
+      return r("height", e, t, n);
+    }, d.offset = function (e, t) {
+      var n = {
+        top: 0,
+        left: 0
+      };
+
+      if (e && e.getBoundingClientRect) {
+        var r = e.getBoundingClientRect();
+        n.top = r.top, n.left = r.left, t || (n.top += d.scrollTop(), n.left += d.scrollLeft());
+      }
+
+      return n;
+    }, e.addClass = function (e, t) {
+      t && (e.classList ? e.classList.add(t) : e.className += " " + t);
+    }, e.removeClass = function (e, t) {
+      t && (e.classList ? e.classList.remove(t) : e.className = e.className.replace(RegExp("(^|\\b)" + t.split(" ").join("|") + "(\\b|$)", "gi"), " "));
+    }, e.css = function (e, t) {
+      if (u.String(t)) return l(e)[c(t)];
+
+      if (u.Array(t)) {
+        var n = {},
+            r = l(e);
+        return t.forEach(function (e, t) {
+          n[e] = r[c(e)];
+        }), n;
+      }
+
+      for (var i in t) {
+        var o = t[i];
+        o == parseFloat(o) && (o += "px"), e.style[c(i)] = o;
+      }
+    }, e;
+  }(window || {});
+
+  return _;
+});
 // helper functions for m9 digital
 // selecting elements
 // select a list of matching elements, context is optional
@@ -5493,6 +6506,9 @@ mNineDScript.start = {
     }
 
     this.runNav();
+    this.runParralax();
+    this.runScrollAnimations();
+    this.scrollToSection();
   },
   cursorSetup: function cursorSetup() {
     var cursor = {
@@ -5599,8 +6615,8 @@ mNineDScript.start = {
     var navTrigger = $1('.hamburger');
     var navWrapper = $1('.mn-site-nav');
     var navItems = $('.mn-site-nav-link-item');
-    var bodyEl = $1('body'); //const navVideoWrap = $1('.mn-site-nav-video-bg');
-
+    var bodyEl = $1('body');
+    var navVideoWrap = $1('.mn-site-nav-video-bg');
     var navTitle = $1('.mn-site-nav-contact-title');
     var navCopy = $1('.mn-site-nav-contact-txt');
     var navLinks = $('.mn-site-nav-contact-link');
@@ -5646,8 +6662,12 @@ mNineDScript.start = {
     navTrigger.addEventListener('click', function () {
       if (hasClass(navWrapper, 'is-active')) {
         if (!tl.isActive()) {
-          tl.call(toggleNavTriggerClass); //tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
-
+          tl.call(toggleNavTriggerClass);
+          tl.to(navVideoWrap, {
+            opacity: 0,
+            duration: 0.5,
+            ease: "circ.inOut"
+          });
           tl.to(navLinks, {
             opacity: 0,
             duration: 0.3
@@ -5711,13 +6731,70 @@ mNineDScript.start = {
           tl.to(navLinks, {
             opacity: 1,
             duration: 0.5
-          }); //tl.to(navVideoWrap, {opacity: 0.5, duration: 0.7, ease: "circ.inOut"});
+          });
+          tl.to(navVideoWrap, {
+            opacity: 1,
+            duration: 2,
+            ease: "circ.inOut"
+          });
         }
       }
+    });
+  },
+  runParralax: function runParralax() {//let rellax = new Rellax('.mn-rellax-el');
+  },
+  runScrollAnimations: function runScrollAnimations() {
+    var scrollController = new ScrollMagic.Controller();
+    var aboutTl = gsap.timeline({
+      paused: true
+    });
+    var aboutTextTween = aboutTl.to('.mn-about-parralax-text', {
+      opacity: 1,
+      duration: 1.2,
+      x: 0,
+      y: 0,
+      z: 0,
+      ease: "expo.out"
+    });
+    var aboutBgTween = aboutTl.to('.mn-about-parralax-el', {
+      scale: 1.35,
+      duration: 1.0,
+      ease: "circ.inOut"
+    }, ">-1.0");
+    var scene = new ScrollMagic.Scene({
+      triggerElement: '#js-about-top',
+      offset: -500
+    }).on("enter", function (e) {
+      aboutTl.play();
+    }).on("leave", function (e) {
+      aboutTl.reverse();
+    }).addTo(scrollController);
+  },
+  scrollToSection: function scrollToSection() {
+    var self = this;
+    var scrollTriggers = $('.mn-scroll-trig');
+
+    for (var i = 0; i < scrollTriggers.length; i++) {
+      scrollTriggers[i].addEventListener('click', function (e) {
+        e.preventDefault();
+        var target = this.getAttribute("href");
+        self.doPageScroll(target);
+      });
+    }
+  },
+  doPageScroll: function doPageScroll(scrollTarget) {
+    gsap.to(window, {
+      duration: 1.3,
+      scrollTo: {
+        y: scrollTarget,
+        autoKill: false
+      },
+      ease: "circ.inOut"
     });
   }
 };
 window.addEventListener('DOMContentLoaded', function () {
-  // dom is loaded!
+  gsap.registerPlugin(ScrollToPlugin); // dom is loaded!
+
   mNineDScript.start.init();
 });

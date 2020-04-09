@@ -1,10 +1,7 @@
 .mn-section-home .mn-section-inner {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  align-content: center;
-  padding-top: 10%;
+  width: 100%;
+  height: 100%;
+  padding: 15% 1rem 0;
 
 }
 
@@ -12,6 +9,7 @@
 .mn-section-home-logo {
   max-width: 120px;
   height: auto;
+  margin: 0 auto;
   img {
     max-width: 100%;
     height: auto;
@@ -53,4 +51,30 @@
   text-transform: uppercase;
   padding: 0 8px;
   display: inline-block;
+}
+
+.mn-home-scroll-trigger {
+  @include button-reset();
+  position: absolute;
+  left : calc(50% - 40px);
+  bottom: 110px;
+  width: 60px;
+  height: 90px;
+  opacity: 0.8;
+  @include std-transitions();
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  &:hover {
+    opacity: 1;
+    transform: scale3d(0.9,0.9, 0.9);
+  }
+
+  &:focus {
+    outline: 0;
+  }
+
 }

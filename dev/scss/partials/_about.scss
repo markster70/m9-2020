@@ -1,0 +1,61 @@
+.mn-section-about {
+  position: relative;
+
+}
+
+.mn-parralax-about {
+  height: 550px;
+  transform: translate3d(0,0,0);
+  overflow: hidden;
+  border-top: 2px solid rgba(255,255,255,0.1);
+  border-bottom: 2px solid rgba(255,255,255,0.1);
+}
+
+.mn-parralax-about {
+  .mn-parralax-inner {
+    background-image: url("/dist/images/parra.png");
+    height: 100%;
+    background-attachment: fixed;
+    background-repeat: repeat;
+    background-size: cover;
+    background-position: 0 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-backface-visibility: hidden;
+  }
+}
+
+.mn-section-about {
+  .mn-section-inner {
+    position: relative;
+    height: 100vh;
+  }
+}
+
+.mn-about-parralax-text {
+  opacity: 0;
+  transform: translate3d(300px, 0px, 0px);
+  position: relative;
+  text-transform: uppercase;
+  color: $white;
+  max-width: 40%;
+  text-align: center;
+  @include font-size(28);
+  font-weight: $font-weight-medium;
+  //text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
+
+  &:before {
+    content: open-quote;
+    position: absolute;
+    top: 0;
+    left: -2rem;
+  }
+  &:after {
+    content: close-quote;
+    padding-left: 1rem;
+    position: absolute;
+    right: -3rem;
+  }
+}
