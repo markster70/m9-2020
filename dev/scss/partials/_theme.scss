@@ -1,3 +1,41 @@
 .mn-section-home {
   background: url("/dist/images/x-hatch-bg.jpg") repeat;
 }
+
+.mn-section-about {
+  padding-top: 0.5rem;
+}
+
+.mn-section-hd {
+  border-top: 1px solid rgba($white,0.1);
+  border-bottom: 1px solid rgba($white,0.1);
+}
+
+.mn-section-logo {
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  margin: 0.5rem 0;
+
+
+  .mn-section-logo-txt {
+    text-transform: uppercase;
+    @include font-size(40);
+    font-weight: $font-weight-bold;
+    @include title-gradient();
+
+  }
+
+  .mn-section-logo-img {
+
+    display: inline-block;
+    position: relative;
+    left: -5px;
+    top: 3px;
+
+    img {
+      width: auto;
+      height: 60px;
+    }
+  }
+}

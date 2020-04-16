@@ -31,3 +31,18 @@
   border: 0;
   box-shadow: none;
 }
+
+@mixin gradient-text ($topGrad: $secondary-accent, $bottomGrad: darken($secondary-accent,10%)) {
+  background: -webkit-linear-gradient($topGrad, $bottomGrad);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+@mixin title-gradient () {
+  background: rgb(123,224,255);
+  background: radial-gradient(circle, rgba(123,224,255,1) 0%, rgba(246,175,52,1) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.5;
+}

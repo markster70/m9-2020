@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="no-js" lang="">
+<html class="no-js" lang="en">
 
 <?php include 'site-partials/_head.html'; ?>
 <body>
@@ -11,7 +11,8 @@
 <?php include 'site-partials/_navigation.html'; ?>
 <?php include 'site-partials/_home.html'; ?>
 <?php include 'site-partials/_about.html'; ?>
-<script src="dist/js/m9-2020-concat-script.js"></script>
+<?php include 'site-partials/_services-new.php'; ?>
+<script src="dist/js/m9-2020-concat-script.min.js"></script>
 
 <div class="cursor-dot-outline"></div>
 <div class="cursor-dot"></div>
