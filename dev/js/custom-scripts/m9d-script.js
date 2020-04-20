@@ -23,9 +23,9 @@ mNineDScript.start = {
         }
 
         this.runNav();
-        //this.runParralax();
         this.runScrollAnimations();
         this.scrollToSection();
+        this.projectsSummaryControl();
 
     },
     cursorSetup () {
@@ -153,7 +153,7 @@ mNineDScript.start = {
         const navItems = $('.mn-site-nav-link-item');
         const bodyEl = $1('body');
         const navVideoWrap = $1('.mn-site-nav-video-bg');
-        const navTitle = $1('.mn-site-nav-contact-title');
+        const navTitle = $('.mn-site-nav-contact-title');
         const navCopy = $1('.mn-site-nav-contact-txt');
         const navLinks = $('.mn-site-nav-contact-link');
 
@@ -195,7 +195,11 @@ mNineDScript.start = {
         }
 
         navTrigger.addEventListener('click', ()  => {
+            animationNavigation();
 
+        });
+
+        function animationNavigation () {
             if(hasClass(navWrapper, 'is-active')) {
 
                 if(!tl.isActive()) {
@@ -203,7 +207,7 @@ mNineDScript.start = {
                     tl.call(toggleNavTriggerClass);
                     tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
                     tl.to(navLinks, {opacity: 0, duration: 0.3});
-                    tl.to(navTitle, {opacity: 0, top: -200, duration: 0.5, ease: "expo.out"});
+                    tl.to(navTitle, {opacity: 0, stagger: 0.2, top: -200, left: 200, duration: 0.5, ease: "expo.out"});
                     tl.to(navCopy, {opacity: 0, left: -50, duration : 0.4,  ease: "circ.out"}, ">-0.3");
                     tl.to(navItems, {left: 200, opacity : 0, duration: 0.15, stagger: 0.15, ease: "circ.Out", onComplete : removeVisibleNavItemClass}, ">-0.4" );
                     tl.to(navWrapper, {x: '100%', duration: 1, ease: "circ.inOut", onComplete: removeNavClass});
@@ -216,7 +220,7 @@ mNineDScript.start = {
 
                     tl.call(toggleNavTriggerClass);
                     tl.to(navWrapper, {x: 0, duration: 1, ease: "circ.inOut", onComplete: addNavClass});
-                    tl.to(navTitle, {opacity: 1, top: 0, duration: 0.8, ease: "expo.out"});
+                    tl.to(navTitle, {opacity: 0.7, top: 0, left: 0, stagger: 0.2, duration: 0.8, ease: "expo.out"});
                     tl.to(navCopy, {opacity: 1, left: 0, duration : 0.5,  ease: "circ.out"}, ">-0.4");
                     tl.to(navItems, {left: 0, opacity : 1, duration: 0.35, stagger: 0.35, ease: "circ.Out", onStart : addVisibleNavItemClass}, ">-0.4");
                     tl.to(navLinks, {opacity: 1, duration: 0.5});
@@ -224,12 +228,25 @@ mNineDScript.start = {
 
                 }
             }
+        }
+
+        navItems.forEach( (el) => {
+            el.addEventListener('click', (e) => {
+                e.preventDefault();
+
+                if(!tl.isActive()) {
+
+                    let sectionTarget = el.getAttribute('href');
+                    animationNavigation();
+
+                    setTimeout(() => {
+                        this.doPageScroll(sectionTarget);
+                    }, 3000);
+                }
+            });
 
         });
 
-    },
-    runParralax () {
-        //let rellax = new Rellax('.mn-rellax-el');
     },
     runScrollAnimations () {
 
@@ -237,11 +254,9 @@ mNineDScript.start = {
         let aboutGridImages = $('.m9-section-about-item-img img');
 
         const scrollController = new ScrollMagic.Controller();
-        const aboutTl = gsap.timeline({paused: true});
-        let imageTween = aboutTl.to(aboutGridImages, {duration : 1.0, stagger: 0.4, scaleX: 1, scaleY: 1, scaleZ: 1, opacity: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
+        let aboutTl = gsap.timeline({paused: true});
+        let imageTween = aboutTl.to(aboutGridImages, {duration : 1.0, stagger: 0.4, scaleX: 1, scaleY: 1, opacity: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
         let contentTween = aboutTl.to(aboutGridContent, {duration : 0.7, stagger: 0.25, opacity: 1, top: 0, ease: "circ.inOut(0.5)"},">-0.8");
-        //let aboutTextTween = aboutTl.to('.mn-about-parralax-text', {opacity: 1, duration: 1.2, x : 0, y : 0, z : 0, ease: "expo.out"});
-        //let aboutBgTween = aboutTl.to('.mn-about-parralax-el', {scale: 1.35, duration : 1.0, ease: "circ.inOut"}, ">-1.0");
 
 
         let aboutScene = new ScrollMagic.Scene({
@@ -268,12 +283,11 @@ mNineDScript.start = {
         const serviceItems = $('.mn-section-services-item-list');
 
 
-        let serveTitleTween = servicesTl.to( servTitleHd, {duration : 0.7, opacity: 1, left: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},);
+        let serveTitleTween = servicesTl.to( servTitleHd, {duration : 0.7, opacity: 1, left: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, 0.5);
         let serveElsTween = servicesTl.to( servTitleEls, {duration : 0.8,  stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
-        let servePanelTween = servicesTl.to( servicePanels, {duration : 2, stagger: 0.3, opacity: 1, scaleX: 1, scaleY:1, scaleZ: 1, ease: "elastic.out(0.8)"});
-        let serveHeadingsTween = servicesTl.to( serviceHeadings, {duration : 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY:1, scaleZ: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"},">-1.8");
+        let servePanelTween = servicesTl.to( servicePanels, {duration : 2, stagger: 0.3, opacity: 1, scaleX: 1, scaleY:1, ease: "elastic.out(0.8)"});
+        let serveHeadingsTween = servicesTl.to( serviceHeadings, {duration : 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY:1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"},">-1.8");
         let serveItemsTween = servicesTl.to( serviceItems, {duration : 0.4,  stagger: 0.17, opacity: 1, top: 0, ease: "circ.out(0.4)"},">0.2");
-        //let servePanelTween = servicesTl.to( servicePanels, {duration : 0.75, stagger: 0.4, opacity: 1, rotationY: 0, scaleX: 1, scaleY:1, scaleZ: 1, ease: "expo.inOut(0.6)"},">-0.35");
 
 
         let servicesScene = new ScrollMagic.Scene({
@@ -310,10 +324,163 @@ mNineDScript.start = {
             });
         }
     },
-    doPageScroll (scrollTarget) {
+    doPageScroll (scrollTarget, scrollDuration = 1.3) {
 
-        gsap.to(window, {duration: 1.3, scrollTo: {y: scrollTarget, autoKill: false}, ease: "circ.inOut"});
+        gsap.to(window, {duration: scrollDuration, scrollTo: {y: scrollTarget, autoKill: false}, ease: "circ.inOut"});
     },
+    projectsSummaryControl () {
+
+        const projectSummaryTriggers = $('.mn-section-project-summary-trigger');
+        const projectsTl = gsap.timeline();
+        const projectWrappers = $('.mn-section-project-summary-item');
+        const itemHeight = 65;
+        const projectsSummaryContainer = $1('#js-projects-summary-container');
+        const bodyEl = $1('body');
+        const projectSummaryClose = $1('.mn-projects-summary-detail-close');
+        const projectsSection = $1('#js-projects-top');
+
+
+        for(let i =0; i < projectWrappers.length; i ++) {
+            let el = projectWrappers[i];
+
+            addClass(el, 'is-inactive');
+            el.dataset.originalPosition = el.style.top = (i * itemHeight);
+            el.dataset.originalIndex = i;
+
+            if(i > 0) {
+                el.style.top = (i * itemHeight) + 'px';
+                el.style.zIndex = i;
+            }
+        }
+
+        projectSummaryTriggers.forEach( (el) => {
+
+                el.addEventListener('click', (e) => {
+
+                    removeClass(el.parentNode.parentNode, 'is-inactive');
+                    addClass(el.parentNode.parentNode, 'is-active-wrapper');
+
+                    e.preventDefault();
+
+                    openProject(el);
+
+
+                });
+        });
+
+
+        function openProject (element) {
+
+            let parentEl = element.parentNode.parentNode;
+            let inactiveSiblings = $('li.is-inactive');
+
+            projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0.5});
+
+
+            gsap.to(window, {duration: 1.1, scrollTo: {y: projectsSummaryContainer, autoKill: false}, ease: "circ.inOut", onComplete : function() {
+                    projectOpenActions();
+                }});
+
+
+            function projectOpenActions () {
+
+                projectsTl.to(window, {duration: 0.9, scrollTo: {y: projectsSummaryContainer, autoKill: false}, ease: "expo.inOut"});
+                projectsTl.to(element, {duration: 0.6, backgroundColor: '#000000', className: "+=is-active", ease: "circ.inOut(0.5)"});
+                projectsTl.to(parentEl, {duration: 0.7, top: 0, opacity: 1, ease: "expo.inOut(0.5)"});
+                projectsTl.to(parentEl, {duration: 0.7, height: '100vh', ease: "expo.inOut(0.5)"});
+                projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0});
+                projectsTl.to(parentEl, {duration: 0.4, zIndex: '1000', backgroundColor: '#343435', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
+
+                    openDetail(parentEl);
+
+                    }
+                });
+
+                // these will run as the timeline is running
+                addClass(projectsSummaryContainer, 'is-active');
+                addClass(bodyEl, 'is-projects-active');
+            }
+
+        }
+
+
+        function openDetail (element) {
+
+            let detailEl = $1('.mn-projects-summary-detail-wrapper', element);
+
+
+            gsap.to(detailEl, {duration : 0.1, display: 'block'});
+            gsap.to(detailEl, {duration : 0.7, top: 0, opacity: 1, height: '100%', ease: "circ.inOut(0.5)"});
+        }
+
+        function resetProjectsWindow () {
+
+            gsap.to(window, {duration: 0.9, scrollTo: {y:projectsSection, autoKill: false}, ease: "expo.inOut(0.6)"});
+
+        }
+
+
+        function resetProjects () {
+
+            let activeWrapper = $1('.is-active-wrapper');
+            let activeDetail = $1('.mn-projects-summary-detail-wrapper', activeWrapper);
+            let activeAnchor = $1('.is-active', activeWrapper);
+            let activeWrapperOriginalPos = activeWrapper.dataset.originalPosition;
+            let activeWrapperOriginalIndex = activeWrapper.dataset.originalIndex;
+            let inactiveSiblings = $('li.is-inactive');
+            const resetTl = gsap.timeline();
+
+
+            // need to hide content first here
+
+            // hiding content here
+            resetTl.to(activeDetail, {duration : 0.7, opacity: 0, ease: "circ.inOut(0.5)", onComplete: function () {
+
+                activeDetail.style = '';
+
+            }});
+
+            // set the summary item back to 65 px height
+            resetTl.to(activeWrapper, {duration : 0.9, height: itemHeight + 'px', ease: "circ.inOut(0.5)" });
+            // make the siblings visible again
+            resetTl.to(inactiveSiblings, {duration: 0.7, opacity: 1});
+            // move the summary item back to it's original position
+            resetTl.to(activeWrapper, {duration : 0.65, top: activeWrapperOriginalPos + 'px', ease: "expo.inOut(0.4)" });
+            // move the anchor back to the left of the list
+            resetTl.to(activeAnchor, {duration : 0.7, translateX: '40px' , className:"-=is-active", ease: "circ.inOut(0.4)", onComplete : function () {
+
+                    // take the inline style for bg color off
+                    activeWrapper.style.removeProperty('background-color');
+                    // reset the z index for the element
+                    activeWrapper.style.zIndex = activeWrapperOriginalIndex;
+                    // take the background color off the anchor as well
+                    activeAnchor.style.removeProperty('background-color');
+                    // remove the class from the active wrapper
+                    removeClass(activeWrapper, 'is-active-wrapper');
+                    // move the window back to top of projects
+                    resetProjectsWindow()
+
+
+            }});
+
+
+            // remove container class, and body class to remove fixed positioning etc
+            removeClass(projectsSummaryContainer, 'is-active');
+            removeClass(bodyEl,'is-projects-active');
+            // add the default class back to previously added element
+            addClass(activeWrapper, 'is-inactive');
+
+
+        }
+
+        projectSummaryClose.addEventListener('click', () => {
+
+            resetProjects();
+
+        });
+
+
+    }
 
 };
 
@@ -321,6 +488,7 @@ mNineDScript.start = {
 window.addEventListener('DOMContentLoaded', () => {
 
     gsap.registerPlugin(ScrollToPlugin);
+    gsap.registerPlugin(CSSRulePlugin);
 
     // dom is loaded!
     mNineDScript.start.init();

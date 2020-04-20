@@ -5273,257 +5273,6 @@ function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "functi
 });
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
-(function (q, g) {
-  "function" === typeof define && define.amd ? define([], g) : "object" === (typeof module === "undefined" ? "undefined" : _typeof(module)) && module.exports ? module.exports = g() : q.Rellax = g();
-})("undefined" !== typeof window ? window : global, function () {
-  var q = function q(g, u) {
-    function C() {
-      if (3 === a.options.breakpoints.length && Array.isArray(a.options.breakpoints)) {
-        var f = !0,
-            c = !0,
-            b;
-        a.options.breakpoints.forEach(function (a) {
-          "number" !== typeof a && (c = !1);
-          null !== b && a < b && (f = !1);
-          b = a;
-        });
-        if (f && c) return;
-      }
-
-      a.options.breakpoints = [576, 768, 1201];
-      console.warn("Rellax: You must pass an array of 3 numbers in ascending order to the breakpoints option. Defaults reverted");
-    }
-
-    var a = Object.create(q.prototype),
-        l = 0,
-        v = 0,
-        m = 0,
-        n = 0,
-        d = [],
-        w = !0,
-        A = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.msRequestAnimationFrame || window.oRequestAnimationFrame || function (a) {
-      return setTimeout(a, 1E3 / 60);
-    },
-        p = null,
-        x = !1;
-
-    try {
-      var k = Object.defineProperty({}, "passive", {
-        get: function get() {
-          x = !0;
-        }
-      });
-      window.addEventListener("testPassive", null, k);
-      window.removeEventListener("testPassive", null, k);
-    } catch (f) {}
-
-    var D = window.cancelAnimationFrame || window.mozCancelAnimationFrame || clearTimeout,
-        E = window.transformProp || function () {
-      var a = document.createElement("div");
-
-      if (null === a.style.transform) {
-        var c = ["Webkit", "Moz", "ms"],
-            b;
-
-        for (b in c) {
-          if (void 0 !== a.style[c[b] + "Transform"]) return c[b] + "Transform";
-        }
-      }
-
-      return "transform";
-    }();
-
-    a.options = {
-      speed: -2,
-      verticalSpeed: null,
-      horizontalSpeed: null,
-      breakpoints: [576, 768, 1201],
-      center: !1,
-      wrapper: null,
-      relativeToWrapper: !1,
-      round: !0,
-      vertical: !0,
-      horizontal: !1,
-      verticalScrollAxis: "y",
-      horizontalScrollAxis: "x",
-      callback: function callback() {}
-    };
-    u && Object.keys(u).forEach(function (d) {
-      a.options[d] = u[d];
-    });
-    u && u.breakpoints && C();
-    g || (g = ".rellax");
-    k = "string" === typeof g ? document.querySelectorAll(g) : [g];
-
-    if (0 < k.length) {
-      a.elems = k;
-      if (a.options.wrapper && !a.options.wrapper.nodeType) if (k = document.querySelector(a.options.wrapper)) a.options.wrapper = k;else {
-        console.warn("Rellax: The wrapper you're trying to use doesn't exist.");
-        return;
-      }
-
-      var F,
-          B = function B() {
-        for (var f = 0; f < d.length; f++) {
-          a.elems[f].style.cssText = d[f].style;
-        }
-
-        d = [];
-        v = window.innerHeight;
-        n = window.innerWidth;
-        f = a.options.breakpoints;
-        F = n < f[0] ? "xs" : n >= f[0] && n < f[1] ? "sm" : n >= f[1] && n < f[2] ? "md" : "lg";
-        H();
-
-        for (f = 0; f < a.elems.length; f++) {
-          var c = void 0,
-              b = a.elems[f],
-              e = b.getAttribute("data-rellax-percentage"),
-              y = b.getAttribute("data-rellax-speed"),
-              t = b.getAttribute("data-rellax-xs-speed"),
-              g = b.getAttribute("data-rellax-mobile-speed"),
-              h = b.getAttribute("data-rellax-tablet-speed"),
-              k = b.getAttribute("data-rellax-desktop-speed"),
-              l = b.getAttribute("data-rellax-vertical-speed"),
-              m = b.getAttribute("data-rellax-horizontal-speed"),
-              p = b.getAttribute("data-rellax-vertical-scroll-axis"),
-              q = b.getAttribute("data-rellax-horizontal-scroll-axis"),
-              u = b.getAttribute("data-rellax-zindex") || 0,
-              x = b.getAttribute("data-rellax-min"),
-              A = b.getAttribute("data-rellax-max"),
-              C = b.getAttribute("data-rellax-min-x"),
-              D = b.getAttribute("data-rellax-max-x"),
-              E = b.getAttribute("data-rellax-min-y"),
-              L = b.getAttribute("data-rellax-max-y"),
-              r = !0;
-          t || g || h || k ? c = {
-            xs: t,
-            sm: g,
-            md: h,
-            lg: k
-          } : r = !1;
-          t = a.options.wrapper ? a.options.wrapper.scrollTop : window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop;
-          a.options.relativeToWrapper && (t = (window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop) - a.options.wrapper.offsetTop);
-          var z = a.options.vertical ? e || a.options.center ? t : 0 : 0,
-              I = a.options.horizontal ? e || a.options.center ? a.options.wrapper ? a.options.wrapper.scrollLeft : window.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft : 0 : 0;
-          t = z + b.getBoundingClientRect().top;
-          g = b.clientHeight || b.offsetHeight || b.scrollHeight;
-          h = I + b.getBoundingClientRect().left;
-          k = b.clientWidth || b.offsetWidth || b.scrollWidth;
-          z = e ? e : (z - t + v) / (g + v);
-          e = e ? e : (I - h + n) / (k + n);
-          a.options.center && (z = e = .5);
-          c = r && null !== c[F] ? Number(c[F]) : y ? y : a.options.speed;
-          l = l ? l : a.options.verticalSpeed;
-          m = m ? m : a.options.horizontalSpeed;
-          p = p ? p : a.options.verticalScrollAxis;
-          q = q ? q : a.options.horizontalScrollAxis;
-          y = J(e, z, c, l, m);
-          b = b.style.cssText;
-          r = "";
-          if (e = /transform\s*:/i.exec(b)) r = b.slice(e.index), r = (e = r.indexOf(";")) ? " " + r.slice(11, e).replace(/\s/g, "") : " " + r.slice(11).replace(/\s/g, "");
-          d.push({
-            baseX: y.x,
-            baseY: y.y,
-            top: t,
-            left: h,
-            height: g,
-            width: k,
-            speed: c,
-            verticalSpeed: l,
-            horizontalSpeed: m,
-            verticalScrollAxis: p,
-            horizontalScrollAxis: q,
-            style: b,
-            transform: r,
-            zindex: u,
-            min: x,
-            max: A,
-            minX: C,
-            maxX: D,
-            minY: E,
-            maxY: L
-          });
-        }
-
-        K();
-        w && (window.addEventListener("resize", B), w = !1, G());
-      },
-          H = function H() {
-        var d = l,
-            c = m;
-        l = a.options.wrapper ? a.options.wrapper.scrollTop : (document.documentElement || document.body.parentNode || document.body).scrollTop || window.pageYOffset;
-        m = a.options.wrapper ? a.options.wrapper.scrollLeft : (document.documentElement || document.body.parentNode || document.body).scrollLeft || window.pageXOffset;
-        a.options.relativeToWrapper && (l = ((document.documentElement || document.body.parentNode || document.body).scrollTop || window.pageYOffset) - a.options.wrapper.offsetTop);
-        return d != l && a.options.vertical || c != m && a.options.horizontal ? !0 : !1;
-      },
-          J = function J(d, c, b, e, g) {
-        var f = {};
-        d = 100 * (g ? g : b) * (1 - d);
-        c = 100 * (e ? e : b) * (1 - c);
-        f.x = a.options.round ? Math.round(d) : Math.round(100 * d) / 100;
-        f.y = a.options.round ? Math.round(c) : Math.round(100 * c) / 100;
-        return f;
-      },
-          h = function h() {
-        window.removeEventListener("resize", h);
-        window.removeEventListener("orientationchange", h);
-        (a.options.wrapper ? a.options.wrapper : window).removeEventListener("scroll", h);
-        (a.options.wrapper ? a.options.wrapper : document).removeEventListener("touchmove", h);
-        p = A(G);
-      },
-          G = function G() {
-        H() && !1 === w ? (K(), p = A(G)) : (p = null, window.addEventListener("resize", h), window.addEventListener("orientationchange", h), (a.options.wrapper ? a.options.wrapper : window).addEventListener("scroll", h, x ? {
-          passive: !0
-        } : !1), (a.options.wrapper ? a.options.wrapper : document).addEventListener("touchmove", h, x ? {
-          passive: !0
-        } : !1));
-      },
-          K = function K() {
-        for (var f, c = 0; c < a.elems.length; c++) {
-          var b = d[c].verticalScrollAxis.toLowerCase(),
-              e = d[c].horizontalScrollAxis.toLowerCase();
-          f = -1 != b.indexOf("x") ? l : 0;
-          b = -1 != b.indexOf("y") ? l : 0;
-          var g = -1 != e.indexOf("x") ? m : 0;
-          e = -1 != e.indexOf("y") ? m : 0;
-          f = J((f + g - d[c].left + n) / (d[c].width + n), (b + e - d[c].top + v) / (d[c].height + v), d[c].speed, d[c].verticalSpeed, d[c].horizontalSpeed);
-          e = f.y - d[c].baseY;
-          b = f.x - d[c].baseX;
-          null !== d[c].min && (a.options.vertical && !a.options.horizontal && (e = e <= d[c].min ? d[c].min : e), a.options.horizontal && !a.options.vertical && (b = b <= d[c].min ? d[c].min : b));
-          null != d[c].minY && (e = e <= d[c].minY ? d[c].minY : e);
-          null != d[c].minX && (b = b <= d[c].minX ? d[c].minX : b);
-          null !== d[c].max && (a.options.vertical && !a.options.horizontal && (e = e >= d[c].max ? d[c].max : e), a.options.horizontal && !a.options.vertical && (b = b >= d[c].max ? d[c].max : b));
-          null != d[c].maxY && (e = e >= d[c].maxY ? d[c].maxY : e);
-          null != d[c].maxX && (b = b >= d[c].maxX ? d[c].maxX : b);
-          a.elems[c].style[E] = "translate3d(" + (a.options.horizontal ? b : "0") + "px," + (a.options.vertical ? e : "0") + "px," + d[c].zindex + "px) " + d[c].transform;
-        }
-
-        a.options.callback(f);
-      };
-
-      a.destroy = function () {
-        for (var f = 0; f < a.elems.length; f++) {
-          a.elems[f].style.cssText = d[f].style;
-        }
-
-        w || (window.removeEventListener("resize", B), w = !0);
-        D(p);
-        p = null;
-      };
-
-      B();
-      a.refresh = B;
-      return a;
-    }
-
-    console.warn("Rellax: The elements you're trying to select don't exist.");
-  };
-
-  return q;
-});
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 /*! ScrollMagic v2.0.7 | (c) 2019 Jan Paepke (@janpaepke) | license & info: http://scrollmagic.io */
 !function (e, t) {
   "function" == typeof define && define.amd ? define(t) : "object" == (typeof exports === "undefined" ? "undefined" : _typeof(exports)) ? module.exports = t() : e.ScrollMagic = t();
@@ -6758,10 +6507,10 @@ mNineDScript.start = {
       this.cursorSetup();
     }
 
-    this.runNav(); //this.runParralax();
-
+    this.runNav();
     this.runScrollAnimations();
     this.scrollToSection();
+    this.projectsSummaryControl();
   },
   cursorSetup: function cursorSetup() {
     var cursor = {
@@ -6865,12 +6614,14 @@ mNineDScript.start = {
     cursor.init();
   },
   runNav: function runNav() {
+    var _this = this;
+
     var navTrigger = $1('.hamburger');
     var navWrapper = $1('.mn-site-nav');
     var navItems = $('.mn-site-nav-link-item');
     var bodyEl = $1('body');
     var navVideoWrap = $1('.mn-site-nav-video-bg');
-    var navTitle = $1('.mn-site-nav-contact-title');
+    var navTitle = $('.mn-site-nav-contact-title');
     var navCopy = $1('.mn-site-nav-contact-txt');
     var navLinks = $('.mn-site-nav-contact-link');
     var tl = gsap.timeline();
@@ -6911,6 +6662,10 @@ mNineDScript.start = {
     }
 
     navTrigger.addEventListener('click', function () {
+      animationNavigation();
+    });
+
+    function animationNavigation() {
       if (hasClass(navWrapper, 'is-active')) {
         if (!tl.isActive()) {
           tl.call(toggleNavTriggerClass);
@@ -6925,7 +6680,9 @@ mNineDScript.start = {
           });
           tl.to(navTitle, {
             opacity: 0,
+            stagger: 0.2,
             top: -200,
+            left: 200,
             duration: 0.5,
             ease: "expo.out"
           });
@@ -6960,8 +6717,10 @@ mNineDScript.start = {
             onComplete: addNavClass
           });
           tl.to(navTitle, {
-            opacity: 1,
+            opacity: 0.7,
             top: 0,
+            left: 0,
+            stagger: 0.2,
             duration: 0.8,
             ease: "expo.out"
           });
@@ -6990,9 +6749,21 @@ mNineDScript.start = {
           });
         }
       }
+    }
+
+    navItems.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        if (!tl.isActive()) {
+          var sectionTarget = el.getAttribute('href');
+          animationNavigation();
+          setTimeout(function () {
+            _this.doPageScroll(sectionTarget);
+          }, 3000);
+        }
+      });
     });
-  },
-  runParralax: function runParralax() {//let rellax = new Rellax('.mn-rellax-el');
   },
   runScrollAnimations: function runScrollAnimations() {
     var aboutGridContent = $('.mn-section-about-grid-item-inner');
@@ -7006,7 +6777,6 @@ mNineDScript.start = {
       stagger: 0.4,
       scaleX: 1,
       scaleY: 1,
-      scaleZ: 1,
       opacity: 1,
       '-webkit-filter': " blur(0px)",
       ease: "circ.inOut(0.5)"
@@ -7017,9 +6787,7 @@ mNineDScript.start = {
       opacity: 1,
       top: 0,
       ease: "circ.inOut(0.5)"
-    }, ">-0.8"); //let aboutTextTween = aboutTl.to('.mn-about-parralax-text', {opacity: 1, duration: 1.2, x : 0, y : 0, z : 0, ease: "expo.out"});
-    //let aboutBgTween = aboutTl.to('.mn-about-parralax-el', {scale: 1.35, duration : 1.0, ease: "circ.inOut"}, ">-1.0");
-
+    }, ">-0.8");
     var aboutScene = new ScrollMagic.Scene({
       triggerElement: '#js-about-top',
       offset: 200
@@ -7042,7 +6810,7 @@ mNineDScript.start = {
       left: 0,
       '-webkit-filter': " blur(0px)",
       ease: "circ.inOut(0.5)"
-    });
+    }, 0.5);
     var serveElsTween = servicesTl.to(servTitleEls, {
       duration: 0.8,
       stagger: 0.25,
@@ -7057,7 +6825,6 @@ mNineDScript.start = {
       opacity: 1,
       scaleX: 1,
       scaleY: 1,
-      scaleZ: 1,
       ease: "elastic.out(0.8)"
     });
     var serveHeadingsTween = servicesTl.to(serviceHeadings, {
@@ -7066,7 +6833,6 @@ mNineDScript.start = {
       stagger: 0.2,
       scaleX: 1,
       scaleY: 1,
-      scaleZ: 1,
       '-webkit-filter': " blur(0px)",
       ease: "circ.inOut(0.3)"
     }, ">-1.8");
@@ -7076,8 +6842,7 @@ mNineDScript.start = {
       opacity: 1,
       top: 0,
       ease: "circ.out(0.4)"
-    }, ">0.2"); //let servePanelTween = servicesTl.to( servicePanels, {duration : 0.75, stagger: 0.4, opacity: 1, rotationY: 0, scaleX: 1, scaleY:1, scaleZ: 1, ease: "expo.inOut(0.6)"},">-0.35");
-
+    }, ">0.2");
     var servicesScene = new ScrollMagic.Scene({
       triggerElement: '#js-services-top',
       offset: 50
@@ -7100,18 +6865,207 @@ mNineDScript.start = {
     }
   },
   doPageScroll: function doPageScroll(scrollTarget) {
+    var scrollDuration = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1.3;
     gsap.to(window, {
-      duration: 1.3,
+      duration: scrollDuration,
       scrollTo: {
         y: scrollTarget,
         autoKill: false
       },
       ease: "circ.inOut"
     });
+  },
+  projectsSummaryControl: function projectsSummaryControl() {
+    var projectSummaryTriggers = $('.mn-section-project-summary-trigger');
+    var projectsTl = gsap.timeline();
+    var projectWrappers = $('.mn-section-project-summary-item');
+    var itemHeight = 65;
+    var projectsSummaryContainer = $1('#js-projects-summary-container');
+    var bodyEl = $1('body');
+    var projectSummaryClose = $1('.mn-projects-summary-detail-close');
+    var projectsSection = $1('#js-projects-top');
+
+    for (var i = 0; i < projectWrappers.length; i++) {
+      var el = projectWrappers[i];
+      addClass(el, 'is-inactive');
+      el.dataset.originalPosition = el.style.top = i * itemHeight;
+      el.dataset.originalIndex = i;
+
+      if (i > 0) {
+        el.style.top = i * itemHeight + 'px';
+        el.style.zIndex = i;
+      }
+    }
+
+    projectSummaryTriggers.forEach(function (el) {
+      el.addEventListener('click', function (e) {
+        removeClass(el.parentNode.parentNode, 'is-inactive');
+        addClass(el.parentNode.parentNode, 'is-active-wrapper');
+        e.preventDefault();
+        openProject(el);
+      });
+    });
+
+    function openProject(element) {
+      var parentEl = element.parentNode.parentNode;
+      var inactiveSiblings = $('li.is-inactive');
+      projectsTl.to(inactiveSiblings, {
+        duration: 0.3,
+        opacity: 0.5
+      });
+      gsap.to(window, {
+        duration: 1.1,
+        scrollTo: {
+          y: projectsSummaryContainer,
+          autoKill: false
+        },
+        ease: "circ.inOut",
+        onComplete: function onComplete() {
+          projectOpenActions();
+        }
+      });
+
+      function projectOpenActions() {
+        projectsTl.to(window, {
+          duration: 0.9,
+          scrollTo: {
+            y: projectsSummaryContainer,
+            autoKill: false
+          },
+          ease: "expo.inOut"
+        });
+        projectsTl.to(element, {
+          duration: 0.6,
+          backgroundColor: '#000000',
+          className: "+=is-active",
+          ease: "circ.inOut(0.5)"
+        });
+        projectsTl.to(parentEl, {
+          duration: 0.7,
+          top: 0,
+          opacity: 1,
+          ease: "expo.inOut(0.5)"
+        });
+        projectsTl.to(parentEl, {
+          duration: 0.7,
+          height: '100vh',
+          ease: "expo.inOut(0.5)"
+        });
+        projectsTl.to(inactiveSiblings, {
+          duration: 0.3,
+          opacity: 0
+        });
+        projectsTl.to(parentEl, {
+          duration: 0.4,
+          zIndex: '1000',
+          backgroundColor: '#343435',
+          opacity: 1,
+          ease: "circ.inOut(0.3)",
+          onComplete: function onComplete() {
+            openDetail(parentEl);
+          }
+        }); // these will run as the timeline is running
+
+        addClass(projectsSummaryContainer, 'is-active');
+        addClass(bodyEl, 'is-projects-active');
+      }
+    }
+
+    function openDetail(element) {
+      var detailEl = $1('.mn-projects-summary-detail-wrapper', element);
+      gsap.to(detailEl, {
+        duration: 0.1,
+        display: 'block'
+      });
+      gsap.to(detailEl, {
+        duration: 0.7,
+        top: 0,
+        opacity: 1,
+        height: '100%',
+        ease: "circ.inOut(0.5)"
+      });
+    }
+
+    function resetProjectsWindow() {
+      gsap.to(window, {
+        duration: 0.9,
+        scrollTo: {
+          y: projectsSection,
+          autoKill: false
+        },
+        ease: "expo.inOut(0.6)"
+      });
+    }
+
+    function resetProjects() {
+      var activeWrapper = $1('.is-active-wrapper');
+      var activeDetail = $1('.mn-projects-summary-detail-wrapper', activeWrapper);
+      var activeAnchor = $1('.is-active', activeWrapper);
+      var activeWrapperOriginalPos = activeWrapper.dataset.originalPosition;
+      var activeWrapperOriginalIndex = activeWrapper.dataset.originalIndex;
+      var inactiveSiblings = $('li.is-inactive');
+      var resetTl = gsap.timeline(); // need to hide content first here
+      // hiding content here
+
+      resetTl.to(activeDetail, {
+        duration: 0.7,
+        opacity: 0,
+        ease: "circ.inOut(0.5)",
+        onComplete: function onComplete() {
+          activeDetail.style = '';
+        }
+      }); // set the summary item back to 65 px height
+
+      resetTl.to(activeWrapper, {
+        duration: 0.9,
+        height: itemHeight + 'px',
+        ease: "circ.inOut(0.5)"
+      }); // make the siblings visible again
+
+      resetTl.to(inactiveSiblings, {
+        duration: 0.7,
+        opacity: 1
+      }); // move the summary item back to it's original position
+
+      resetTl.to(activeWrapper, {
+        duration: 0.65,
+        top: activeWrapperOriginalPos + 'px',
+        ease: "expo.inOut(0.4)"
+      }); // move the anchor back to the left of the list
+
+      resetTl.to(activeAnchor, {
+        duration: 0.7,
+        translateX: '40px',
+        className: "-=is-active",
+        ease: "circ.inOut(0.4)",
+        onComplete: function onComplete() {
+          // take the inline style for bg color off
+          activeWrapper.style.removeProperty('background-color'); // reset the z index for the element
+
+          activeWrapper.style.zIndex = activeWrapperOriginalIndex; // take the background color off the anchor as well
+
+          activeAnchor.style.removeProperty('background-color'); // remove the class from the active wrapper
+
+          removeClass(activeWrapper, 'is-active-wrapper'); // move the window back to top of projects
+
+          resetProjectsWindow();
+        }
+      }); // remove container class, and body class to remove fixed positioning etc
+
+      removeClass(projectsSummaryContainer, 'is-active');
+      removeClass(bodyEl, 'is-projects-active'); // add the default class back to previously added element
+
+      addClass(activeWrapper, 'is-inactive');
+    }
+
+    projectSummaryClose.addEventListener('click', function () {
+      resetProjects();
+    });
   }
 };
 window.addEventListener('DOMContentLoaded', function () {
-  gsap.registerPlugin(ScrollToPlugin); // dom is loaded!
+  gsap.registerPlugin(ScrollToPlugin);
+  gsap.registerPlugin(CSSRulePlugin); // dom is loaded!
 
   mNineDScript.start.init();
 });

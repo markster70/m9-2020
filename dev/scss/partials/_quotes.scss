@@ -1,0 +1,64 @@
+.mn-bq-wrapper {
+  width: 100vw;
+  padding: 10rem 6rem;
+  background: url("/dist/images/x-hatch-bg.jpg") repeat;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-top: 1px solid rgba($white, 0.2);
+  border-bottom: 1px solid rgba($white, 0.2);
+}
+
+.mn-blockquote-item {
+  @include font-size(28);
+  font-weight: $font-weight-medium;
+  text-align: center;
+  color: rgba($white,0.4);
+  max-width: 60%;
+  margin: 0 auto;
+  position: relative;
+  flex-basis: 100%;
+
+
+  &:before {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    background-image: url("/dist/images/quote.png");
+    background-size: contain;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    content: '';
+    left: -80px;
+    top: -80px;
+  }
+
+
+  &:after {
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    background-image: url("/dist/images/close-quote.png");
+    background-size: contain;
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    content: '';
+    right: -80px;
+    bottom: -80px
+  }
+
+}
+
+
+.mn-blockquote-author {
+  @include font-size(18);
+  font-weight: $font-weight-light;
+  letter-spacing: 5px;
+  color: $secondary-accent;
+  text-align: center;
+  margin-top: auto;
+  flex-basis: 100%;
+  padding-top: 5rem;
+  font-style: normal;
+
+}

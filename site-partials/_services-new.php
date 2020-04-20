@@ -9,7 +9,7 @@
            <h1>
                <span class="is-secondary-txt mn-section-services-hd-lg">Here's</span>
                <span class="mn-section-services-hd-anim">some of the</span>
-               <span class="is-primary-txt mn-section-services-hd-anim">services</span>
+               <span class="is-primary-txt mn-section-services-hd-anim mn-section-services-hd-sub">services</span>
            </h1>
            <h2 class="mn-section-services-hd-anim">we regularly help our clients with...</h2>
        </header>
@@ -50,9 +50,14 @@
                         <li>Build Tooling - Gulp, Webpack</li>
                         <li>Production Deployment</li>
                         <li>Website Performance Optimisation</li>
+                        <li>Website / CMS Maintenance</li>
                     </ul>
                 </article>
             </div>
         </div>
+        <footer class="mn-services-ft">
+            <h4>Have a project in mind that you'd like to discuss ?</h4>
+            <h4>Feel free to <a href="#js-contact-section">contact us</a> for a no obligation chat..</h4>
+        </footer>
     </div>
 </section>

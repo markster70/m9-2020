@@ -1,0 +1,139 @@
+.mn-section-projects {
+  .mn-section-inner {
+    position: relative;
+    background-color: $body-base-bg;
+    height: 100vh;
+  }
+}
+
+.mn-section-projects-summary {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  position: relative;
+
+  li {
+    padding: 0 2rem;
+    background-color: rgba($black, 0.1);
+    border-bottom : 1px solid rgba($white,0.1);
+    height: 65px;
+    line-height: 65px;
+    position: absolute;
+    width: 100%;
+
+    .mn-section-projects-item-inner {
+      position: relative;
+    }
+
+    a {
+      @include font-size(18);
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color : $grey-accent;
+      text-decoration: none;
+      font-weight: $font-weight-light;
+      @include std-transitions($speed: 400ms, $ease: cubic-bezier(0.215, 0.610, 0.355, 1.000));
+      transform: translateX(40px);
+      opacity: 0.8;
+      display: inline-block;
+      padding: 0 1rem;
+    }
+
+    &:hover {
+
+      a {
+        //transform: translateX(60px);
+        opacity: 1.0;
+        @include font-size(22);
+
+      }
+    }
+
+    &.is-active-wrapper {
+
+      overflow: scroll;
+
+      &:hover {
+
+        a {
+          @include font-size(18);
+        }
+
+      }
+    }
+
+  }
+
+}
+
+
+.mn-projects-summary-wrap {
+  &.is-active {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left:0;
+    z-index: 5000;
+  }
+}
+
+
+.mn-projects-summary-detail-wrapper {
+  max-height: 0;
+  opacity: 0;
+  display: none;
+  max-width: 80%;
+  margin: 4rem auto;
+
+}
+
+
+.mn-projects-summary-detail-inner {
+  min-height: 400px;
+  background-color: #acacb2;
+}
+
+.mn-projects-summary-detail-close {
+  display: none;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+}
+
+.mn-projects-summary-wrap.is-active {
+  .mn-projects-summary-detail-close {
+    display: block;
+    z-index: 6000;
+  }
+}
+
+.mn-section-projects-hd {
+  padding: 3rem;
+  max-width: 60%;
+  margin: 0 auto 1rem;
+
+  h1, h2 {
+    margin: 0;
+    color: $grey-accent;
+    font-weight: $font-weight-light;
+    line-height: 1;
+    text-align: center;
+  }
+
+  h1 {
+    @include font-size(22);
+    letter-spacing: 6px;
+  }
+
+  h2 {
+    @include font-size(20);
+    letter-spacing: 4px;
+  }
+
+}
+
+.mn-section-projects-hd-lg {
+  @include font-size(50);
+  font-weight: $font-weight-light;
+}

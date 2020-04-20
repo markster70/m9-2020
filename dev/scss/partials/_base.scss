@@ -16,9 +16,10 @@ body {
   max-width: 100%;
   overflow-x: hidden;
 
-  &.is-nav-active {
+  &.is-nav-active,  &.is-projects-active  {
     overflow: hidden;
   }
+
 
 }
 

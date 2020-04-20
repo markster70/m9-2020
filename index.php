@@ -12,6 +12,10 @@
 <?php include 'site-partials/_home.html'; ?>
 <?php include 'site-partials/_about.html'; ?>
 <?php include 'site-partials/_services-new.php'; ?>
+<?php include 'site-partials/_block-quote-a.html'; ?>
+<?php include 'site-partials/_projects.html'; ?>
+<?php include 'site-partials/_contact.html'; ?>
+
 <script src="dist/js/m9-2020-concat-script.min.js"></script>
 
 <div class="cursor-dot-outline"></div>

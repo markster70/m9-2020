@@ -44,9 +44,16 @@
 
 .mn-section-services-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-gap: 2rem;
-  padding: 2rem 4rem;
+
+  grid-template-columns: 1fr;
+
+  @include breakpoint($bp-xl) {
+
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 2rem;
+    padding: 2rem 4rem;
+  }
+
 }
 
 .mn-section-services-item {
@@ -63,9 +70,14 @@
 }
 
 .mn-section-services-svg-wrap {
-  max-width: 150px;
+  max-width: 80px;
   margin: 0 auto;
   @include std-transitions();
+
+  @include breakpoint($bp-xl) {
+    max-width: 150px;
+  }
+
 }
 
 
@@ -89,13 +101,15 @@
   text-transform: uppercase;
   @include std-transitions();
 
+
+
 }
 
 .mn-section-services-item-list {
   list-style: none;
-  padding: 3rem 5rem;
+  padding: 1rem 1.5rem;
   background-color: rgba($black, 0.08);
-  height: 400px;
+  height: auto;
   display: flex;
   align-items: flex-start;
   flex-wrap: wrap;
@@ -105,6 +119,12 @@
   opacity: 0;
   position: relative;
 
+
+  @include breakpoint($bp-xl) {
+    height: 400px;
+    padding: 3rem 2rem;
+  }
+
   li {
     text-align: center;
     margin-bottom: 0.5rem;
@@ -112,6 +132,12 @@
     color: $grey-accent;
     flex-basis: 100%;
     font-weight: $font-weight-light;
+    @include font-size(14);
+
+    @include breakpoint($bp-l) {
+      @include font-size(15);
+
+    }
 
   }
 }
@@ -126,6 +152,12 @@
   filter: blur(36px);
   opacity: 0;
   top: 80px;
+  position: relative;
+}
+
+.mn-section-services-hd-sub {
+  top: -80px;
+
 }
 
 .mn-section-services-item-hd {
@@ -151,4 +183,32 @@
     @include font-size(28);
   }
 
+}
+
+.mn-services-ft {
+  display: flex;
+  width: 100vw;
+  padding: 2rem 6rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid rgba($white, 0.2);
+
+  h4 {
+    color : $grey-accent;
+    margin: 0 0 1rem;
+    flex-basis: 100%;
+    @include font-size(28);
+    text-transform: uppercase;
+    text-align: center;
+
+    a {
+      color: $secondary-accent;
+      text-decoration: none;
+      @include std-transitions();
+
+      &:hover {
+        color: $primary-accent;
+      }
+
+    }
+  }
 }

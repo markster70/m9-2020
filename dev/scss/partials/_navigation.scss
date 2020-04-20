@@ -6,6 +6,8 @@
   width: 100vw;
   background-color: $nav-bg-color;
   overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 400px;
 
 }
 
@@ -79,7 +81,6 @@
   opacity: 0;
   left: 200px;
   min-width: 300px;
-  //background-color: $nav-bg-color;
   @include std-transitions($speed: 350ms, $property: color, $ease: cubic-bezier(0.785, 0.135, 0.150, 0.860));
   display: block;
 
@@ -107,6 +108,7 @@
     &:hover {
 
       opacity: 0.5!important;
+      transform: rotateY(-5deg);
     }
 
   }
@@ -165,7 +167,6 @@
     @include font-size(22);
     @include std-transitions($property : font-size);
     margin: 0 0 1rem;
-    text-shadow: 2px 2px 25px rgba($white, 0.3);
 
     @include breakpoint($bp-l) {
       @include font-size(30);
@@ -174,12 +175,28 @@
 
     @include breakpoint($bp-l) {
       @include font-size(48);
-      margin: 1rem 0 0;
+      margin: 0;
+
+      &:last-child {
+        margin-bottom: 1rem;
+        left: 200px;
+      }
 
 
     }
 
     color: $secondary-accent;
+
+    @supports (mix-blend-mode:color-dodge) {
+
+      @include breakpoint($bp-xl) {
+
+        mix-blend-mode: color-dodge;
+        text-shadow: 3px 3px 14px rgba($white,0.7);
+        color: $black;
+      }
+    }
+
     text-transform: uppercase;
 
     opacity: 0;

@@ -2,6 +2,9 @@
   width: 100%;
   height: 100%;
   padding: 15% 1rem 0;
+  position: relative;
+  z-index: 2;
+  height: 100vh;
 
 }
 
@@ -27,12 +30,12 @@
 
 .mn-section-home-hello {
   text-align: center;
-  @include font-size(64);
+  @include font-size(40);
   margin: 0.5rem 0;
   color: $secondary-accent;
   text-transform: uppercase;
   letter-spacing: 0.5rem;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-light;
 
 }
 
@@ -65,9 +68,9 @@
   opacity: 0.8;
   @include std-transitions();
 
-  img {
+  svg {
     max-width: 100%;
-    height: auto;
+    max-height: 150px;
   }
 
   &:hover {
@@ -93,4 +96,85 @@
   70%{-webkit-transform:translateY(15%);transform:translateY(15%)}
   80%{-webkit-transform:translate(3%,35%);transform:translate(3%,35%)}
   90%{-webkit-transform:translate(-10%,10%);transform:translate(-10%,10%)}
+}
+
+.mn-home-mouse {
+  opacity: 0.2;
+  animation-name: home-scroll-opacity;
+  animation-duration:3s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-out;
+  animation-delay: 3s;
+  position: relative;
+
+
+  .mn-home-mouse-line,.cls-3,.cls-4{
+    fill:none;stroke:#fff;
+    stroke-miterlimit:10;
+    @include std-transitions();
+  }
+  .cls-1{
+    stroke-width:0.75px;
+  }
+  .cls-2{
+    fill:#fff;
+  }
+  .cls-3{
+    stroke-width:0.15px;
+  }
+  .cls-4{
+    stroke-width:0.25px;
+  }
+
+
+  .cls-2, .cls-3, .cls-4 {
+    animation: fadein 2s forwards;
+    animation-delay: 1.5s;
+    opacity: 0;
+  }
+
+}
+
+
+.mn-home-mouse-line {
+  stroke-dasharray: 200;
+  stroke-dashoffset: 200;
+  animation: dash 0.5s ease-out forwards;
+  animation-delay: 1s;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes fadein {
+  from {
+    opacity:0;
+  }
+  to {
+    opacity:1;
+  }
+}
+
+@keyframes home-scroll-opacity {
+  0% {
+    opacity: 0.2;
+    top: 0;
+  }
+  10% {
+    opacity: 0.5;
+    top: -7px;
+  }
+}
+
+.mn-particles-holder {
+  position: absolute;
+  left: 0;
+  top:0;
+  height: 100vh;
+  width: 100vw;
+  opacity: 0.9;
+  z-index: 1;
 }
