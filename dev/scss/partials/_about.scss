@@ -33,6 +33,11 @@
   }
 }
 
+.mn-section-about {
+  .mn-section-hd {
+  }
+}
+
 .mn-about-parralax-text {
   opacity: 0;
   transform: translate3d(300px, 0px, 0px);
@@ -98,9 +103,9 @@
       height: auto;
     }
 
-    filter: blur(36px);
-    transform: scale3d(0.1, 0.1,0.1);
-    opacity: 0;
+    //filter: blur(36px);
+    //transform: scale3d(0.1, 0.1,0.1);
+    //opacity: 0;
   }
 }
 

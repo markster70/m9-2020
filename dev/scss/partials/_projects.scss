@@ -2,7 +2,6 @@
   .mn-section-inner {
     position: relative;
     background-color: $body-base-bg;
-    height: 100vh;
   }
 }
 
@@ -12,8 +11,7 @@
   margin: 0;
   position: relative;
 
-  li {
-    padding: 0 2rem;
+  .mn-section-project-summary-item {
     background-color: rgba($black, 0.1);
     border-bottom : 1px solid rgba($white,0.1);
     height: 65px;
@@ -37,6 +35,7 @@
       opacity: 0.8;
       display: inline-block;
       padding: 0 1rem;
+      background-color: transparent;
     }
 
     &:hover {
@@ -52,6 +51,7 @@
     &.is-active-wrapper {
 
       overflow: scroll;
+      -webkit-overflow-scrolling: touch;
 
       &:hover {
 
@@ -64,6 +64,10 @@
 
   }
 
+}
+
+.mn-section-projects-summary {
+  min-height: $project-items * $project-height + 200;
 }
 
 
@@ -83,7 +87,6 @@
   max-height: 0;
   opacity: 0;
   display: none;
-  max-width: 80%;
   margin: 4rem auto;
 
 }
@@ -95,10 +98,35 @@
 }
 
 .mn-projects-summary-detail-close {
+  @include button-reset();
   display: none;
   position: absolute;
-  right: 10px;
-  top: 10px;
+  width: 70px;
+  height: 70px;
+  left: 50%;
+  margin-left: -40px;
+  top: 5px;
+  text-transform: uppercase;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.3;
+  @include std-transitions()
+;
+  &:hover {
+    opacity: 0.8;
+    transform: scale(1.1);
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+
+  svg {
+    fill: $tertiary-accent;
+    max-width: 100%;
+  }
+
 }
 
 .mn-projects-summary-wrap.is-active {
@@ -136,4 +164,150 @@
 .mn-section-projects-hd-lg {
   @include font-size(50);
   font-weight: $font-weight-light;
+}
+
+
+
+.mn-projects-summary-detail-hd {
+  color : $project-detail-header-color;
+  @include font-size(40);
+  letter-spacing: 5px;
+  line-height: 0;
+  margin: 0 auto 2rem;
+  font-weight: $font-weight-bold;
+  text-align: center;
+  text-transform: uppercase;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba($white,0.2);
+  max-width: 80%;
+  opacity: 0.8;
+}
+
+.mn-projects-summary-detail-sub-hb {
+  text-align: center;
+  color : $project-detail-header-color;
+  @include font-size(28);
+  font-weight: $font-weight-light;
+  max-width: 40%;
+  margin: 0 auto;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+
+.mn-projects-summary-detail-bd {
+
+  margin-top: 2rem;
+  background: url("/dist/images/m9-logo-large.png") bottom right no-repeat;
+  background-size: 180px auto;
+  display: flex;
+  flex-direction: column;
+}
+
+
+
+.mn-projects-summary-detail-logo {
+  text-align: center;
+  padding: 2rem 0 1rem;
+
+  img {
+    max-width: 80px;
+    height: auto;
+  }
+}
+
+.mn-projects-summary-detail-content {
+
+  max-width: 70%;
+  margin: 0 auto;
+
+  h3 {
+    color: $primary-accent;
+    @include font-size(20);
+    font-size: $font-weight-medium;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($white,0.2);
+  }
+
+  p {
+    color: $body-copy-color;
+    font-weight: $font-weight-light;
+    opacity: 0.6;
+  }
+}
+
+.mn-projects-summary-tech-content {
+
+  width: 70%;
+  max-width: 70%;
+  margin: 0 auto;
+
+
+  h3 {
+    color: $secondary-accent;
+    @include font-size(20);
+    font-size: $font-weight-medium;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($white,0.2);
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba($white,0.2);
+    padding-left: 0;
+
+    li {
+
+      color : $white;
+      @include font-size(14);
+      text-transform: uppercase;
+      font-weight: $font-weight-medium;
+      padding: 0.5rem;
+      margin-right: 1rem;
+      background-color: $primary-accent;
+    }
+  }
+}
+
+.mn-projects-summary-detail-images {
+  max-width: 70%;
+  margin: 1rem auto;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  .is-inner-whole {
+    flex-basis: 100%;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .is-inner {
+    flex-basis: 50%;
+    padding: 1rem;
+
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+    opacity: 0.5;
+    box-shadow: 11px 9px 9px -4px rgba(0,0,0,0.19);
+    @include std-transitions();
+
+    &:hover {
+        opacity: 1;
+    }
+  }
+
+}
+
+.mn-project-summary-detail-ft {
+  width: 100%;
+  text-align: center;
+  margin-top: auto;
+  padding-top: 4rem;
 }

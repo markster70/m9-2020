@@ -1,0 +1,19 @@
+.mn-project-summary-btt {
+
+  @include button-reset();
+  padding: 1rem;
+  background-color: $black;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+
+
+  svg {
+    fill: $primary-accent;
+    max-width: 100%;
+    height: auto;
+    position: relative;
+    top: -5px;
+
+  }
+}

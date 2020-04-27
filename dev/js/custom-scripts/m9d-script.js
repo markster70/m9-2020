@@ -251,17 +251,17 @@ mNineDScript.start = {
     runScrollAnimations () {
 
         let aboutGridContent = $('.mn-section-about-grid-item-inner');
-        let aboutGridImages = $('.m9-section-about-item-img img');
+        //
 
         const scrollController = new ScrollMagic.Controller();
         let aboutTl = gsap.timeline({paused: true});
-        let imageTween = aboutTl.to(aboutGridImages, {duration : 1.0, stagger: 0.4, scaleX: 1, scaleY: 1, opacity: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
-        let contentTween = aboutTl.to(aboutGridContent, {duration : 0.7, stagger: 0.25, opacity: 1, top: 0, ease: "circ.inOut(0.5)"},">-0.8");
+        //let imageTween = aboutTl.to(aboutGridImages, {duration : 1.0, stagger: 0.4, scaleX: 1, scaleY: 1, opacity: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
+        let contentTween = aboutTl.to(aboutGridContent, {duration : 0.7, stagger: 0.45, opacity: 1, top: 0, ease: "circ.inOut(0.5)"});
 
 
         let aboutScene = new ScrollMagic.Scene({
                 triggerElement : '#js-about-top',
-                offset: 200
+                offset: 100
 
             })
             .on("enter", function (e) {
@@ -330,6 +330,8 @@ mNineDScript.start = {
     },
     projectsSummaryControl () {
 
+        // this needs re-factor to make more manageable
+
         const projectSummaryTriggers = $('.mn-section-project-summary-trigger');
         const projectsTl = gsap.timeline();
         const projectWrappers = $('.mn-section-project-summary-item');
@@ -338,6 +340,10 @@ mNineDScript.start = {
         const bodyEl = $1('body');
         const projectSummaryClose = $1('.mn-projects-summary-detail-close');
         const projectsSection = $1('#js-projects-top');
+        const fadeSections = $('.mn-section-fade');
+        const projectContainerClass = '.mn-projects-summary-detail-wrapper';
+
+        const _self = this;
 
 
         for(let i =0; i < projectWrappers.length; i ++) {
@@ -353,16 +359,36 @@ mNineDScript.start = {
             }
         }
 
+
+
         projectSummaryTriggers.forEach( (el) => {
 
                 el.addEventListener('click', (e) => {
 
-                    removeClass(el.parentNode.parentNode, 'is-inactive');
-                    addClass(el.parentNode.parentNode, 'is-active-wrapper');
-
                     e.preventDefault();
 
-                    openProject(el);
+                    let contentToLoad = el.dataset.content;
+                    let elParent = el.parentNode.parentNode;
+                    let projectContainer = $1(projectContainerClass, elParent);
+
+
+                        partialLoader(projectContainer,contentToLoad)
+                            .then(function(){
+                                setTimeout(function(){
+
+                                    // need to look at pre-loader here
+
+                                    removeClass(elParent, 'is-inactive');
+                                    addClass(elParent, 'is-active-wrapper');
+                                    openProject(el);
+
+                                }, 500);
+
+                            })
+                            .catch(function() {
+                                // need to do something here with the error handler
+                            });
+
 
 
                 });
@@ -374,22 +400,23 @@ mNineDScript.start = {
             let parentEl = element.parentNode.parentNode;
             let inactiveSiblings = $('li.is-inactive');
 
-            projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0.5});
+            projectsTl.to(element, {duration: 0.9, backgroundColor: '#000000'});
+            projectsTl.to(inactiveSiblings, { duration: 0.3, opacity: 0.5 });
+            projectsTl.to(fadeSections, { duration: 0.5, opacity:0 , onComplete: function () {
+                    gsap.to(window, {duration: 1.1, scrollTo: {y: projectsSummaryContainer, autoKill: false}, ease: "circ.inOut", onComplete : function() {
+                            projectOpenActions();
+                        }});
+            }});
 
-
-            gsap.to(window, {duration: 1.1, scrollTo: {y: projectsSummaryContainer, autoKill: false}, ease: "circ.inOut", onComplete : function() {
-                    projectOpenActions();
-                }});
 
 
             function projectOpenActions () {
 
-                projectsTl.to(window, {duration: 0.9, scrollTo: {y: projectsSummaryContainer, autoKill: false}, ease: "expo.inOut"});
-                projectsTl.to(element, {duration: 0.6, backgroundColor: '#000000', className: "+=is-active", ease: "circ.inOut(0.5)"});
+                projectsTl.to(element, {duration: 0.6, className: "+=is-active", ease: "circ.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, top: 0, opacity: 1, ease: "expo.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, height: '100vh', ease: "expo.inOut(0.5)"});
                 projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0});
-                projectsTl.to(parentEl, {duration: 0.4, zIndex: '1000', backgroundColor: '#343435', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
+                projectsTl.to(parentEl, {duration: 0.4, zIndex: '1000', backgroundColor: 'rgba(0,0,0,0.4)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
 
                     openDetail(parentEl);
 
@@ -410,12 +437,17 @@ mNineDScript.start = {
 
 
             gsap.to(detailEl, {duration : 0.1, display: 'block'});
-            gsap.to(detailEl, {duration : 0.7, top: 0, opacity: 1, height: '100%', ease: "circ.inOut(0.5)"});
+            gsap.to(detailEl, {duration : 0.7, top: 0, opacity: 1, height: '100%', ease: "circ.inOut(0.5)", onComplete: function() {
+
+                _self.projectDetailControl();
+
+            }});
         }
 
         function resetProjectsWindow () {
 
             gsap.to(window, {duration: 0.9, scrollTo: {y:projectsSection, autoKill: false}, ease: "expo.inOut(0.6)"});
+            projectsTl.to(fadeSections, { duration: 0.5, opacity:1 });
 
         }
 
@@ -479,6 +511,22 @@ mNineDScript.start = {
 
         });
 
+
+    },
+    projectDetailControl () {
+        let projectDetailTl = gsap.timeline();
+
+        let detailDash = $1('.mn-projects-summary-detail-dash-anim');
+        let detailHd = $1('.mn-projects-summary-detail-hd');
+
+
+        projectDetailTl.to(detailDash, {duration : 0.4, repeat : 3,opacity: 0  });
+        projectDetailTl.to(detailDash, {duration : 0.1, opacity: 1  });
+        projectDetailTl.to(detailDash, {duration : 0.4, left: '30vw', ease: "circ.inOut(0.4)" });
+        projectDetailTl.to(detailHd, {duration : 0.6, left: '0vw', opacity: 1, '-webkit-filter': " blur(0px)", ease: "expo.out(0.6)" });
+        projectDetailTl.to(detailDash, {duration : 0.2, opacity: 0, ease: "circ.inOut(0.4)" });
+
+        // move the anchor back to the left of the list
 
     }
 

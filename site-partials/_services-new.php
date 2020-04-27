@@ -24,7 +24,7 @@
                         <li>UI Design / Website Design</li>
                         <li>Responsive Design</li>
                         <li>CMS Design</li>
-                        <li>Poster/ Banner Design</li>
+                        <li>Poster / Banner Design</li>
                     </ul>
                 </article>
                 <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="1200">
@@ -38,6 +38,7 @@
                             <li>Javascript Development</li>
                             <li>Javascript Applications ( Vue.js )</li>
                             <li>CMS Development</li>
+                            <li>Wordpress Theme Creation</li>
                         </ul>
 
                 </article>

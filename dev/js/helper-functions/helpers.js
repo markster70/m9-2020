@@ -93,7 +93,7 @@ function currScreenSize() {
 
 function partialLoader(container, partial) {
     return new Promise(function(resolve, reject) {
-        var x;
+        let x;
 
         if(XMLHttpRequest) {
             x = new XMLHttpRequest();
@@ -122,19 +122,19 @@ function partialLoader(container, partial) {
 // detect the dreaded crappo versions of IE
 
 function detectOldIE() {
-    var ua = window.navigator.userAgent;
+    let ua = window.navigator.userAgent;
 
 
-    var msie = ua.indexOf('MSIE ');
+    let msie = ua.indexOf('MSIE ');
     if (msie > 0) {
         // IE 10 or older => return version number
         return parseInt(ua.substring(msie + 5, ua.indexOf('.', msie)), 10);
     }
 
-    var trident = ua.indexOf('Trident/');
+    let trident = ua.indexOf('Trident/');
     if (trident > 0) {
         // IE 11 => return version number
-        var rv = ua.indexOf('rv:');
+        let rv = ua.indexOf('rv:');
         return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
     }
 

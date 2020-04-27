@@ -1,0 +1,78 @@
+.is-mpp-hero {
+  background: url("/dist/images/project-images/mpp-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.is-zishi-hero {
+  background: url("/dist/images/project-images/zishi-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.is-frotcom-hero {
+  background: url("/dist/images/project-images/frotcom-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.is-collective-hero {
+  background: url("/dist/images/project-images/hyundai-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+
+.is-ttc-hero {
+  background: url("/dist/images/project-images/ttc-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.is-otk-hero {
+  background: url("/dist/images/project-images/otk-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.is-investec-hero {
+  background: url("/dist/images/project-images/investec-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.is-jisc-hero {
+  background: url("/dist/images/project-images/jisc-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+.mn-projects-summary-detail-hero {
+  min-height: 500px;
+  width: 100vw;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-top: 1px solid rgba($white, 0.2);
+  border-bottom: 1px solid rgba($white, 0.2);
+}
+
+.mn-projects-summary-detail-hero-inner {
+  max-width: 70%;
+  position: relative;
+  text-align: center;
+
+  blockquote {
+    line-height: 1.3;
+    padding: 2rem 6rem;
+    font-weight: $font-weight-thin;
+    max-width: 90%;
+    color: $white;
+    @include font-size(16);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+
+    &:before, &:after {
+      background-color: rgba($primary-accent,0.15);
+      background-position: 50% 50%;
+      height: 60px;
+      width: 60px;
+    }
+  }
+
+  cite {
+    text-transform: uppercase;
+    color: $primary-accent;
+    font-weight: $font-weight-light;
+    @include font-size(14);
+    letter-spacing: 3px;
+
+  }
+
+}

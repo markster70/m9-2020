@@ -2,28 +2,31 @@
   background: url("/dist/images/x-hatch-bg.jpg") repeat;
 }
 
-.mn-section-about {
-  padding-top: 0.5rem;
+.mn-section {
+  background: url("/dist/images/m9-logo-large.png") bottom right no-repeat;
+  background-size: 140px auto;
 }
 
+
 .mn-section-hd {
-  border-top: 1px solid rgba($white,0.1);
-  border-bottom: 1px solid rgba($white,0.1);
+  border-top: 1px solid rgba($white,0.05);
+  border-bottom: 1px solid rgba($white,0.05);
 }
 
 .mn-section-logo {
   display: flex;
   align-items: center;
   padding-left: 1rem;
-  margin: 0.75rem 0;
-  justify-content: center;
+  margin: 0.75rem 8rem 0.75rem;
+  justify-content: flex-end;
 
 
   .mn-section-logo-txt {
     text-transform: uppercase;
-    @include font-size(40);
+    @include font-size(34);
     font-weight: $font-weight-bold;
-    @include title-gradient();
+    opacity: 0.4;
+    color: $grey-accent;
 
   }
 
@@ -32,11 +35,11 @@
     display: inline-block;
     position: relative;
     left: 5px;
-    top: 5px;
+    top: 7px;
 
     img {
       width: auto;
-      height: 50px;
+      height: 40px;
     }
   }
 }
