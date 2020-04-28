@@ -1,10 +1,14 @@
 .mn-section-home {
-  background: url("/dist/images/x-hatch-bg.jpg") repeat;
+  //background: url("/dist/images/x-hatch-bg.jpg") repeat;
 }
 
 .mn-section {
   background: url("/dist/images/m9-logo-large.png") bottom right no-repeat;
-  background-size: 140px auto;
+  background-size: 130px auto;
+}
+
+.mn-section-home {
+  background-size: 350px auto;
 }
 
 

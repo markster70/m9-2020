@@ -83,30 +83,48 @@
 
   width: 100%;
   height: 200px;
+  position: relative;
 
   @include breakpoint($bp-l) {
     height: 350px;
   }
 
   @include breakpoint($bp-xl) {
-    height: auto;
+    height: 550px;
   }
 
   img {
-
+    position: absolute;
+    top: 0;
+    left:0;
     object-fit: cover;
     height: 100%;
     width: 100%;
+    @include std-transitions($speed: 1200ms, $property: opacity);
 
     @include breakpoint($bp-xl) {
       max-width: 100%;
       height: auto;
     }
-
-    //filter: blur(36px);
-    //transform: scale3d(0.1, 0.1,0.1);
-    //opacity: 0;
   }
+
+  .mn-section-about-img-primary {
+    z-index: 1;
+  }
+
+  .mn-section-about-img-hover {
+    transition: 0.2s all;
+  }
+
+  &:hover {
+    .mn-section-about-img-primary {
+      opacity: 0.75;
+      mix-blend-mode: darken
+    }
+
+  }
+
+
 }
 
 .mn-section-about-grid {
@@ -150,8 +168,13 @@
   }
 }
 
+.mn-section-about-grid {
+  border-bottom: 1px solid rgba($white,0.1);
+}
+
 .mn-section-about-grid-item.is-content {
-  background-color: $about-content-bg-color;
+  //background-color: $about-content-bg-color;
+  //background-color: darken($body-base-bg, 1%);
   overflow: hidden;
 
 }
@@ -176,11 +199,6 @@
   p {
     @include font-size(14);
   }
-
-}
-
-.mn-section-about-grid-item.is-image {
-
 
 }
 

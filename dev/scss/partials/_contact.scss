@@ -1,0 +1,238 @@
+.mn-section-contact {
+  //background: url("/dist/images/x-hatch-bg.jpg") repeat;
+}
+
+
+.mn-section-contact-content {
+  padding: 2rem 6rem;
+
+  h2, h3, h4, p, label {
+    color: $body-copy-color;
+
+  }
+
+  h2 {
+    @include font-size(48);
+    opacity: 0.2;
+  }
+
+
+}
+
+
+
+.mn-contact-lbl {
+  width: 250px;
+  @include font-size(15);
+  text-transform: uppercase;
+  font-weight: $font-weight-medium;
+  letter-spacing: 2px;
+}
+
+
+
+.mn-contact-phone-nr, .mn-contact-twitter {
+  font-weight: $font-weight-light;
+
+  span {
+    display: inline-block;
+    @include breakpoint($bp-l) {
+      margin-bottom: 15px;
+    }
+  }
+
+
+  span:last-child, a {
+    color: $tertiary-accent;
+    font-weight: $font-weight-medium;
+    text-decoration: none;
+    @include font-size(22);
+    text-transform: uppercase;
+  }
+}
+
+.mn-contact-frm {
+
+  background-color: rgba($white, 0.01);
+
+  .mn-contact-frm-inner {
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    background-color: transparent;
+
+    @include breakpoint($bp-l) {
+      padding: 1.25rem;
+    }
+  }
+
+  padding: 1rem;
+
+  @include breakpoint($bp-l) {
+    max-width: 85%;
+    padding: 2rem;
+  }
+
+  border: 1px solid rgba($white,0.1);
+  box-sizing: border-box;
+}
+
+.mn-contact-form-hd {
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba($white, 0.1);
+  border-top: 1px solid rgba($white, 0.1);
+
+  margin-bottom: 1.5rem;
+  display: flex;
+
+  @include breakpoint($bp-l) {
+    max-width: 85%;
+  }
+
+  h4 {
+    margin: 0;
+    color: $secondary-accent;
+  }
+}
+
+.mn-ff-input-wrapper {
+
+
+  @media (max-width: 1499px) {
+    flex-basis: 100%;
+  }
+
+}
+
+
+.mn-ff-field-wrap {
+  flex-basis: 100%;
+
+  @media (min-width: 1500px) {
+    flex-basis: 48%;
+    margin-right: 2%;
+  }
+  margin-bottom: 1.5rem;
+
+  @include breakpoint($bp-xl) {
+    display: flex;
+  }
+
+  input,textarea {
+
+    border: 2px solid rgba($white, 0.1);
+    background-color: rgba($white, 0.05);
+    padding: 1rem;
+    color: $white;
+    //border-radius: 5px;
+    transition: border 300ms ease, background-color 300ms ease, font-weight 300ms ease;
+    display: block;
+    flex-grow: 1;
+    width: 90%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    @include breakpoint($bp-l) {
+
+      min-width: 450px;
+
+    }
+
+    @media (min-width: 1500px) {
+      min-width: 320px;
+    }
+
+    @media (min-width: 1700px) {
+      min-width: 350px;
+    }
+
+    &:focus {
+      background-color: rgba($black, 0.25);
+      border: 3px solid rgba($white, 0.8);
+      outline: none;
+      font-weight: $font-weight-medium;
+    }
+  }
+
+  textarea {
+    resize: vertical;
+
+    min-height: 240px;
+  }
+
+  label {
+    display: block;
+
+    @include breakpoint($bp-l) {
+      min-width: 200px;
+
+    }
+
+    margin-bottom: 20px;
+  }
+}
+
+.mn-ff-msg {
+  @media (min-width: 1500px) {
+    margin-left: auto;
+
+    .mn-contact-input-wrp {
+      margin-left: auto;
+    }
+  }
+  @media (min-width: 1500px) {
+    display: flex;
+
+  }
+}
+
+.mn-ff-btn {
+  flex-basis: 100%;
+  display: flex;
+
+  button {
+
+    margin-left: auto;
+    @include button-reset();
+    padding: 0.8rem 3rem;
+    background-color: $primary-accent;
+    color: $white;
+    @include font-size(16);
+    text-transform: uppercase;
+    @include std-transitions();
+
+
+    &:hover {
+
+      background-color: darken($primary-accent, 3%);
+    }
+
+  }
+
+}
+
+.mn-ff-field-wrap .js-validate-error-field {
+
+  border: 3px solid $white;
+}
+
+.js-validate-error-label {
+
+  margin-top: 0.5rem;
+  color: $primary-accent;
+  font-weight: bold;
+}
+
+.mn-contact-req-msg {
+  text-align: right;
+
+  @include font-size(12);
+
+  @include breakpoint($bp-l) {
+    text-align: left;
+    @include font-size(14);
+  }
+
+}

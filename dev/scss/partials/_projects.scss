@@ -12,7 +12,6 @@
   position: relative;
 
   .mn-section-project-summary-item {
-    background-color: rgba($black, 0.1);
     border-bottom : 1px solid rgba($white,0.1);
     height: 65px;
     line-height: 65px;
@@ -52,6 +51,7 @@
 
       overflow: scroll;
       -webkit-overflow-scrolling: touch;
+      background-color: rgba($black, 0.1);
 
       &:hover {
 
@@ -60,6 +60,10 @@
         }
 
       }
+    }
+
+    &:first-child {
+      border-top : 1px solid rgba($white,0.1);
     }
 
   }
@@ -109,7 +113,7 @@
   text-transform: uppercase;
   align-items: center;
   justify-content: center;
-  opacity: 0.3;
+  opacity: 0;
   @include std-transitions()
 ;
   &:hover {

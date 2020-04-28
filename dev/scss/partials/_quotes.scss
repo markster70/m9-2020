@@ -1,7 +1,8 @@
 .mn-bq-wrapper {
   width: 100vw;
   padding: 10rem 6rem;
-  background: url("/dist/images/x-hatch-bg.jpg") repeat;
+  background: url("/dist/images/x-hatch-bg.jpg") rgba($black, 0.3) repeat;
+  //background-color: darken($body-base-bg, 2%);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
@@ -14,10 +15,12 @@
   font-weight: $font-weight-medium;
   text-align: center;
   color: rgba($white,0.4);
-  max-width: 60%;
+  max-width: 70%;
   margin: 0 auto;
   position: relative;
   flex-basis: 100%;
+  background-color: rgba($black, 0.05);
+  padding: 3rem;
 
 
   &:before {

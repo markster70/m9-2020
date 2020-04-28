@@ -67,6 +67,20 @@ mNineDScript.start = {
                     });
                 });
 
+                // Anchor hovering
+                $('.hover-cursor-effect').forEach(function(el) {
+                    el.addEventListener('mouseover', function() {
+                        //self.cursorEnlarged = true;
+                        //self.toggleCursorSize();
+                        addClass(self.$outline, 'imgHover');
+                    });
+                    el.addEventListener('mouseout', function() {
+                        //self.cursorEnlarged = false;
+                        //self.toggleCursorSize();
+                        removeClass(self.$outline, 'imgHover');
+                    });
+                });
+
                 // Click events
                 document.addEventListener('mousedown', function() {
                     self.cursorEnlarged = true;
@@ -416,7 +430,7 @@ mNineDScript.start = {
                 projectsTl.to(parentEl, {duration: 0.7, top: 0, opacity: 1, ease: "expo.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, height: '100vh', ease: "expo.inOut(0.5)"});
                 projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0});
-                projectsTl.to(parentEl, {duration: 0.4, zIndex: '1000', backgroundColor: 'rgba(0,0,0,0.4)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
+                projectsTl.to(parentEl, {duration: 0.4, zIndex: '1000', backgroundColor: 'rgba(0,0,0,0.2)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
 
                     openDetail(parentEl);
 
@@ -460,12 +474,15 @@ mNineDScript.start = {
             let activeWrapperOriginalPos = activeWrapper.dataset.originalPosition;
             let activeWrapperOriginalIndex = activeWrapper.dataset.originalIndex;
             let inactiveSiblings = $('li.is-inactive');
+            const projectCloseBtn = $1('.mn-projects-summary-detail-close');
             const resetTl = gsap.timeline();
 
 
             // need to hide content first here
 
             // hiding content here
+            resetTl.to(projectCloseBtn, {duration: 0.5, opacity: 0, ease: "circ.inOut(0.5)"});''
+
             resetTl.to(activeDetail, {duration : 0.7, opacity: 0, ease: "circ.inOut(0.5)", onComplete: function () {
 
                 activeDetail.style = '';
@@ -514,19 +531,22 @@ mNineDScript.start = {
 
     },
     projectDetailControl () {
+
         let projectDetailTl = gsap.timeline();
+        const bttButton = $1('.mn-project-summary-btt');
+        const detailWrapper = $1('.mn-section-project-summary-item.is-active-wrapper');
+        const projectCloseBtn = $1('.mn-projects-summary-detail-close');
 
-        let detailDash = $1('.mn-projects-summary-detail-dash-anim');
-        let detailHd = $1('.mn-projects-summary-detail-hd');
+        // back to top button for each wrapper
+        bttButton.addEventListener('click', () => {
+
+            gsap.to(detailWrapper, {duration: 0.8, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
+
+        });
+
+        projectDetailTl .to(projectCloseBtn, {duration : 0.6, opacity: 0.3, ease: "circ.inOut(0.5)" });
 
 
-        projectDetailTl.to(detailDash, {duration : 0.4, repeat : 3,opacity: 0  });
-        projectDetailTl.to(detailDash, {duration : 0.1, opacity: 1  });
-        projectDetailTl.to(detailDash, {duration : 0.4, left: '30vw', ease: "circ.inOut(0.4)" });
-        projectDetailTl.to(detailHd, {duration : 0.6, left: '0vw', opacity: 1, '-webkit-filter': " blur(0px)", ease: "expo.out(0.6)" });
-        projectDetailTl.to(detailDash, {duration : 0.2, opacity: 0, ease: "circ.inOut(0.4)" });
-
-        // move the anchor back to the left of the list
 
     }
 

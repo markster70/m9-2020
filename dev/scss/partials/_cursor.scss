@@ -33,5 +33,12 @@ body {
   height: $size;
   background-color: rgba($white, 0.2);
 
-
 }
+
+
+.cursor-dot-outline.imgHover {
+    $size: 60px;
+    width: $size;
+    height: $size;
+    background-color: rgba($white, 0.1);
+  }
