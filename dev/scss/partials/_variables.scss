@@ -5,28 +5,34 @@
 $white : #ffffff;
 $black : #000000;
 
-$body-base-bg : #343435;
-//$body-base-bg : #343539;
+$body-base-bg : #272727;
 
-$primary-accent: #f6af34;
-$secondary-accent : #96ccfa;
+
+$primary-accent: #7ff7f0;
+$secondary-accent : #f9ccc1;
 $tertiary-accent : #f2ebd5;
 
 $grey-accent: #acacb2;
 $logo-txt-color: #464648;
 
-$body-copy-color : #ddddde;
+$body-copy-color : #fff;
 
 $nav-bg-color: #2e2e2f;
 $nav-links-base-color : #fff;
 
 $about-content-bg-color : #303031;
 
+$home-grad-primary-color: #343435;
+$home-grad-bg-secondary-color: #2e2e2f;
+
+$grey-heading-accent : #656565;
+
 // base fonts
 
 $base-font-size: 16;
 $base-line-height: 1.5;
 $base-font-family :  'Roboto', sans-serif;
+$secondary-font-family : 'Oswald', sans-serif;
 $font-weight-thin: 100;
 $font-weight-light: 300;
 $font-weight-regular: 400;

@@ -4,13 +4,26 @@ html {
   -webkit-font-smoothing: antialiased;
 }
 
-h1,h2,h3,h4,h5,h6, p, li, button, a.btn, nav a, span, label, input, textarea, a, td, th, address, dt,dd, blockquote, cite {
+p, li, button, a.btn, nav a, span, label, input, textarea, a, td, th, address, dt,dd {
   font-family: $base-font-family;
 }
+
+h1,h2,h3,h4,h5,h6, blockquote, cite, blockquote span {
+  font-family: $secondary-font-family;
+  font-weight : 400;
+}
+
 
 
 h1,h2,h3,h4,h5,h6, p, li, button, a.btn, nav a, span, label, input {
   line-height: 1.5;
+}
+
+h1,h2,h3,h4,h5,h6 {
+  span {
+    font-family: $secondary-font-family;
+    font-weight : 400;
+  }
 }
 
 h1,h2,h3,h4,h5,h6 {
@@ -19,6 +32,10 @@ h1,h2,h3,h4,h5,h6 {
 
 .mn-body-copy {
   color : $body-copy-color;
+  @include font-size(14);
+  font-weight: $font-weight-light;
+  letter-spacing: 2px;
+  margin-bottom: 1.5rem;
 }
 
 .mn-copy-light {

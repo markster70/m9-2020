@@ -270,7 +270,7 @@ mNineDScript.start = {
         const scrollController = new ScrollMagic.Controller();
         let aboutTl = gsap.timeline({paused: true});
         //let imageTween = aboutTl.to(aboutGridImages, {duration : 1.0, stagger: 0.4, scaleX: 1, scaleY: 1, opacity: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
-        let contentTween = aboutTl.to(aboutGridContent, {duration : 0.7, stagger: 0.45, opacity: 1, top: 0, ease: "circ.inOut(0.5)"});
+        //let contentTween = aboutTl.to(aboutGridContent, {duration : 0.7, stagger: 0.45, opacity: 1, top: 0, ease: "circ.inOut(0.5)"});
 
 
         let aboutScene = new ScrollMagic.Scene({
@@ -306,7 +306,7 @@ mNineDScript.start = {
 
         let servicesScene = new ScrollMagic.Scene({
             triggerElement : '#js-services-top',
-            offset: 50
+            offset: -300
 
         })
             .on("enter", function (e) {
@@ -463,6 +463,9 @@ mNineDScript.start = {
             gsap.to(window, {duration: 0.9, scrollTo: {y:projectsSection, autoKill: false}, ease: "expo.inOut(0.6)"});
             projectsTl.to(fadeSections, { duration: 0.5, opacity:1 });
 
+            // remove container class, and body class to remove fixed positioning etc
+            removeClass(projectsSummaryContainer, 'is-active');
+
         }
 
 
@@ -481,7 +484,7 @@ mNineDScript.start = {
             // need to hide content first here
 
             // hiding content here
-            resetTl.to(projectCloseBtn, {duration: 0.5, opacity: 0, ease: "circ.inOut(0.5)"});''
+            resetTl.to(projectCloseBtn, {duration: 0.5, opacity: 0, ease: "circ.inOut(0.5)"});
 
             resetTl.to(activeDetail, {duration : 0.7, opacity: 0, ease: "circ.inOut(0.5)", onComplete: function () {
 
@@ -496,7 +499,7 @@ mNineDScript.start = {
             // move the summary item back to it's original position
             resetTl.to(activeWrapper, {duration : 0.65, top: activeWrapperOriginalPos + 'px', ease: "expo.inOut(0.4)" });
             // move the anchor back to the left of the list
-            resetTl.to(activeAnchor, {duration : 0.7, translateX: '40px' , className:"-=is-active", ease: "circ.inOut(0.4)", onComplete : function () {
+            resetTl.to(activeAnchor, {duration : 0.7, translateX: '80px' , className:"-=is-active", ease: "circ.inOut(0.4)", onComplete : function () {
 
                     // take the inline style for bg color off
                     activeWrapper.style.removeProperty('background-color');
@@ -506,18 +509,20 @@ mNineDScript.start = {
                     activeAnchor.style.removeProperty('background-color');
                     // remove the class from the active wrapper
                     removeClass(activeWrapper, 'is-active-wrapper');
+
+                    removeClass(bodyEl,'is-projects-active');
+                    // add the default class back to previously added element
+                    addClass(activeWrapper, 'is-inactive');
+
+
                     // move the window back to top of projects
-                    resetProjectsWindow()
+                    resetProjectsWindow();
 
 
-            }});
+                }});
 
 
-            // remove container class, and body class to remove fixed positioning etc
-            removeClass(projectsSummaryContainer, 'is-active');
-            removeClass(bodyEl,'is-projects-active');
-            // add the default class back to previously added element
-            addClass(activeWrapper, 'is-inactive');
+
 
 
         }

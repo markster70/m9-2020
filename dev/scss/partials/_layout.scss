@@ -1,12 +1,14 @@
 .mn-section {
   width: 100%;
-  min-height: 100%;
   position: relative;
-  //z-index: 3;
+}
+
+.mn-section-inner {
+  position: relative;
+  z-index: 3;
+  &.is-padded {
+    padding: 0 6rem;
+  }
 }
 
 
-.mn-content {
-  position: relative;
-  //z-index: 3;
-}

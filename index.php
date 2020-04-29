@@ -9,17 +9,16 @@
 <![endif]-->
 <?php include 'site-partials/_burger.html'; ?>
 <?php include 'site-partials/_navigation.html'; ?>
-<?php include 'site-partials/_home.html'; ?>
-<?php include 'site-partials/_about.html'; ?>
+<?php include 'site-partials/_home.php'; ?>
+<?php include 'site-partials/_about.php'; ?>
 <?php include 'site-partials/_services-new.php'; ?>
 <?php include 'site-partials/_block-quote-a.html'; ?>
-<?php include 'site-partials/_projects.html'; ?>
+<?php include 'site-partials/_projects.php'; ?>
 <?php include 'site-partials/_contact.html'; ?>
-
+<?php include 'site-partials/_counter.html'; ?>
 <div class="cursor-dot-outline"></div>
 <div class="cursor-dot"></div>
-<!--<div class="mn-particles-holder" id="canvas" role="presentation"></div>
-<div class="mn-home-grad-bg" role="presentation"></div>-->
+
 
 
 <script src="dist/js/m9-2020-concat-script.min.js"></script>

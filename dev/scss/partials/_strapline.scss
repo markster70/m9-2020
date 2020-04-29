@@ -1,0 +1,25 @@
+.mn-section-strapline {
+  position: absolute;
+
+  h2 {
+    @include font-size(28);
+    color: $grey-heading-accent;
+    text-transform: uppercase;
+    margin: 0;
+
+    span {
+      display: inline-flex;
+      align-items: center;
+      &:after {
+        content: '\00B7';
+        color: $secondary-accent;
+        padding: 0 1rem;
+        @include font-size(48)
+      }
+
+      &:last-child:after {
+        content: normal;
+      }
+    }
+  }
+}

@@ -1,24 +1,12 @@
 <section class="mn-section mn-section-projects" id="js-projects-top">
     <div class="mn-section-inner">
-        <header class="mn-section-hd">
-            <h1 class="mn-section-logo">
-                <span class="mn-section-logo-txt">Projects</span>
-                <span class="mn-section-logo-img">
-                   <img src="/dist/images/m9-logo-2020-outline.png" alt="m9 digital ui and website development, sussex, uk" />
-               </span>
-            </h1>
-        </header>
         <div class="mn-section-projects-bd">
-            <div class="mn-section-projects-hd">
-                    <h1>
-                        <span class="is-secondary-txt mn-section-projects-hd-lg">These</span>
-                        <span class="mn-section-projects-hd-anim"> are some of the</span>
-                        <span class="is-primary-txt mn-section-projects-hd-anim">projects</span>
-                    </h1>
-                    <h2 class="mn-section-projects-hd-anim">we've helped our clients with..</h2>
-            </div>
-            <div class="mn-section-projects-inner">
-                <div class="mn-projects-summary-wrap" id="js-projects-summary-container">
+            <header class="mn-section-projects-hd mn-section-hd">
+                <h1 class="mn-section-hd-title mn-section-projects-title">Our Projects</h1>
+                <p class="mn-section-projects-hd-copy">Here's some of the work that we have taken care of in the last few years...</p>
+            </header>
+            <div class="mn-section-projects-inner" id="js-projects-summary-container">
+                <div class="mn-projects-summary-wrap">
                     <button class="mn-projects-summary-detail-close">
                         <svg viewBox="0 0 91 113.75">
                             <g>
@@ -142,5 +130,13 @@
                 </div>
             </div>
         </div>
+    </div>
+	<?php include '_counter.html'; ?>
+    <div class="mn-section-projects-strapline mn-section-strapline">
+        <h2>
+            <span>Design</span>
+            <span>Develop</span>
+            <span>Deploy</span>
+        </h2>
     </div>
 </section>

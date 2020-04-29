@@ -1,193 +1,76 @@
 .mn-section-home .mn-section-inner {
   width: 100%;
   height: 100%;
-  padding: 10% 1rem 0;
+  height: 100vh;
   position: relative;
   z-index: 2;
-  height: 100vh;
-
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-
-.mn-section-home-logo {
-  max-width: 120px;
-  height: auto;
-  margin: 0 auto;
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+.mn-section-home-strapline {
+  top: 0.5rem;
 }
 
-.mn-section-home-strap {
-  text-align: center;
-  @include font-size(22);
-  font-weight: 400;
-  color: $secondary-accent;
-  text-transform: uppercase;
-  letter-spacing: 5px;
-}
 
 .mn-section-home-hello {
-  text-align: center;
-  @include font-size(100);
-  margin: 0.5rem 0;
-  color: darken($grey-accent, 5%);
-  opacity: 0.3;
+  @include font-size(115);
+  color: $primary-accent;
   text-transform: uppercase;
-  //letter-spacing: 0.5rem;
-  font-weight: $font-weight-bold;
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: 5px;
 
 }
 
 .mn-section-home-copy {
-  text-align: center;
-  max-width: 85%;
-  margin: 0 auto;
-  @include font-size(14);
-  text-transform: uppercase;
-  color: $grey-accent;
+  flex-basis: 50%;
 
-  @include breakpoint($bp-xl) {
-    max-width: 40%;
+  p {
+    color: $grey-accent;
+    max-width: 80%;
+    @include font-size(19);
+    letter-spacing: 4px;
+    font-weight: $font-weight-light;
+
+    span {
+      opacity: 1;
+    }
+  }
+
+}
+
+.mn-section-home-brand {
+  flex-basis: 50%;
+  text-align: center;
+  img {
+    max-height: 300px;
+    width: auto;
   }
 }
 
-.mn-section-home-copy-emphasise {
-  @include font-size(24);
-  font-weight: $font-weight-medium;
-  color: $primary-accent;
-  text-transform: uppercase;
-  padding: 0 8px;
-  display: inline-block;
-}
 
 .mn-home-scroll-trigger {
-  @include button-reset();
-  position: absolute;
-  left : calc(50% - 40px);
-  bottom: 110px;
-  width: 60px;
-  height: 90px;
-  opacity: 0.8;
-  @include std-transitions();
-
-  svg {
-    max-width: 100%;
-    max-height: 150px;
-  }
-
-  &:hover {
-    opacity: 1;
-    transform: scale3d(0.9,0.9, 0.9);
-  }
-
-  &:focus {
-    outline: 0;
-  }
-
 }
 
 
-.mn-home-mouse {
-  opacity: 0.5;
-  //animation-name: home-scroll-opacity;
-  //animation-duration:3s;
-  //animation-iteration-count: infinite;
-  //animation-timing-function: ease-out;
-  //animation-delay: 3s;
-  //position: relative;
-
-
-  .mn-home-mouse-line,.cls-3,.cls-4{
-    fill:none;
-    stroke:#fff;
-    stroke-miterlimit: 10;
-    @include std-transitions();
-  }
-  .cls-1{
-    stroke-width:0.5px;
-  }
-  .cls-2{
-    fill:#fff;
-  }
-  .cls-3{
-    stroke-width:0.5px;
-  }
-  .cls-4{
-    stroke-width:0.5px;
-  }
-
-
-  .cls-2, .cls-3, .cls-4 {
-    //animation: fadein 2s forwards;
-    //animation-delay: 1.5s;
-    opacity: 0.5;
-  }
-
-}
-
-
-.mn-home-mouse-line {
-  //stroke-dasharray: 200;
-  //stroke-dashoffset: 200;
-  //animation: dash 0.5s ease-out forwards;
-  //animation-delay: 1s;
-}
-
-@keyframes dash {
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-@keyframes fadein {
-  from {
-    opacity:0;
-  }
-  to {
-    opacity:1;
-  }
-}
-
-@keyframes home-scroll-opacity {
-  0% {
-    opacity: 0.2;
-    top: 0;
-  }
-  10% {
-    opacity: 0.5;
-    top: -7px;
-  }
-}
-
-.mn-particles-holder {
-  position: absolute;
-  left: 0;
-  top:0;
-  height: 100vh;
-  width: 100vw;
-  //opacity: 0.35;
-  z-index: 1;
-
-}
 
 .mn-home-grad-bg {
 
-  position: fixed;
+  position: absolute;
   left: 0;
-  top:0;
+  top: 0;
   height: 100vh;
-  //z-index: 1;
+  z-index: 1;
   width: 100vw;
 
-  //background: linear-gradient(8deg, #444449, darken(#18181a, 3%));
-  //background: linear-gradient(8deg, darken($body-base-bg,3%), $about-content-bg-color);
-  background-size: 400% 400%;
+  //background: linear-gradient(135deg,$home-grad-primary-color 10%, darken($home-grad-bg-secondary-color, 5%));
 
-  -webkit-animation: mnHomeAnimate 25s ease infinite;
-  -moz-animation: mnHomeAnimate 25s ease infinite;
-  animation: mnHomeAnimate 25s ease infinite;
+
+  //-webkit-animation: mnHomeAnimate 25s ease infinite;
+  //-moz-animation: mnHomeAnimate 25s ease infinite;
+  //animation: mnHomeAnimate 25s ease infinite;
 
   @-webkit-keyframes mnHomeAnimate {
     0%{background-position:15% 0%}
@@ -204,28 +87,40 @@
     50%{background-position:86% 100%}
     100%{background-position:15% 0%}
   }
+}
 
-  ////background: linear-gradient(213deg, lighten(#4a4a4c, 5%), lighten(#080809, 5%));
-  //background: linear-gradient(130deg, darken($body-base-bg,2%), $about-content-bg-color);
-  //background-size: 200% 200%;
-  //
-  //-webkit-animation: AnimationName 5s ease infinite;
-  //-moz-animation: AnimationName 5s ease infinite;
-  //animation: AnimationName 5s ease infinite;
-  //
-  //@-webkit-keyframes AnimationName {
-  //  0%{background-position:0% 0%}
-  //  50%{background-position:93% 100%}
-  //  100%{background-position:0% 0%}
-  //}
-  //@-moz-keyframes AnimationName {
-  //  0%{background-position:0% 0%}
-  //  50%{background-position:93% 100%}
-  //  100%{background-position:0% 0%}
-  //}
-  //@keyframes AnimationName {
-  //  0%{background-position:0% 0%}
-  //  50%{background-position:93% 100%}
-  //  100%{background-position:0% 0%}
-  //}
+.mn-home-video-bg {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 100vh;
+  width: 100vw;
+
+  z-index: 2;
+  opacity: 0.2;
+  mix-blend-mode: luminosity;
+
+  .is-inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+
+  video {
+   object-fit: cover;
+    width: 100%;
+    height: 100%;
+
+  }
+
+  .cover {
+    position: absolute;
+    z-index: 2;
+    bottom:0;
+    width: 100%;
+    height: 40%;
+    background: linear-gradient(0deg, $body-base-bg 49%, rgba(46,46,47,0) 100%);
+  }
+
 }

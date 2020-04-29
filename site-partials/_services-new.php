@@ -1,17 +1,11 @@
-<!--<div class="mn-parralax mn-parralax-about" id="js-about-parralax">
-    <div class="mn-rellax-el mn-parralax-inner mn-about-parralax-el"  data-rellax-speed="3">
-        <blockquote class="mn-about-parralax-text">M9 Digital created a CMS and website based on our UI / Functional requirements with high accuracy, and within the timescales we had set for the project</blockquote>
-    </div>
-</div>-->
 <section class="mn-section mn-section-services" id="js-services-top">
     <div class="mn-section-inner">
-       <header class="mn-section-services-hd">
-           <h1>
-               <span class="is-secondary-txt mn-section-services-hd-lg">Here's</span>
-               <span class="mn-section-services-hd-anim">some of the</span>
-               <span class="is-primary-txt mn-section-services-hd-anim mn-section-services-hd-sub">services</span>
+       <header class="mn-section-services-hd mn-section-hd">
+           <h1 class="mn-section-hd-title">
+               <span class="mn-section-services-hd-lg">Our</span>
+               <span class="mn-section-services-hd-anim">Services</span>
            </h1>
-           <h2 class="mn-section-services-hd-anim">we regularly help our clients with...</h2>
+
        </header>
         <div class="mn-section-services-wrapper">
             <div class="mn-section-services-grid">
@@ -61,4 +55,5 @@
             <h4>Feel free to <a href="#js-contact-section">contact us</a> for a no obligation chat..</h4>
         </footer>
     </div>
+	<?php include '_counter.html'; ?>
 </section>

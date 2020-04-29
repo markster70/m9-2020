@@ -1,25 +1,25 @@
 .mn-bq-wrapper {
   width: 100vw;
-  padding: 10rem 6rem;
-  background: url("/dist/images/x-hatch-bg.jpg") rgba($black, 0.3) repeat;
-  //background-color: darken($body-base-bg, 2%);
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  //border-top: 1px solid rgba($white, 0.1);
-  //border-bottom: 1px solid rgba($white, 0.1);
+  align-items: center;
+
+  &.is-padded {
+    padding: 10rem 6rem;
+  }
 }
 
 .mn-blockquote-item {
-  @include font-size(28);
-  font-weight: $font-weight-medium;
+  @include font-size(26);
+  font-weight: 400;
   text-align: center;
-  color: rgba($white,0.4);
-  max-width: 70%;
+  color: rgba($white,0.7);
+  max-width: 50%;
   margin: 0 auto;
   position: relative;
   flex-basis: 100%;
-  background-color: rgba($black, 0.05);
+  //background-color: rgba($black, 0.05);
   padding: 3rem;
 
 
@@ -32,8 +32,8 @@
     background-position: 0 0;
     background-repeat: no-repeat;
     content: '';
-    left: -80px;
-    top: -80px;
+    left: -60px;
+    top: -60px;
   }
 
 
@@ -46,22 +46,21 @@
     background-position: 0 0;
     background-repeat: no-repeat;
     content: '';
-    right: -80px;
-    bottom: -80px
+    right: -60px;
+    bottom: -60px
   }
 
 }
 
 
 .mn-blockquote-author {
-  @include font-size(18);
-  font-weight: $font-weight-light;
-  letter-spacing: 5px;
+  @include font-size(20);
+  font-weight: $font-weight-medium;
+  text-transform: uppercase;
+  letter-spacing: 3px;
   color: $secondary-accent;
   text-align: center;
-  margin-top: auto;
   flex-basis: 100%;
-  padding-top: 5rem;
   font-style: normal;
 
 }

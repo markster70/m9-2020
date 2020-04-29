@@ -1,45 +1,23 @@
-.mn-services-inner {
-  padding: 2rem 3rem;
-  width: 100%;
-  display: flex;
-  position: relative;
 
+.mn-section-services {
+
+  .mn-section-inner {
+
+    background: url("/dist/images/m9-logo-large.png") bottom right no-repeat;
+    background-size: 220px auto;
+  }
 }
+
 
 .mn-section-services-wrapper {
   position: relative;
 }
 
 .mn-section-services-hd {
-  padding: 4rem 3rem;
-  max-width: 60%;
-  margin: 0 auto 2rem;
-  border-bottom: 1px solid rgba($white, 0.1);
-
-  h1, h2 {
-    margin: 0;
-    color: $grey-accent;
-    font-weight: $font-weight-light;
-    line-height: 1;
-    text-align: center;
-  }
-
-  h1 {
-    @include font-size(22);
-    letter-spacing: 6px;
-  }
-
-  h2 {
-    @include font-size(20);
-    letter-spacing: 4px;
-  }
+  padding: 0.5rem 6rem;
 
 }
 
-.mn-section-services-hd-lg {
-  @include font-size(50);
-  font-weight: $font-weight-light;
-}
 
 
 .mn-section-services-grid {
