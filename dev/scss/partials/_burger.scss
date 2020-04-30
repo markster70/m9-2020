@@ -212,3 +212,12 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
 
 }
 
+.js-contact-top-is-active {
+
+  .hamburger-outline {
+    border: 1px solid transparent;
+    background-color: $black;
+  }
+
+}
+

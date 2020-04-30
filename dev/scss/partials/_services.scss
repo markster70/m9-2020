@@ -51,18 +51,3 @@
   }
 
 }
-
-$services-number: 6;
-$services-number: 6;
-$services-item-gap: 25;
-
-@for $i from 1 through $services-number {
-  .mn-services-item:nth-child(#{$i}) {
-    transform: rotateY(-8deg) translateX(#{$i * 35%}) translateZ(-#{$i * 20}px);
-    &:hover {
-      transform: rotateY(-8deg) translateY(-0px) translateX(#{$i * 40%}) translateZ(-#{$i * 15}px);
-    }
-
-  }
-}
-

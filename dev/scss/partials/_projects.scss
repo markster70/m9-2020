@@ -2,13 +2,14 @@
   .mn-section-inner {
     position: relative;
     background-color: $body-base-bg;
-    margin-bottom: 2rem;
+    padding-bottom: 5rem;
   }
 }
 
 .mn-section-projects {
   display: flex;
   flex-direction: column;
+  min-height: 100vh;
 }
 
 .mn-section-projects-summary {
@@ -170,7 +171,7 @@
 
 
 .mn-projects-summary-detail-hd {
-  color : $project-detail-header-color;
+  color : $primary-accent;
   @include font-size(40);
   letter-spacing: 5px;
   line-height: 0;
@@ -268,7 +269,7 @@
       font-weight: $font-weight-medium;
       padding: 0.5rem;
       margin-right: 1rem;
-      background-color: $primary-accent;
+      background-color: rgba($black, 0.2);
     }
   }
 }
@@ -330,6 +331,16 @@
     position: static;
     align-self: flex-end;
     margin-right: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 4rem;
+  }
+}
+
+.mn-projects-summary-detail-bd {
+  .mn-section-detail-strapline {
+    position: static;
+    max-width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 2.5rem;
   }
 }

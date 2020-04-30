@@ -38,6 +38,11 @@ h1,h2,h3,h4,h5,h6 {
   margin-bottom: 1.5rem;
 }
 
+.is-large-bd-copy {
+  @include font-size(24);
+  font-weight: $font-weight-medium;
+}
+
 .mn-copy-light {
   font-weight: $font-weight-light;
 }
@@ -50,4 +55,7 @@ h1,h2,h3,h4,h5,h6 {
   color: $secondary-accent;
 }
 
+.is-tertiary-txt {
+  color: $tertiary-accent;
+}
 

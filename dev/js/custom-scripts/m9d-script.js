@@ -1,7 +1,6 @@
 const mNineDScript = {};
 
 
-
 mNineDScript.start = {
 
     'config': {
@@ -26,6 +25,7 @@ mNineDScript.start = {
         this.runScrollAnimations();
         this.scrollToSection();
         this.projectsSummaryControl();
+        this.activeSectionClasses();
 
     },
     cursorSetup () {
@@ -70,13 +70,11 @@ mNineDScript.start = {
                 // Anchor hovering
                 $('.hover-cursor-effect').forEach(function(el) {
                     el.addEventListener('mouseover', function() {
-                        //self.cursorEnlarged = true;
-                        //self.toggleCursorSize();
+
                         addClass(self.$outline, 'imgHover');
                     });
                     el.addEventListener('mouseout', function() {
-                        //self.cursorEnlarged = false;
-                        //self.toggleCursorSize();
+
                         removeClass(self.$outline, 'imgHover');
                     });
                 });
@@ -135,8 +133,8 @@ mNineDScript.start = {
                 const self = this;
 
                 if (self.cursorEnlarged) {
-                    self.$dot.style.transform = 'translate(-50%, -50%) scale(0.00)';
-                    self.$outline.style.transform = 'translate(-50%, -50%) scale(1.5)';
+                    self.$dot.style.transform = 'translate(-50%, -50%) scale(0.5)';
+                    self.$outline.style.transform = 'translate(-50%, -50%) scale(1.8)';
                 } else {
                     self.$dot.style.transform = 'translate(-50%, -50%) scale(1)';
                     self.$outline.style.transform = 'translate(-50%, -50%) scale(1)';
@@ -151,7 +149,7 @@ mNineDScript.start = {
                     self.$outline.style.opacity = 1;
 
                 } else if(self.cursorVisible && hasClass(self.$outline,'elementHover')) {
-                    self.$outline.style.opacity = 0.3;
+                    self.$outline.style.opacity = 0.5;
                 } else {
                     self.$dot.style.opacity = 0;
                     self.$outline.style.opacity = 0;
@@ -430,7 +428,7 @@ mNineDScript.start = {
                 projectsTl.to(parentEl, {duration: 0.7, top: 0, opacity: 1, ease: "expo.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, height: '100vh', ease: "expo.inOut(0.5)"});
                 projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0});
-                projectsTl.to(parentEl, {duration: 0.4, zIndex: '1000', backgroundColor: 'rgba(0,0,0,0.2)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
+                projectsTl.to(parentEl, {duration: 0.7, zIndex: '1000', backgroundColor: 'rgba(32,32,32,1.0)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
 
                     openDetail(parentEl);
 
@@ -549,11 +547,56 @@ mNineDScript.start = {
 
         });
 
-        projectDetailTl .to(projectCloseBtn, {duration : 0.6, opacity: 0.3, ease: "circ.inOut(0.5)" });
+        projectDetailTl .to(projectCloseBtn, {duration : 0.6, opacity: 0.6, ease: "circ.inOut(0.5)" });
 
 
+    },
+    activeSectionClasses () {
 
-    }
+        // for each section, we need a class added to body for the menu variations etc
+        // this is done via waypoints js
+
+        // also in this function, when we hit the top of the page, we want to clear the variation classes
+
+        let sections = $('.mn-section');
+        let bodyWrap = $1('body');
+
+        for (let i = 0; i < sections.length; i++) {
+            let el = sections[i];
+            let elId = el.id;
+            let classToAdd = elId + '-is-active';
+            let element = document.getElementById(elId);
+
+            let waypointDown = new Waypoint({
+                element: element,
+                handler: function(direction) {
+                    bodyWrap.className ='';
+                    addClass(bodyWrap, classToAdd);
+                },
+                offset: '10%'
+            });
+
+            let waypointUp = new Waypoint({
+                element: element,
+                handler: function(direction) {
+                    bodyWrap.className ='';
+                    addClass(bodyWrap, classToAdd);
+                },
+                offset: '-10%'
+            });
+
+        }
+
+        window.onscroll = function() {
+            if(window.pageYOffset === 0) {
+                bodyWrap.className ='';
+                addClass(bodyWrap, 'js-section-home-is-active');
+            } else if (window.pageYOffset > 100) {
+                //addClass(bodyWrap, 'body-scrolling-is-active');
+
+            }
+        };
+    },
 
 };
 

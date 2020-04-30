@@ -16,14 +16,10 @@
             <img src="/dist/images/home-logo-shape.png" alt="m9 digital - website development, west sussex, england"/>
         </div>
     </div>
-    <div class="mn-home-grad-bg" role="presentation"></div>
-    <?php include '_counter.html'; ?>
-    <!--<div class="mn-home-video-bg">
-     <div class="is-inner">
-  <video id="mn-site-nav-vid" autoplay muted loop>
-         <source src="/dist/video/horiz-wave.mp4" type="video/mp4">
-     </video>
-         <div class="cover"></div>
-     </div>
-    </div>-->
+    <div class="mn-home-grad-bg" role="presentation" aria-hidden="true"></div>
+    <div class="mn-home-grad-grid-bg" role="presentation" aria-hidden="true">
+        <div class="is-inner">
+            <div class="mn-home-bg-circle"></div>
+        </div>
+    </div>
 </section>

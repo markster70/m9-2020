@@ -24,15 +24,16 @@ body {
   $size: 8px;
   width: $size;
   height: $size;
-  background-color: $primary-accent;
+  //background-color: $primary-accent;
+  background-color: $tertiary-accent;
 }
 
 .cursor-dot-outline {
   $size: 50px;
   width: $size;
   height: $size;
-  background-color: rgba($white, 0.2);
-
+  //background-color: rgba($white, 0.2);
+  background-color: rgba(black, 0.2);
 }
 
 
@@ -42,3 +43,15 @@ body {
     height: $size;
     background-color: rgba($white, 0.1);
   }
+
+
+.js-projects-top-is-active, .js-contact-top-is-active {
+
+  .cursor-dot {
+    background-color: $tertiary-accent;
+  }
+
+  .cursor-dot-outline {
+    background-color: rgba(black, 0.2);
+  }
+}

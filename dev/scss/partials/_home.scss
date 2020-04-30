@@ -3,14 +3,14 @@
   height: 100%;
   height: 100vh;
   position: relative;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: row;
   align-items: center;
 }
 
 .mn-section-home-strapline {
-  top: 0.5rem;
+  top: 1.5rem;
 }
 
 
@@ -54,16 +54,95 @@
 .mn-home-scroll-trigger {
 }
 
+.mn-home-grad-grid-bg {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 90vh;
+  z-index: 2;
+  width: 100vw;
+  mix-blend-mode: color;
+  background: linear-gradient(150deg, rgba(0,0,0,0) 0%, rgba(7,7,7,0) 60%, rgba(39,39,39,1) 89%);
+
+  //-webkit-animation: mnHomeAnimate 10s ease infinite;
+  //-moz-animation: mnHomeAnimate 10s ease infinite;
+  //animation: mnHomeAnimate 10s ease infinite;
+
+  @-webkit-keyframes mnHomeAnimate {
+    0%{
+      background-position:15% 0%;
+      opacity: 1;
+    }
+    50%{
+      opacity: 0.3;
+      background-position:86% 100%
+    }
+    100%{
+      opacity: 1;
+      background-position:15% 0%;
+    }
+  }
+  @-moz-keyframes mnHomeAnimate {
+    0%{
+      background-position:15% 0%;
+      opacity: 1;
+    }
+    50%{
+      opacity: 0.3;
+      background-position:86% 100%
+    }
+    100%{
+      opacity: 1;
+      background-position:15% 0%;
+    }
+  }
+  @keyframes mnHomeAnimate {
+    0%{
+      background-position:15% 0%;
+      opacity: 1;
+    }
+    50%{
+      opacity: 0.3;
+      background-position:86% 100%
+    }
+    100%{
+      opacity: 1;
+      background-position:15% 0%;
+    }
+  }
+
+  .is-inner {
+    position: relative;
+    height: 100%;
+    width: 100%;
+  }
+
+  .mn-home-bg-circle {  /* or 4n+1 */
+    background-color: $white;
+    mix-blend-mode: hue;
+    opacity: 0.2;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+
+  }
+}
 
 
 .mn-home-grad-bg {
 
   position: absolute;
   left: 0;
-  top: 0;
-  height: 100vh;
+  bottom: 0;
+  height: 90vh;
   z-index: 1;
   width: 100vw;
+
+  background: url("/dist/images/home-bg-squares.png") no-repeat bottom right;
+  background-size: 80%;
 
   //background: linear-gradient(135deg,$home-grad-primary-color 10%, darken($home-grad-bg-secondary-color, 5%));
 
@@ -87,40 +166,4 @@
     50%{background-position:86% 100%}
     100%{background-position:15% 0%}
   }
-}
-
-.mn-home-video-bg {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 100vh;
-  width: 100vw;
-
-  z-index: 2;
-  opacity: 0.2;
-  mix-blend-mode: luminosity;
-
-  .is-inner {
-    position: relative;
-    height: 100%;
-    width: 100%;
-  }
-
-
-  video {
-   object-fit: cover;
-    width: 100%;
-    height: 100%;
-
-  }
-
-  .cover {
-    position: absolute;
-    z-index: 2;
-    bottom:0;
-    width: 100%;
-    height: 40%;
-    background: linear-gradient(0deg, $body-base-bg 49%, rgba(46,46,47,0) 100%);
-  }
-
 }

@@ -10,11 +10,14 @@
     span {
       display: inline-flex;
       align-items: center;
+
       &:after {
-        content: '\00B7';
+        content: '\25A0';
         color: $secondary-accent;
         padding: 0 1rem;
-        @include font-size(48)
+        @include font-size(24);
+        position: relative;
+        top: -2px;
       }
 
       &:last-child:after {

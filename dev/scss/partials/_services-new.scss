@@ -35,13 +35,10 @@
 }
 
 .mn-section-services-item {
-  //display: flex;
-  justify-content: center;
+
   padding: 2rem;
-  flex-wrap: wrap;
-  flex-direction: row;
   transform-style: preserve-3d;
-  background-color: rgba($black, 0.03);
+  background-color: rgba($black, 0.1);
   transform:scale(0.4);
   opacity: 0;
 
@@ -146,7 +143,7 @@
 
 
 .mn-section-services-item:hover {
-  background-color: rgba($black, 0.1);
+  background-color: rgba($black, 0.2);
 
   .mn-section-services-svg-wrap {
     max-width: 110px;
@@ -174,17 +171,19 @@
     color : $grey-accent;
     margin: 0 0 1rem;
     flex-basis: 100%;
-    @include font-size(28);
+    @include font-size(22);
     text-transform: uppercase;
     text-align: center;
+    letter-spacing: 4px;
 
     a {
-      color: $secondary-accent;
+      color: $tertiary-accent;
       text-decoration: none;
       @include std-transitions();
+      @include font-size(26);
 
       &:hover {
-        color: $primary-accent;
+        color: $secondary-accent;
       }
 
     }

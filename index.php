@@ -14,7 +14,7 @@
 <?php include 'site-partials/_services-new.php'; ?>
 <?php include 'site-partials/_block-quote-a.html'; ?>
 <?php include 'site-partials/_projects.php'; ?>
-<?php include 'site-partials/_contact.html'; ?>
+<?php include 'site-partials/_contact.php'; ?>
 <?php include 'site-partials/_counter.html'; ?>
 <div class="cursor-dot-outline"></div>
 <div class="cursor-dot"></div>
