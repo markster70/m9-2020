@@ -1,0 +1,27 @@
+.mn-site-footer {
+  padding: 3rem 6rem;
+  background-color: $body-base-bg;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.mn-footer-cta {
+  flex-basis: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mn-footer-copy {
+  flex-basis: 100%;
+  max-width: 90%;
+  margin: 0 auto;
+  text-align: center;
+  p {
+    @include font-size(12);
+    font-weight: $font-weight-light;
+    color: $white;
+    letter-spacing: 3px;
+  }
+}

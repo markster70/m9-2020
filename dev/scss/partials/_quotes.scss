@@ -12,7 +12,6 @@
 
 .mn-blockquote-item {
   @include font-size(26);
-  font-weight: 400;
   text-align: center;
   color: rgba($white,0.7);
   max-width: 50%;

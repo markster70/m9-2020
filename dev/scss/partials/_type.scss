@@ -10,7 +10,7 @@ p, li, button, a.btn, nav a, span, label, input, textarea, a, td, th, address, d
 
 h1,h2,h3,h4,h5,h6, blockquote, cite, blockquote span {
   font-family: $secondary-font-family;
-  font-weight : 400;
+  font-weight : $font-weight-light;
 }
 
 
@@ -22,12 +22,12 @@ h1,h2,h3,h4,h5,h6, p, li, button, a.btn, nav a, span, label, input {
 h1,h2,h3,h4,h5,h6 {
   span {
     font-family: $secondary-font-family;
-    font-weight : 400;
+    font-weight : $font-weight-light;
   }
 }
 
 h1,h2,h3,h4,h5,h6 {
-  font-weight: $font-weight-regular;
+  font-weight: $font-weight-light;
 }
 
 .mn-body-copy {

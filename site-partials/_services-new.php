@@ -52,7 +52,7 @@
         </div>
         <footer class="mn-services-ft">
             <h4>Have a project in mind that you'd like to discuss ?</h4>
-            <h4>Feel free to <a href="#js-contact-section">contact us</a> for a no obligation chat..</h4>
+            <h4>Feel free to <a class="mn-scroll-trig" href="#js-contact-top">contact us</a> for a no obligation chat..</h4>
         </footer>
     </div>
 	<?php include '_counter.html'; ?>

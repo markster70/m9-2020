@@ -70,7 +70,6 @@
   color: $primary-accent;
   text-align: center;
   @include font-size(24);
-  font-weight: $font-weight-medium;
   padding-bottom: 2rem;
   border-bottom: 1px solid rgba($white, 0.1);
   text-transform: uppercase;
@@ -125,6 +124,7 @@
 
 .mn-section-services-hd-anim {
   filter: blur(36px);
+  -webkit-filter: blur(36px);
   opacity: 0;
   top: 80px;
   position: relative;

@@ -15,12 +15,12 @@
 
 
 .mn-section-home-hello {
-  @include font-size(115);
+  @include font-size(100);
   color: $primary-accent;
   text-transform: uppercase;
   margin: 0;
   line-height: 1.2;
-  letter-spacing: 5px;
+  letter-spacing: 8px;
 
 }
 
@@ -48,6 +48,10 @@
     max-height: 300px;
     width: auto;
   }
+}
+
+#home-logo-mask {
+  fill: $white;
 }
 
 
@@ -166,4 +170,30 @@
     50%{background-position:86% 100%}
     100%{background-position:15% 0%}
   }
+}
+
+.mn-logo-mask-wrapper {
+  position: relative;
+  svg, img {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
+
+.mn-home-logo-bg {
+
+  mask-image: url("/dist/images/home-logo-mask-alpha.png");
+  -webkit-mask-image :  url("/dist/images/home-logo-mask-alpha.png");
+  mask-mode: alpha;
+  mask-repeat: no-repeat;
+  mask-size: 80%;
+  -webkit-mask-size: 80%;
+  -webkit-mask-repeat: no-repeat;
+
+}
+
+.fill-white {
+  fill: $white;
 }

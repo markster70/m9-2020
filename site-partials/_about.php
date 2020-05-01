@@ -1,7 +1,10 @@
 <section class="mn-section mn-section-about mn-section-fade" id="js-about-top">
     <div class="mn-section-inner is-padded" id="js-about-content">
         <header class="mn-section-hd">
-            <h1 class="mn-section-hd-title">About Us</h1>
+            <h1 class="mn-section-hd-title">
+                <span class="mn-section-about-hd-lg">About</span>
+                <span class="mn-section-about-hd-anim">Us</span>
+            </h1>
         </header>
         <div class="mn-section-about-grid">
             <div class="mn-section-about-grid-item is-content">

@@ -26,6 +26,8 @@ mNineDScript.start = {
         this.scrollToSection();
         this.projectsSummaryControl();
         this.activeSectionClasses();
+        this.siteBtt();
+        this.formValidation();
 
     },
     cursorSetup () {
@@ -165,9 +167,9 @@ mNineDScript.start = {
         const navItems = $('.mn-site-nav-link-item');
         const bodyEl = $1('body');
         const navVideoWrap = $1('.mn-site-nav-video-bg');
-        const navTitle = $('.mn-site-nav-contact-title');
-        const navCopy = $1('.mn-site-nav-contact-txt');
+        const navStrapLine = $1('.mn-section-nav-strapline');
         const navLinks = $('.mn-site-nav-contact-link');
+        const video = $1('#mn-site-nav-vid');
 
         const tl = gsap.timeline();
 
@@ -179,6 +181,14 @@ mNineDScript.start = {
         function addNavClass () {
 
             addClass(navWrapper, 'is-active');
+        }
+
+        function startVideo () {
+            video.play();
+        }
+
+        function stopVideo() {
+            video.pause();
         }
 
         function addVisibleNavItemClass() {
@@ -217,12 +227,14 @@ mNineDScript.start = {
                 if(!tl.isActive()) {
 
                     tl.call(toggleNavTriggerClass);
+                    tl.to(navStrapLine, {opacity: 0, top: '47%', duration : 0.7,  ease: "circ.out"});
                     tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
                     tl.to(navLinks, {opacity: 0, duration: 0.3});
-                    tl.to(navTitle, {opacity: 0, stagger: 0.2, top: -200, left: 200, duration: 0.5, ease: "expo.out"});
-                    tl.to(navCopy, {opacity: 0, left: -50, duration : 0.4,  ease: "circ.out"}, ">-0.3");
                     tl.to(navItems, {left: 200, opacity : 0, duration: 0.15, stagger: 0.15, ease: "circ.Out", onComplete : removeVisibleNavItemClass}, ">-0.4" );
-                    tl.to(navWrapper, {x: '100%', duration: 1, ease: "circ.inOut", onComplete: removeNavClass});
+                    tl.to(navWrapper, {x: '100%', duration: 1, ease: "circ.inOut", onComplete: function () {
+                            removeNavClass();
+                            stopVideo();
+                        }});
 
                 }
 
@@ -232,11 +244,10 @@ mNineDScript.start = {
 
                     tl.call(toggleNavTriggerClass);
                     tl.to(navWrapper, {x: 0, duration: 1, ease: "circ.inOut", onComplete: addNavClass});
-                    tl.to(navTitle, {opacity: 0.7, top: 0, left: 0, stagger: 0.2, duration: 0.8, ease: "expo.out"});
-                    tl.to(navCopy, {opacity: 1, left: 0, duration : 0.5,  ease: "circ.out"}, ">-0.4");
                     tl.to(navItems, {left: 0, opacity : 1, duration: 0.35, stagger: 0.35, ease: "circ.Out", onStart : addVisibleNavItemClass}, ">-0.4");
                     tl.to(navLinks, {opacity: 1, duration: 0.5});
-                    tl.to(navVideoWrap, {opacity: 1, duration: 2, ease: "circ.inOut"});
+                    tl.to(navVideoWrap, {opacity: 1, duration: 2, ease: "circ.inOut", onComplete: startVideo});
+                    tl.to(navStrapLine, {opacity: 1, top: '45%', duration : 0.5,  ease: "circ.out"}, ">-0.4");
 
                 }
             }
@@ -262,18 +273,19 @@ mNineDScript.start = {
     },
     runScrollAnimations () {
 
-        let aboutGridContent = $('.mn-section-about-grid-item-inner');
-        //
+        const aboutTitleHd = $1('.mn-section-about-hd-lg');
+        const aboutTitleEls = $('.mn-section-about-hd-anim');
 
         const scrollController = new ScrollMagic.Controller();
         let aboutTl = gsap.timeline({paused: true});
-        //let imageTween = aboutTl.to(aboutGridImages, {duration : 1.0, stagger: 0.4, scaleX: 1, scaleY: 1, opacity: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
-        //let contentTween = aboutTl.to(aboutGridContent, {duration : 0.7, stagger: 0.45, opacity: 1, top: 0, ease: "circ.inOut(0.5)"});
+
+        let aboutTitleTween = aboutTl.to( aboutTitleHd, {duration : 0.7, opacity: 1, left: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, 0.5);
+        let aboutElsTween = aboutTl.to( aboutTitleEls, {duration : 0.8,  stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
 
 
         let aboutScene = new ScrollMagic.Scene({
                 triggerElement : '#js-about-top',
-                offset: 100
+                offset: -100
 
             })
             .on("enter", function (e) {
@@ -295,7 +307,7 @@ mNineDScript.start = {
         const serviceItems = $('.mn-section-services-item-list');
 
 
-        let serveTitleTween = servicesTl.to( servTitleHd, {duration : 0.7, opacity: 1, left: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, 0.5);
+        let serveTitleTween = servicesTl.to( servTitleHd, {duration : 0.7, opacity: 1, left: 0, delay: 1.0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"});
         let serveElsTween = servicesTl.to( servTitleEls, {duration : 0.8,  stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
         let servePanelTween = servicesTl.to( servicePanels, {duration : 2, stagger: 0.3, opacity: 1, scaleX: 1, scaleY:1, ease: "elastic.out(0.8)"});
         let serveHeadingsTween = servicesTl.to( serviceHeadings, {duration : 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY:1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"},">-1.8");
@@ -304,7 +316,7 @@ mNineDScript.start = {
 
         let servicesScene = new ScrollMagic.Scene({
             triggerElement : '#js-services-top',
-            offset: -300
+            offset: -100
 
         })
             .on("enter", function (e) {
@@ -573,7 +585,7 @@ mNineDScript.start = {
                     bodyWrap.className ='';
                     addClass(bodyWrap, classToAdd);
                 },
-                offset: '10%'
+                offset: '15%'
             });
 
             let waypointUp = new Waypoint({
@@ -582,7 +594,7 @@ mNineDScript.start = {
                     bodyWrap.className ='';
                     addClass(bodyWrap, classToAdd);
                 },
-                offset: '-10%'
+                offset: '-25%'
             });
 
         }
@@ -596,6 +608,65 @@ mNineDScript.start = {
 
             }
         };
+    },
+    siteBtt () {
+
+        let siteBtt = $1('.mn-site-footer-btt');
+
+        // back to top button for each wrapper
+        siteBtt.addEventListener('click', () => {
+
+            gsap.to(document.documentElement, {duration: 1.2, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
+
+        });
+    },
+    'formValidation' () {
+
+
+        const formFeedbackWrap = $1('.mn-contact-feedback');
+        const form = $1('.mn-contact-frm');
+
+        new JustValidate('.mn-contact-frm', {
+            rules: {
+                cmrName: {
+                    required: true,
+                },
+                cmrEmail: {
+                    required: true,
+                    email: true,
+                },
+                cmrNumber: {
+                    required: true,
+                },
+                cmrMessage: {
+                    required: true,
+                }
+            },
+            messages: {
+                cmrName: 'Please Enter Your Name',
+                cmrEmail: 'An Email Address Is Required',
+                cmrNumber: 'Please Add Your Phone Number ',
+                cmrMessage: 'A Message Is Required'
+            },
+            submitHandler: function (form, values, ajax) {
+
+                ajax({
+                    url: 'php-partials/form-handler.php',
+                    method: 'POST',
+                    data: values,
+                    async: true,
+                    callback: function (response) {
+                        formFeedbackWrap.innerHTML = response;
+                        form.reset();
+
+                    },
+                    error: function () {
+                        formFeedbackWrap.innerHTML = ' There was a problem with your submission, please try again';
+                    }
+                });
+            }
+        });
+
     },
 
 };

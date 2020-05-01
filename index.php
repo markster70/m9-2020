@@ -16,6 +16,7 @@
 <?php include 'site-partials/_projects.php'; ?>
 <?php include 'site-partials/_contact.php'; ?>
 <?php include 'site-partials/_counter.html'; ?>
+<?php include 'site-partials/_footer.php'; ?>
 <div class="cursor-dot-outline"></div>
 <div class="cursor-dot"></div>
 
