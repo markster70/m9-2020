@@ -13,7 +13,7 @@
             <p class="mn-body-copy">We work with large and small companies around the world to help them create, develop, improve, and maintain their websites, and applications.</p>
         </div>
         <div class="mn-section-home-brand">
-            <<img id="mn-home-logo" src="/dist/images/home-logo-shape.png" alt="m9 digital - website development, west sussex, england"/>
+            <img id="mn-home-logo" src="/dist/images/home-logo-shape.png" alt="m9 digital - website development, west sussex, england"/>
         </div>
     </div>
     <div class="mn-home-grad-bg" role="presentation" aria-hidden="true"></div>

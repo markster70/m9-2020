@@ -5,8 +5,12 @@
 
 
 .mn-section-contact-content {
-  padding: 2rem 6rem;
+  padding: 2rem;
   text-align: center;
+
+  @include breakpoint($bp-xl) {
+    padding: 2rem 6rem;
+  }
 
   h2, h3, h4, p, label {
     color: $black;
@@ -22,8 +26,13 @@
 
 .mn-contact-detail {
   text-align: center;
-  max-width: 60%;
+
   margin: 1rem auto;
+
+  @include breakpoint($bp-l) {
+    max-width: 60%;
+  }
+
 }
 
 
@@ -52,11 +61,19 @@
     color: $black;
     font-weight: $font-weight-medium;
     text-decoration: none;
-    @include font-size(22);
+    @include font-size(18);
     text-transform: uppercase;
-    text-align: left;
-    margin-left: 1rem;
+    text-align: center;
+
     width: 300px;
+
+    @include breakpoint($bp-xl) {
+      @include font-size(22);
+      margin-left: 1rem;
+      text-align: left;
+    }
+
+
   }
 }
 
@@ -65,11 +82,8 @@
 
   .mn-contact-frm-inner {
 
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: flex-start;
     background-color: transparent;
+    justify-content: center;
 
     @include breakpoint($bp-l) {
       padding: 1.25rem;
@@ -77,13 +91,6 @@
   }
 
   padding: 1rem;
-
-  @include breakpoint($bp-l) {
-    max-width: 75%;
-    padding: 2rem;
-    margin: 0 auto;
-  }
-
   box-sizing: border-box;
 }
 
@@ -105,27 +112,13 @@
   }
 }
 
-.mn-ff-input-wrapper {
-
-
-  @media (max-width: 1499px) {
-    flex-basis: 100%;
-  }
-
-}
-
 
 .mn-ff-field-wrap {
-  flex-basis: 100%;
 
-  @media (min-width: 1500px) {
-    flex-basis: 48%;
-    margin-right: 2%;
-  }
   margin-bottom: 1.5rem;
 
-  @include breakpoint($bp-xl) {
-    display: flex;
+  @include breakpoint(900) {
+    margin-bottom: 0.5rem;
   }
 
   input,textarea {
@@ -136,20 +129,12 @@
 
     transition: border 300ms ease;
     display: block;
-    flex-grow: 1;
-    width: 90%;
+
     max-width: 100%;
     box-sizing: border-box;
 
-    @include breakpoint($bp-l) {
-
-      min-width: 450px;
-
-    }
-
-
     &:focus {
-      //background-color: rgba($black, 0.25);
+
       border: 1px solid rgba($black, 0.5);
       outline: none;
     }
@@ -159,6 +144,8 @@
     resize: vertical;
     border : 1px solid rgba($black, 0.4);
     min-height: 240px;
+
+
   }
 
   label {
@@ -173,23 +160,10 @@
   }
 }
 
-.mn-ff-msg {
-  @media (min-width: 1500px) {
-    margin-left: auto;
-
-    .mn-contact-input-wrp {
-      margin-left: auto;
-    }
-  }
-  @media (min-width: 1500px) {
-    display: flex;
-
-  }
-}
-
 .mn-ff-btn {
   flex-basis: 100%;
   display: flex;
+
 
   button {
 
@@ -212,25 +186,74 @@
 
 }
 
-.mn-ff-field-wrap .js-validate-error-field {
+.mn-ff-field-wrap.js-validate-error-field {
 
-  border: 3px solid $white;
+  border: 3px solid $tertiary-accent!important;
 }
 
 .js-validate-error-label {
 
-  margin-top: 0.5rem;
-  color: $primary-accent;
+  margin-top: 1rem;
+  color: $tertiary-accent!important;
   font-weight: bold;
+  text-align: left;
+  font-family: $base-font-family;
 }
 
 .mn-contact-req-msg {
-  text-align: center;
+  text-align: left;
+  padding-left: 1rem;
 
   @include font-size(12);
 
   @include breakpoint($bp-l) {
     @include font-size(14);
+  }
+
+}
+
+.mn-contact-frm {
+  @include breakpoint($bp-xxl) {
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  @include breakpoint($bp-massive) {
+    max-width: 65%;
+  }
+
+}
+
+.mn-contact-frm-inner {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 2rem;
+
+  @include breakpoint(900) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  input, textarea {
+    width: 100%;
+    -webkit-appearance: none;
+  }
+
+}
+
+.mn-ff-btn {
+  @include breakpoint(900) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}
+
+.mn-ff-input-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+
+  .mn-ff-field-wrap {
+    flex-basis: 100%;
   }
 
 }

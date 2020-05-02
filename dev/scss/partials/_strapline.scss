@@ -2,10 +2,14 @@
   position: absolute;
 
   h2 {
-    @include font-size(28);
+    @include font-size(14);
     color: $grey-heading-accent;
     text-transform: uppercase;
     margin: 0;
+
+    @include breakpoint($bp-xl) {
+      @include font-size(28);
+    }
 
     span {
       display: inline-flex;
@@ -15,9 +19,15 @@
         content: '\25A0';
         color: $secondary-accent;
         padding: 0 1rem;
-        @include font-size(24);
+        @include font-size(12);
         position: relative;
         top: -2px;
+
+
+        @include breakpoint($bp-xl) {
+          @include font-size(24);
+        }
+
       }
 
       &:last-child:after {

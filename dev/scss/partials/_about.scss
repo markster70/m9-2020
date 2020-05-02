@@ -4,16 +4,21 @@
 }
 
 .mn-parralax-about {
-  height: 550px;
+  height: 400px;
   overflow: hidden;
   width: 100vw;
+
+  @include breakpoint($bp-xl) {
+    height: 550px;
+  }
+
 }
 
 .mn-parralax-about {
   .mn-parralax-inner {
     background-image: url("/dist/images/mn-quote-parra-bg.jpg");
     height: 100%;
-    background-attachment: fixed;
+
     background-repeat: repeat;
     background-size: cover;
     background-position: 50% 0;
@@ -23,7 +28,13 @@
     align-items: center;
     justify-content: center;
     -webkit-backface-visibility: hidden;
-    padding: 6rem 0;
+    padding: 3rem 0;
+
+    @include breakpoint($bp-xl) {
+      background-attachment: fixed;
+      padding: 6rem 0;
+    }
+
   }
 }
 
@@ -38,7 +49,6 @@
   text-align: center;
   @include font-size(28);
   font-weight: $font-weight-medium;
-  //text-shadow: 1px 1px 0px rgba(0, 0, 0, 0.2);
 
   &:before {
     content: open-quote;
@@ -60,9 +70,10 @@
 
   @include breakpoint($bp-l) {
     grid-template-columns: 1fr 1fr;
+    grid-gap: 2rem;
   }
 
-  grid-gap: 2rem;
+
 }
 
 
@@ -85,15 +96,23 @@
 
 
 .mn-section-about-hd-lg {
-  opacity: 0;
-  position: relative;
-  left: -150px;
+
+
+  @include breakpoint($bp-xl) {
+    opacity: 0;
+    position: relative;
+    left: -150px;
+  }
+
 }
 
 .mn-section-about-hd-anim {
-  filter: blur(36px);
-  -webkit-filter: blur(36px);
-  opacity: 0;
-  top: 80px;
-  position: relative;
+
+  @include breakpoint($bp-xl) {
+    filter: blur(36px);
+    opacity: 0;
+    top: 80px;
+    position: relative;
+  }
+
 }

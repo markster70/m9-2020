@@ -668,6 +668,25 @@ mNineDScript.start = {
         });
 
     },
+    triggerVideos () {
+
+    let mediaWrappers = $('.mn-site-nav-video-bg');
+    let videoFormats = [{type : 'mp4'}, {type : 'webm'} ]; //, {type : 'webm'}
+
+    for(let i = 0; i < mediaWrappers.length; i ++) {
+        let wrapperEl = mediaWrappers[i];
+        let videoEl = wrapperEl.querySelector('video');
+        let videoUrl = wrapperEl.dataset.videoId;
+
+        for(let j = 0; j < videoFormats.length; j ++ ) {
+
+            let videoSourceType = videoUrl + '.' + videoFormats[j].type;
+            let videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
+            videoEl.innerHTML += videoTag;
+        }
+
+    }
+}
 
 };
 
@@ -680,6 +699,13 @@ window.addEventListener('DOMContentLoaded', () => {
     // dom is loaded!
     mNineDScript.start.init();
 
+
+});
+
+
+window.addEventListener('load', () => {
+
+    mNineDScript.start.triggerVideos();
 
 
 });

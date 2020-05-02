@@ -117,12 +117,20 @@ function createScripts() {
         .pipe(browsersync.stream());
 }
 
+function copyStandaloneScripts () {
+
+    return gulp.src('dev/js/standalone/**/*.js')
+        .pipe(gulp.dest('dist/js/'));
+}
+
+
 
 function watchFiles() {
     gulp.watch("dev/scss/**/*", createCss);
     gulp.watch("dev/images/**/*", createImages);
-    gulp.watch("dev/js/**/*", gulp.series(lintScripts,createScripts));
+    gulp.watch("dev/js/**/*", gulp.series(lintScripts,createScripts, copyStandaloneScripts));
     gulp.watch("dev/fonts/**/*", copyFonts);
+
 
     gulp.watch( "site-partials/*.html",gulp.parallel(browserSyncReload));
 
@@ -132,7 +140,7 @@ function watchFiles() {
 // Tasks
 gulp.task("images", createImages);
 gulp.task("css", createCss);
-gulp.task("js", gulp.series(lintScripts,createScripts));
+gulp.task("js", gulp.series(lintScripts,createScripts, copyStandaloneScripts));
 gulp.task("clean", clean);
 
 

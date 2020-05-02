@@ -13,19 +13,23 @@
 
 
 .mn-site-nav-wrapper {
-  width: 100%;
+  width: 90%;
   height: 100%;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
   position: relative;
   flex-wrap: wrap;
-  align-content: flex-end;
-  align-items: center;
-  justify-content: center;
+
+  padding-top: 6rem;
+
 
   @include breakpoint($bp-xl) {
     padding-top: 0;
-    //justify-content: normal;
+    width: 100%;
+    align-content: flex-end;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -49,7 +53,7 @@
     @include std-transitions();
     position: relative;
     left: 0;
-    text-align: center;
+    text-align: right;
 
     @include breakpoint($bp-l) {
       text-align: left;
@@ -65,9 +69,11 @@
 
 .mn-site-nav-link-item {
   @include font-size(24);
+  padding: 7px 12px 5px;
 
   @include breakpoint($bp-l) {
     @include font-size(40);
+    padding: 0 12px;
   }
 
   font-weight: $font-weight-light;
@@ -75,7 +81,7 @@
   text-transform: uppercase;
   text-decoration: none;
   position: relative;
-  padding: 0 12px;
+
   opacity: 0;
   left: 200px;
   min-width: 300px;
@@ -139,7 +145,7 @@
   video {
     min-width: 100%;
     min-height: 100%;
-    opacity: 0.2;
+    opacity: 0.5;
   }
 }
 
@@ -147,9 +153,14 @@
 
 
   align-self: flex-end;
-  padding-right: 5%;
-  margin-top: 3rem;
+
+  margin-top: 1rem;
   text-align: right;
+
+  @include breakpoint($bp-xl) {
+    padding-right: 5%;
+    margin-top: 3rem;
+  }
 
 
   a {
@@ -212,9 +223,16 @@
 .mn-site-nav-wrapper {
 
   .mn-section-nav-strapline {
-    left: 2rem;
+    left: 0;
     opacity: 0;
-    top: 45%;
+    top: 2rem;
+
+    @include breakpoint($bp-l) {
+
+      left: 2rem;
+      top: 45%;
+
+    }
 
     h2 {
       color: $white;

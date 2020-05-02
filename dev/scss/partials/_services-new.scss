@@ -14,7 +14,11 @@
 }
 
 .mn-section-services-hd {
-  padding: 0.5rem 6rem;
+  padding: 0.5rem 2rem;
+
+  @include breakpoint($bp-xl) {
+    padding: 0.5rem 6rem;
+  }
 
 }
 
@@ -41,6 +45,11 @@
   background-color: rgba($black, 0.1);
   transform:scale(0.4);
   opacity: 0;
+  border-bottom: 1px solid rgba($white, 0.1);
+
+  @include breakpoint($bp-l) {
+    border-bottom: 0;
+  }
 
 }
 
@@ -117,22 +126,34 @@
 }
 
 .mn-section-services-hd-lg {
-  opacity: 0;
-  position: relative;
-  left: -150px;
+
+  @include breakpoint($bp-xl) {
+    opacity: 0;
+    position: relative;
+    left: -150px;
+  }
+
+
 }
 
 .mn-section-services-hd-anim {
-  filter: blur(36px);
-  -webkit-filter: blur(36px);
-  opacity: 0;
-  top: 80px;
-  position: relative;
+
+  @include breakpoint($bp-xl) {
+
+    filter: blur(36px);
+    -webkit-filter: blur(36px);
+    opacity: 0;
+    top: 80px;
+    position: relative;
+  }
 }
 
 .mn-section-services-hd-sub {
-  top: -80px;
 
+  @include breakpoint($bp-xl) {
+    top: -80px;
+
+  }
 }
 
 .mn-section-services-item-hd {
@@ -147,7 +168,6 @@
 
   .mn-section-services-svg-wrap {
     max-width: 110px;
-    //filter: blur(1px);
   }
 
   .mn-services-section-svg {
@@ -163,24 +183,38 @@
 .mn-services-ft {
   display: flex;
   width: 100vw;
-  padding: 2rem 6rem;
+  padding: 2rem 1rem;
   flex-wrap: wrap;
   border-bottom: 1px solid rgba($white, 0.2);
+
+  @include breakpoint($bp-l) {
+    padding: 2rem 6rem;
+  }
+
 
   h4 {
     color : $grey-accent;
     margin: 0 0 1rem;
     flex-basis: 100%;
-    @include font-size(22);
+    @include font-size(18);
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 4px;
 
+    @include breakpoint($bp-xl) {
+      @include font-size(22);
+    }
+
     a {
       color: $tertiary-accent;
       text-decoration: none;
+
       @include std-transitions();
-      @include font-size(26);
+      @include font-size(21);
+
+      @include breakpoint($bp-xl) {
+        @include font-size(26);
+      }
 
       &:hover {
         color: $secondary-accent;

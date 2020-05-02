@@ -5,9 +5,15 @@ $counter-width : 130px;
   position: absolute;
   bottom: 3rem;
   left: 3rem;
-  display: flex;
+
   align-items: flex-end;
   z-index: 50;
+
+  display: none;
+
+  @include breakpoint($bp-xl) {
+    display: flex;
+  }
 
   .mn-counter-wrapper-inner {
     height: $counter-height;

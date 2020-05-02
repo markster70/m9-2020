@@ -11,49 +11,69 @@
 }
 
 .mn-blockquote-item {
-  @include font-size(26);
+  @include font-size(22);
   text-align: center;
   color: rgba($white,0.7);
-  max-width: 50%;
+  max-width: 90%;
   margin: 0 auto;
   position: relative;
   flex-basis: 100%;
-  //background-color: rgba($black, 0.05);
   padding: 3rem;
 
+  @include breakpoint($bp-xl) {
+    max-width: 50%;
+    @include font-size(26);
+  }
 
-  &:before {
+
+  &:before, &:after {
     position: absolute;
-    height: 80px;
-    width: 80px;
-    background-image: url("/dist/images/quote.png");
+    height: 40px;
+    width: 40px;
     background-size: contain;
     background-position: 0 0;
     background-repeat: no-repeat;
     content: '';
-    left: -60px;
-    top: -60px;
+
+    @include breakpoint($bp-xl) {
+      height: 80px;
+      width: 80px;
+    }
+  }
+
+
+  &:before {
+
+    background-image: url("/dist/images/quote.png");
+    left: 0;
+    top: 30px;
+
+    @include breakpoint($bp-xl) {
+      left: -60px;
+      top: -60px;
+    }
+
   }
 
 
   &:after {
-    position: absolute;
-    height: 80px;
-    width: 80px;
+
     background-image: url("/dist/images/close-quote.png");
-    background-size: contain;
-    background-position: 0 0;
-    background-repeat: no-repeat;
-    content: '';
-    right: -60px;
-    bottom: -60px
+
+    right: 0;
+    bottom: 60px;
+
+    @include breakpoint($bp-xl) {
+      right: -60px;
+      bottom: -60px;
+    }
   }
 
 }
 
 
 .mn-blockquote-author {
-  @include font-size(20);
+  @include font-size(16);
   font-weight: $font-weight-medium;
   text-transform: uppercase;
   letter-spacing: 3px;
@@ -61,5 +81,9 @@
   text-align: center;
   flex-basis: 100%;
   font-style: normal;
+
+  @include breakpoint($bp-xl) {
+    @include font-size(20);
+  }
 
 }

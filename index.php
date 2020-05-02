@@ -20,8 +20,6 @@
 <div class="cursor-dot-outline"></div>
 <div class="cursor-dot"></div>
 
-
-
 <script src="dist/js/m9-2020-concat-script.min.js"></script>
 </body>
 

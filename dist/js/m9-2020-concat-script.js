@@ -8665,6 +8665,26 @@ mNineDScript.start = {
         });
       }
     });
+  },
+  triggerVideos: function triggerVideos() {
+    var mediaWrappers = $('.mn-site-nav-video-bg');
+    var videoFormats = [{
+      type: 'mp4'
+    }, {
+      type: 'webm'
+    }]; //, {type : 'webm'}
+
+    for (var i = 0; i < mediaWrappers.length; i++) {
+      var wrapperEl = mediaWrappers[i];
+      var videoEl = wrapperEl.querySelector('video');
+      var videoUrl = wrapperEl.dataset.videoId;
+
+      for (var j = 0; j < videoFormats.length; j++) {
+        var videoSourceType = videoUrl + '.' + videoFormats[j].type;
+        var videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
+        videoEl.innerHTML += videoTag;
+      }
+    }
   }
 };
 window.addEventListener('DOMContentLoaded', function () {
@@ -8672,4 +8692,7 @@ window.addEventListener('DOMContentLoaded', function () {
   gsap.registerPlugin(CSSRulePlugin); // dom is loaded!
 
   mNineDScript.start.init();
+});
+window.addEventListener('load', function () {
+  mNineDScript.start.triggerVideos();
 });

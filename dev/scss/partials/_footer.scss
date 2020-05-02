@@ -1,10 +1,15 @@
 .mn-site-footer {
-  padding: 3rem 6rem;
+  padding: 2rem;
   background-color: $body-base-bg;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
+
+  @include breakpoint($bp-xl) {
+    padding: 3rem 6rem;
+  }
+
 }
 
 .mn-footer-cta {
