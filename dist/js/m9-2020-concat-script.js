@@ -8093,6 +8093,7 @@ mNineDScript.start = {
 
     function addNavClass() {
       addClass(navWrapper, 'is-active');
+      navWrapper.setAttribute('aria-expanded', 'true');
     }
 
     function startVideo() {
@@ -8127,6 +8128,7 @@ mNineDScript.start = {
 
     function removeNavClass() {
       removeClass(navWrapper, 'is-active');
+      navWrapper.setAttribute('aria-expanded', 'false');
     }
 
     navTrigger.addEventListener('click', function () {
@@ -8139,7 +8141,6 @@ mNineDScript.start = {
           tl.call(toggleNavTriggerClass);
           tl.to(navStrapLine, {
             opacity: 0,
-            top: '47%',
             duration: 0.7,
             ease: "circ.out"
           });
@@ -8199,7 +8200,6 @@ mNineDScript.start = {
           });
           tl.to(navStrapLine, {
             opacity: 1,
-            top: '45%',
             duration: 0.5,
             ease: "circ.out"
           }, ">-0.4");
@@ -8209,7 +8209,7 @@ mNineDScript.start = {
 
     navItems.forEach(function (el) {
       el.addEventListener('click', function (e) {
-        e.preventDefault();
+        e.preventDefault(); // detection for screen size here to determine what the position of the strapline should be
 
         if (!tl.isActive()) {
           var sectionTarget = el.getAttribute('href');
@@ -8572,19 +8572,26 @@ mNineDScript.start = {
     // for each section, we need a class added to body for the menu variations etc
     // this is done via waypoints js
     // also in this function, when we hit the top of the page, we want to clear the variation classes
-    var sections = $('.mn-section');
+    var sections = $('.mn-section-main');
     var bodyWrap = $1('body');
+
+    var _self = this;
 
     var _loop2 = function _loop2(i) {
       var el = sections[i];
+      var elIndex = i;
       var elId = el.id;
+      console.log(i);
       var classToAdd = elId + '-is-active';
       var element = document.getElementById(elId);
       var waypointDown = new Waypoint({
         element: element,
         handler: function handler(direction) {
+          console.log('down');
           bodyWrap.className = '';
           addClass(bodyWrap, classToAdd);
+
+          _self.manageSliderClasses(elIndex);
         },
         offset: '15%'
       });
@@ -8593,8 +8600,11 @@ mNineDScript.start = {
         handler: function handler(direction) {
           bodyWrap.className = '';
           addClass(bodyWrap, classToAdd);
+          console.log('up');
+
+          _self.manageSliderClasses(elIndex);
         },
-        offset: '-25%'
+        offset: '-15%'
       });
     };
 
@@ -8602,10 +8612,14 @@ mNineDScript.start = {
       _loop2(i);
     }
 
+    _self.manageSliderClasses(0);
+
     window.onscroll = function () {
       if (window.pageYOffset === 0) {
         bodyWrap.className = '';
         addClass(bodyWrap, 'js-section-home-is-active');
+
+        _self.manageSliderClasses();
       } else if (window.pageYOffset > 100) {//addClass(bodyWrap, 'body-scrolling-is-active');
       }
     };
@@ -8667,6 +8681,12 @@ mNineDScript.start = {
     });
   },
   triggerVideos: function triggerVideos() {
+    var ss = currScreenSize();
+
+    if (ss === 'ss' || ss === 'ms') {
+      return;
+    }
+
     var mediaWrappers = $('.mn-site-nav-video-bg');
     var videoFormats = [{
       type: 'mp4'
@@ -8684,6 +8704,27 @@ mNineDScript.start = {
         var videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
         videoEl.innerHTML += videoTag;
       }
+    }
+  },
+  manageSliderClasses: function manageSliderClasses(elIndex) {
+    var slideListElements = $('.mpp-slide-list li');
+    slideListElements.forEach(function (el) {
+      removeClass(el, 'is-current');
+    });
+
+    if (elIndex) {
+      console.log(elIndex);
+
+      for (var i = 0; i < slideListElements.length; i++) {
+        var currentEl = slideListElements[i];
+
+        if (i === elIndex) {
+          console.log('match ! : ' + i);
+          addClass(currentEl, 'is-current');
+        }
+      }
+    } else {
+      addClass(slideListElements[0], 'is-current');
     }
   }
 };

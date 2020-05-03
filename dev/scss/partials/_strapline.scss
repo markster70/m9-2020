@@ -8,7 +8,7 @@
     margin: 0;
 
     @include breakpoint($bp-xl) {
-      @include font-size(28);
+      @include font-size(24);
     }
 
     span {

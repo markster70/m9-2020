@@ -1,97 +1,31 @@
-$counter-height: 110px;
-$counter-width : 130px;
-
 .mn-counter-wrapper {
   position: absolute;
   bottom: 3rem;
-  left: 3rem;
+  left: 5.5rem;
+  z-index: 5;
 
-  align-items: flex-end;
-  z-index: 50;
-
-  display: none;
+  display:  none;
 
   @include breakpoint($bp-xl) {
-    display: flex;
-  }
-
-  .mn-counter-wrapper-inner {
-    height: $counter-height;
-    z-index: 4;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    overflow: hidden;
-    padding: 0;
-    width: $counter-width;
-  }
-
-
-  ul {
-    height: $counter-height;
-    list-style: none;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    padding: 0;
-    margin: 0;
-  }
-
-}
-
-.mn-counter-item {
-  height: $counter-height;
-  position: relative;
-  display: flex;
-  align-items: center;
-  align-content: center;
-  opacity: 0.7;
-  width: $counter-width;
-  @include std-transitions();
-  left: 0;
-  justify-content: flex-start;
-
-  span {
     display: block;
   }
-
-
-  span:first-child {
-    @include font-size(95);
-    text-transform: uppercase;
-    color: rgba($grey-accent,0.2);
-    font-weight: $font-weight-bold;
-    letter-spacing: 5px;
-    position: absolute;
-    height: $counter-height;
-    width: $counter-width;
-    left:0;
-    top: 0;
-    z-index: -1;
-  }
-  span:last-child {
-    @include font-size(14);
-    text-transform: uppercase;
-    color: rgba($white,0.7);
-    font-weight: $font-weight-medium;
-    letter-spacing: 3px;
-    align-self: center;
-    margin-top: 25%;
-
-  }
-
 }
+
 
 .mn-scroll-indicator-wrap {
 
-  display: none;
+  height: 0;
+  width: 0;
+  overflow: hidden;
+  @include std-transitions();
+  display: block;
 
-  width: 60px;
+
   margin: 0.5rem 0 0 0.5rem;
+
   svg {
     fill: $primary-accent;
-    max-width: 100%;
+    width: 100%;
     height: auto;
   }
 }
@@ -100,37 +34,143 @@ $counter-width : 130px;
 
 .js-section-home-is-active {
   .mn-scroll-indicator-wrap {
-    display: block;
+
+
+    width: 60px;
+    height: 60px;
+
+    &:hover {
+      transform: scale(1.1);
+      opacity: 0.85;
+    }
+
   }
 }
 
 
-.js-about-top-is-active, .js-services-top-is-active {
-  .mn-counter-item {
-    left: -$counter-width;
+
+.is-nav-active {
+  .mn-counter-wrapper {
+    opacity: 0;
   }
 }
 
-.js-projects-top-is-active {
 
-  .mn-counter-item {
-    left: -$counter-width*2;
+.mn-page-indicators {
+
+  @include breakpoint($bp-xl-max, max-width) {
+    display: none;
   }
 
+  position: fixed;
+  z-index: 1000;
+  bottom : 40%;
+  left: 1.5rem;
+
+  @include breakpoint($bp-l) {
+    bottom: 30%;
+  }
+
+  @include breakpoint($bp-xl) {
+    bottom: 40%;
+  }
+
+  ul {
+    @include list-reset();
+    display: flex;
+    display: -ms-flexbox;
+    flex-direction: column;
+
+    li {
+      display: flex;
+      display: -ms-flexbox;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    a {
+      color: $white;
+      width: 26px;
+      height: 26px;
+      line-height: 1;
+      margin-bottom: 6px;
+      display: flex;
+      display: -ms-flexbox;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      @include font-size(11);
+      border: 0;
+      box-shadow: none;
+      background: transparent;
+      text-decoration: none;
+      @include std-transitions();
+
+      &:focus {
+        outline: none;
+      }
+
+      &:hover {
+        background-color: rgba($white, 0.05);
+      }
+    }
+
+    .is-current a {
+
+      //background: rgba($standout, 1.0);
+      border: 1px solid $standout;
+      color: $white;
+      margin-bottom: 3px;
+      @include font-size(11);
+    }
+
+    span:after {
+      height: 0;
+      @include std-transitions();
+      width: 1px;
+      content: '';
+      display: block;
+      flex-basis: 100%;
+      background-color: transparent;
+    }
+
+    .is-current span:after {
+      height: 35px;
+      background-color: $standout;
+      width: 1px;
+
+    }
+
+  }
 }
 
 .js-contact-top-is-active {
+  .mn-page-indicators a {
+    background-color: $black;
+    color: $white;
+  }
 
-  .mn-counter-item {
-    left: -$counter-width*3;
-    //background-color: $black;
-    opacity: 1;
-    span:first-child {
-      color: rgba($black, 1);
+  .mn-page-indicators .is-current {
+
+    a {
+
+      border: 1px solid transparent;
+      background-color: $standout;
+      color: $white;
+      order: 1;
     }
 
-    span:last-child {
-      color: rgba($tertiary-accent, 1.0);
+    span:after {
+      content : normal;
+    }
+
+    span:before {
+      height: 35px;
+      background-color: $standout;
+      width: 1px;
+      content: '';
+      display: block;
+      flex-basis: 100%;
     }
 
   }
@@ -138,7 +178,7 @@ $counter-width : 130px;
 }
 
 .is-nav-active {
-  .mn-counter-wrapper {
+  .mn-counter-wrapper, .mn-page-indicators {
     opacity: 0;
   }
 }

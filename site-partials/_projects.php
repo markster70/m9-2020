@@ -1,4 +1,4 @@
-<section class="mn-section mn-section-projects" id="js-projects-top">
+<section class="mn-section mn-section-projects mn-section-main" id="js-projects-top">
     <div class="mn-section-inner">
         <div class="mn-section-projects-bd">
             <header class="mn-section-projects-hd mn-section-hd">
@@ -18,111 +18,111 @@
                     <ul class="mn-section-projects-summary">
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/zishi.php" data-content="/projects/includes/zishi-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/zishi.php" data-content="/projects/includes/zishi-content.html" aria-controls="zishi-project-content">
                                     <span class="mn-section-project-summary-item-title">Zishi Adaptive</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" id="zishi-project-content" aria-live="polite">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/frotcom.php" data-content="/projects/includes/frotcom-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/frotcom.php" data-content="/projects/includes/frotcom-content.html" aria-controls="frotcom-project-content">
                                     <span class="mn-section-project-summary-item-title">Frotcom Ireland</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                             </a>
                             </div>
-                            <div class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="frotcom-project-content">
                                 <!-- content to be injected here -->
-                            </div>
+                            </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/mpp.php" data-content="/projects/includes/mpp-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/mpp.php" data-content="/projects/includes/mpp-content.html" aria-controls="mpp-project-content">
                                     <span class="mn-section-project-summary-item-title">Mark-Price.photography</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="mpp-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger"  href="/projects/collective.php" data-content="/projects/includes/collective-content.html">
+                                <a class="mn-section-project-summary-trigger"  href="/projects/collective.php" data-content="/projects/includes/collective-content.html" aria-controls="collective-project-content">
                                     <span class="mn-section-project-summary-item-title">Collective London</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="collective-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/ttc.php" data-content="/projects/includes/ttc-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/ttc.php" data-content="/projects/includes/ttc-content.html" aria-controls="ttc-project-content">
                                     <span class="mn-section-project-summary-item-title">The Travel Corporation</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="ttc-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                            <a class="mn-section-project-summary-trigger" href="/projects/object-tech.php" data-content="/projects/includes/objecttech-content.html">
+                            <a class="mn-section-project-summary-trigger" href="/projects/object-tech.php" data-content="/projects/includes/objecttech-content.html" aria-controls="otk-project-content">
                                 <span class="mn-section-project-summary-item-title">Object Tech Ltd</span>
                                 <span class="mn-section-project-summary-item-ico"></span>
                             </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="otk-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/investec.php" data-content="/projects/includes/investec-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/investec.php" data-content="/projects/includes/investec-content.html" aria-controls="investec-project-content">
                                     <span class="mn-section-project-summary-item-title">Investec Bank PLC</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="investec-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/jisc.php" data-content="/projects/includes/jisc-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/jisc.php" data-content="/projects/includes/jisc-content.html" aria-controls="jisc-project-content">
                                     <span class="mn-section-project-summary-item-title">Jisc Collections</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="jisc-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger" href="/projects/think-rise.php" data-content="/projects/includes/think-rise-content.html">
+                                <a class="mn-section-project-summary-trigger" href="/projects/think-rise.php" data-content="/projects/includes/think-rise-content.html" aria-controls="rise-project-content">
                                     <span class="mn-section-project-summary-item-title">Think Rise</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="rise-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
-                                <a class="mn-section-project-summary-trigger"  href="/projects/barclays.php" data-content="/projects/includes/barclays-content.html">
+                                <a class="mn-section-project-summary-trigger"  href="/projects/barclays.php" data-content="/projects/includes/barclays-content.html" aria-controls="barclays-project-content">
                                     <span class="mn-section-project-summary-item-title">Barclays Smart Investor</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
-                            <article class="mn-projects-summary-detail-wrapper">
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="barclays-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>
@@ -131,8 +131,7 @@
             </div>
         </div>
     </div>
-	<?php include '_counter.html'; ?>
-    <div class="mn-section-projects-strapline mn-section-strapline">
+    <div class="mn-section-projects-strapline mn-section-strapline mn-section-fade">
         <h2>
             <span>Design</span>
             <span>Develop</span>

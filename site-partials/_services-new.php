@@ -10,7 +10,7 @@
         <div class="mn-section-services-wrapper">
             <div class="mn-section-services-grid">
                 <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="500">
-                    <div class="mn-section-services-svg-wrap">
+                    <div class="mn-section-services-svg-wrap" role="presentation" aria-hidden="true">
 		                <?php include '_services-svg-a.html'; ?>
                     </div>
                     <h3 class="mn-section-services-item-hd">Design</h3>
@@ -22,7 +22,7 @@
                     </ul>
                 </article>
                 <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="1200">
-                    <div class="mn-section-services-svg-wrap">
+                    <div class="mn-section-services-svg-wrap"  role="presentation" aria-hidden="true">
 		                <?php include '_services-svg-b.html'; ?>
                     </div>
                         <h3 class="mn-section-services-item-hd">Develop</h3>
@@ -37,7 +37,7 @@
 
                 </article>
                 <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="1200">
-                    <div class="mn-section-services-svg-wrap">
+                    <div class="mn-section-services-svg-wrap"  role="presentation" aria-hidden="true">
 		                <?php include '_services-svg-c.html'; ?>
                     </div>
                     <h3 class="mn-section-services-item-hd">Deploy</h3>
@@ -55,5 +55,4 @@
             <h4>Feel free to <a class="mn-scroll-trig" href="#js-contact-top">contact us</a> for a no obligation chat..</h4>
         </footer>
     </div>
-	<?php include '_counter.html'; ?>
 </section>

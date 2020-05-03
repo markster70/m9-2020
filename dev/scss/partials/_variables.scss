@@ -11,6 +11,7 @@ $body-base-bg : #272727;
 $primary-accent: #7ff7f0;
 $secondary-accent : #f9ccc1;
 $tertiary-accent : #f8ac84;
+$standout : #f8aa82;
 
 $grey-accent: #acacb2;
 $logo-txt-color: #464648;
@@ -25,7 +26,7 @@ $about-content-bg-color : #303031;
 $home-grad-primary-color: #343435;
 $home-grad-bg-secondary-color: #2e2e2f;
 
-$grey-heading-accent : #656565;
+$grey-heading-accent : #f2f2f2;
 
 // base fonts
 
@@ -44,12 +45,12 @@ $font-weight-bold : 900;
 
 $bp-massive: 1750;
 $bp-xxl: 1440;
-$bp-xl: 1280;
 $bp-xl-max: 1279;
-$bp-l: 960;
+$bp-xl: 1280;
 $bp-l-max: 959;
-$bp-l-max: 767;
-$bp-l: 768;
+$bp-l: 960;
+$bp-m-max: 767;
+$bp-m: 768;
 $bp-s-max: 639;
 $bp-s: 640;
 $bp-xs: 480;

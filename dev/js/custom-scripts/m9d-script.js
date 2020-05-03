@@ -3,11 +3,10 @@ const mNineDScript = {};
 
 mNineDScript.start = {
 
-    'config': {
-    },
+    'config': {},
     init(settings) {
         // loop through any settings passed in, and overwrite the default config with those settings
-        if (settings && typeof(settings) === 'object') {
+        if (settings && typeof (settings) === 'object') {
             for (let prop in settings) {
                 if (settings.hasOwnProperty(prop)) {
                     this.config[prop] = settings[prop];
@@ -17,7 +16,7 @@ mNineDScript.start = {
 
         let currSS = currScreenSize();
 
-        if(currSS === 'ls' | currSS === 'xls') {
+        if (currSS === 'ls' | currSS === 'xls') {
             this.cursorSetup();
         }
 
@@ -28,9 +27,8 @@ mNineDScript.start = {
         this.activeSectionClasses();
         this.siteBtt();
         this.formValidation();
-
     },
-    cursorSetup () {
+    cursorSetup() {
         let cursor = {
             delay: 8,
             _x: 0,
@@ -40,9 +38,9 @@ mNineDScript.start = {
             cursorVisible: true,
             cursorEnlarged: false,
             $dot: $1('.cursor-dot'),
-            $outline:$1('.cursor-dot-outline'),
+            $outline: $1('.cursor-dot-outline'),
 
-            init: function() {
+            init: function () {
                 // Set up element sizes
                 this.dotSize = this.$dot.offsetWidth;
                 this.outlineSize = this.$outline.offsetWidth;
@@ -52,17 +50,17 @@ mNineDScript.start = {
             },
 
 
-            setupEventListeners: function() {
+            setupEventListeners: function () {
                 const self = this;
 
                 // Anchor hovering
-                $('a, button').forEach(function(el) {
-                    el.addEventListener('mouseover', function() {
+                $('a, button').forEach(function (el) {
+                    el.addEventListener('mouseover', function () {
                         self.cursorEnlarged = true;
                         self.toggleCursorSize();
                         addClass(self.$outline, 'elementHover');
                     });
-                    el.addEventListener('mouseout', function() {
+                    el.addEventListener('mouseout', function () {
                         self.cursorEnlarged = false;
                         self.toggleCursorSize();
                         removeClass(self.$outline, 'elementHover');
@@ -70,29 +68,29 @@ mNineDScript.start = {
                 });
 
                 // Anchor hovering
-                $('.hover-cursor-effect').forEach(function(el) {
-                    el.addEventListener('mouseover', function() {
+                $('.hover-cursor-effect').forEach(function (el) {
+                    el.addEventListener('mouseover', function () {
 
                         addClass(self.$outline, 'imgHover');
                     });
-                    el.addEventListener('mouseout', function() {
+                    el.addEventListener('mouseout', function () {
 
                         removeClass(self.$outline, 'imgHover');
                     });
                 });
 
                 // Click events
-                document.addEventListener('mousedown', function() {
+                document.addEventListener('mousedown', function () {
                     self.cursorEnlarged = true;
                     self.toggleCursorSize();
                 });
-                document.addEventListener('mouseup', function() {
+                document.addEventListener('mouseup', function () {
                     self.cursorEnlarged = false;
                     self.toggleCursorSize();
                 });
 
 
-                document.addEventListener('mousemove', function(e) {
+                document.addEventListener('mousemove', function (e) {
                     // Show the cursor
                     self.cursorVisible = true;
                     self.toggleCursorVisibility();
@@ -105,14 +103,14 @@ mNineDScript.start = {
                 });
 
                 // Hide/show cursor
-                document.addEventListener('mouseenter', function(e) {
+                document.addEventListener('mouseenter', function (e) {
                     self.cursorVisible = true;
                     self.toggleCursorVisibility();
                     self.$dot.style.opacity = 1;
                     self.$outline.style.opacity = 1;
                 });
 
-                document.addEventListener('mouseleave', function(e) {
+                document.addEventListener('mouseleave', function (e) {
                     self.cursorVisible = true;
                     self.toggleCursorVisibility();
                     self.$dot.style.opacity = 0;
@@ -120,7 +118,7 @@ mNineDScript.start = {
                 });
             },
 
-            animateDotOutline: function() {
+            animateDotOutline: function () {
                 const self = this;
 
                 self._x += (self.endX - self._x) / self.delay;
@@ -131,7 +129,7 @@ mNineDScript.start = {
                 requestAnimationFrame(this.animateDotOutline.bind(self));
             },
 
-            toggleCursorSize: function() {
+            toggleCursorSize: function () {
                 const self = this;
 
                 if (self.cursorEnlarged) {
@@ -143,14 +141,14 @@ mNineDScript.start = {
                 }
             },
 
-            toggleCursorVisibility: function() {
+            toggleCursorVisibility: function () {
                 const self = this;
 
-                if (self.cursorVisible && !hasClass(self.$outline,'elementHover')) {
+                if (self.cursorVisible && !hasClass(self.$outline, 'elementHover')) {
                     self.$dot.style.opacity = 1;
                     self.$outline.style.opacity = 1;
 
-                } else if(self.cursorVisible && hasClass(self.$outline,'elementHover')) {
+                } else if (self.cursorVisible && hasClass(self.$outline, 'elementHover')) {
                     self.$outline.style.opacity = 0.5;
                 } else {
                     self.$dot.style.opacity = 0;
@@ -161,7 +159,7 @@ mNineDScript.start = {
 
         cursor.init();
     },
-    runNav () {
+    runNav() {
         const navTrigger = $1('.hamburger');
         const navWrapper = $1('.mn-site-nav');
         const navItems = $('.mn-site-nav-link-item');
@@ -173,17 +171,18 @@ mNineDScript.start = {
 
         const tl = gsap.timeline();
 
-        function toggleNavTriggerClass () {
+        function toggleNavTriggerClass() {
             toggleClass(navTrigger, 'is-active');
             toggleClass(bodyEl, 'is-nav-active');
         }
 
-        function addNavClass () {
+        function addNavClass() {
 
             addClass(navWrapper, 'is-active');
+            navWrapper.setAttribute('aria-expanded', 'true');
         }
 
-        function startVideo () {
+        function startVideo() {
             video.play();
         }
 
@@ -195,7 +194,7 @@ mNineDScript.start = {
 
             let delay = 0;
 
-            for(let i =0; i < navItems.length; i ++) {
+            for (let i = 0; i < navItems.length; i++) {
                 let el = navItems[i];
                 delay += 250;
 
@@ -207,57 +206,76 @@ mNineDScript.start = {
         }
 
         function removeVisibleNavItemClass() {
-            navItems.forEach( (el) => {
+            navItems.forEach((el) => {
                 removeClass(el, 'is-visible');
             });
         }
 
         function removeNavClass() {
             removeClass(navWrapper, 'is-active');
+            navWrapper.setAttribute('aria-expanded', 'false')
         }
 
-        navTrigger.addEventListener('click', ()  => {
+        navTrigger.addEventListener('click', () => {
             animationNavigation();
 
         });
 
-        function animationNavigation () {
-            if(hasClass(navWrapper, 'is-active')) {
+        function animationNavigation() {
+            if (hasClass(navWrapper, 'is-active')) {
 
-                if(!tl.isActive()) {
+                if (!tl.isActive()) {
 
                     tl.call(toggleNavTriggerClass);
-                    tl.to(navStrapLine, {opacity: 0, top: '47%', duration : 0.7,  ease: "circ.out"});
+                    tl.to(navStrapLine, {opacity: 0, duration: 0.7, ease: "circ.out"});
                     tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
                     tl.to(navLinks, {opacity: 0, duration: 0.3});
-                    tl.to(navItems, {left: 200, opacity : 0, duration: 0.15, stagger: 0.15, ease: "circ.Out", onComplete : removeVisibleNavItemClass}, ">-0.4" );
-                    tl.to(navWrapper, {x: '100%', duration: 1, ease: "circ.inOut", onComplete: function () {
+                    tl.to(navItems, {
+                        left: 200,
+                        opacity: 0,
+                        duration: 0.15,
+                        stagger: 0.15,
+                        ease: "circ.Out",
+                        onComplete: removeVisibleNavItemClass
+                    }, ">-0.4");
+                    tl.to(navWrapper, {
+                        x: '100%', duration: 1, ease: "circ.inOut", onComplete: function () {
                             removeNavClass();
                             stopVideo();
-                        }});
+                        }
+                    });
 
                 }
 
-            }  else {
+            } else {
 
-                if(!tl.isActive()) {
+                if (!tl.isActive()) {
 
                     tl.call(toggleNavTriggerClass);
                     tl.to(navWrapper, {x: 0, duration: 1, ease: "circ.inOut", onComplete: addNavClass});
-                    tl.to(navItems, {left: 0, opacity : 1, duration: 0.35, stagger: 0.35, ease: "circ.Out", onStart : addVisibleNavItemClass}, ">-0.4");
+                    tl.to(navItems, {
+                        left: 0,
+                        opacity: 1,
+                        duration: 0.35,
+                        stagger: 0.35,
+                        ease: "circ.Out",
+                        onStart: addVisibleNavItemClass
+                    }, ">-0.4");
                     tl.to(navLinks, {opacity: 1, duration: 0.5});
                     tl.to(navVideoWrap, {opacity: 1, duration: 2, ease: "circ.inOut", onComplete: startVideo});
-                    tl.to(navStrapLine, {opacity: 1, top: '45%', duration : 0.5,  ease: "circ.out"}, ">-0.4");
+                    tl.to(navStrapLine, {opacity: 1, duration: 0.5, ease: "circ.out"}, ">-0.4");
 
                 }
             }
         }
 
-        navItems.forEach( (el) => {
+        navItems.forEach((el) => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
 
-                if(!tl.isActive()) {
+                // detection for screen size here to determine what the position of the strapline should be
+
+                if (!tl.isActive()) {
 
                     let sectionTarget = el.getAttribute('href');
                     animationNavigation();
@@ -271,7 +289,7 @@ mNineDScript.start = {
         });
 
     },
-    runScrollAnimations () {
+    runScrollAnimations() {
 
         const aboutTitleHd = $1('.mn-section-about-hd-lg');
         const aboutTitleEls = $('.mn-section-about-hd-anim');
@@ -279,15 +297,28 @@ mNineDScript.start = {
         const scrollController = new ScrollMagic.Controller();
         let aboutTl = gsap.timeline({paused: true});
 
-        let aboutTitleTween = aboutTl.to( aboutTitleHd, {duration : 0.7, opacity: 1, left: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, 0.5);
-        let aboutElsTween = aboutTl.to( aboutTitleEls, {duration : 0.8,  stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
+        let aboutTitleTween = aboutTl.to(aboutTitleHd, {
+            duration: 0.7,
+            opacity: 1,
+            left: 0,
+            '-webkit-filter': " blur(0px)",
+            ease: "circ.inOut(0.5)"
+        }, 0.5);
+        let aboutElsTween = aboutTl.to(aboutTitleEls, {
+            duration: 0.8,
+            stagger: 0.25,
+            opacity: 1,
+            top: 0,
+            '-webkit-filter': " blur(0px)",
+            ease: "circ.inOut(0.5)"
+        }, ">-0.3");
 
 
         let aboutScene = new ScrollMagic.Scene({
-                triggerElement : '#js-about-top',
-                offset: -100
+            triggerElement: '#js-about-top',
+            offset: -100
 
-            })
+        })
             .on("enter", function (e) {
                 aboutTl.play();
 
@@ -307,15 +338,50 @@ mNineDScript.start = {
         const serviceItems = $('.mn-section-services-item-list');
 
 
-        let serveTitleTween = servicesTl.to( servTitleHd, {duration : 0.7, opacity: 1, left: 0, delay: 1.0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"});
-        let serveElsTween = servicesTl.to( servTitleEls, {duration : 0.8,  stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"},">-0.3");
-        let servePanelTween = servicesTl.to( servicePanels, {duration : 2, stagger: 0.3, opacity: 1, scaleX: 1, scaleY:1, ease: "elastic.out(0.8)"});
-        let serveHeadingsTween = servicesTl.to( serviceHeadings, {duration : 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY:1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"},">-1.8");
-        let serveItemsTween = servicesTl.to( serviceItems, {duration : 0.4,  stagger: 0.17, opacity: 1, top: 0, ease: "circ.out(0.4)"},">0.2");
+        let serveTitleTween = servicesTl.to(servTitleHd, {
+            duration: 0.7,
+            opacity: 1,
+            left: 0,
+            delay: 1.0,
+            '-webkit-filter': " blur(0px)",
+            ease: "circ.inOut(0.5)"
+        });
+        let serveElsTween = servicesTl.to(servTitleEls, {
+            duration: 0.8,
+            stagger: 0.25,
+            opacity: 1,
+            top: 0,
+            '-webkit-filter': " blur(0px)",
+            ease: "circ.inOut(0.5)"
+        }, ">-0.3");
+        let servePanelTween = servicesTl.to(servicePanels, {
+            duration: 2,
+            stagger: 0.3,
+            opacity: 1,
+            scaleX: 1,
+            scaleY: 1,
+            ease: "elastic.out(0.8)"
+        });
+        let serveHeadingsTween = servicesTl.to(serviceHeadings, {
+            duration: 0.2,
+            opacity: 1,
+            stagger: 0.2,
+            scaleX: 1,
+            scaleY: 1,
+            '-webkit-filter': " blur(0px)",
+            ease: "circ.inOut(0.3)"
+        }, ">-1.8");
+        let serveItemsTween = servicesTl.to(serviceItems, {
+            duration: 0.4,
+            stagger: 0.17,
+            opacity: 1,
+            top: 0,
+            ease: "circ.out(0.4)"
+        }, ">0.2");
 
 
         let servicesScene = new ScrollMagic.Scene({
-            triggerElement : '#js-services-top',
+            triggerElement: '#js-services-top',
             offset: -100
 
         })
@@ -330,7 +396,7 @@ mNineDScript.start = {
 
 
     },
-    scrollToSection () {
+    scrollToSection() {
 
         let self = this;
 
@@ -348,11 +414,11 @@ mNineDScript.start = {
             });
         }
     },
-    doPageScroll (scrollTarget, scrollDuration = 1.3) {
+    doPageScroll(scrollTarget, scrollDuration = 1.3) {
 
         gsap.to(window, {duration: scrollDuration, scrollTo: {y: scrollTarget, autoKill: false}, ease: "circ.inOut"});
     },
-    projectsSummaryControl () {
+    projectsSummaryControl() {
 
         // this needs re-factor to make more manageable
 
@@ -370,79 +436,89 @@ mNineDScript.start = {
         const _self = this;
 
 
-        for(let i =0; i < projectWrappers.length; i ++) {
+        for (let i = 0; i < projectWrappers.length; i++) {
             let el = projectWrappers[i];
 
             addClass(el, 'is-inactive');
             el.dataset.originalPosition = el.style.top = (i * itemHeight);
             el.dataset.originalIndex = i;
 
-            if(i > 0) {
+            if (i > 0) {
                 el.style.top = (i * itemHeight) + 'px';
                 el.style.zIndex = i;
             }
         }
 
 
+        projectSummaryTriggers.forEach((el) => {
 
-        projectSummaryTriggers.forEach( (el) => {
+            el.addEventListener('click', (e) => {
 
-                el.addEventListener('click', (e) => {
+                e.preventDefault();
 
-                    e.preventDefault();
-
-                    let contentToLoad = el.dataset.content;
-                    let elParent = el.parentNode.parentNode;
-                    let projectContainer = $1(projectContainerClass, elParent);
-
-
-                        partialLoader(projectContainer,contentToLoad)
-                            .then(function(){
-                                setTimeout(function(){
-
-                                    // need to look at pre-loader here
-
-                                    removeClass(elParent, 'is-inactive');
-                                    addClass(elParent, 'is-active-wrapper');
-                                    openProject(el);
-
-                                }, 500);
-
-                            })
-                            .catch(function() {
-                                // need to do something here with the error handler
-                            });
+                let contentToLoad = el.dataset.content;
+                let elParent = el.parentNode.parentNode;
+                let projectContainer = $1(projectContainerClass, elParent);
 
 
+                partialLoader(projectContainer, contentToLoad)
+                    .then(function () {
+                        setTimeout(function () {
 
-                });
+                            // need to look at pre-loader here
+
+                            removeClass(elParent, 'is-inactive');
+                            addClass(elParent, 'is-active-wrapper');
+                            openProject(el);
+
+                        }, 500);
+
+                    })
+                    .catch(function () {
+                        // need to do something here with the error handler
+                    });
+
+
+            });
         });
 
 
-        function openProject (element) {
+        function openProject(element) {
 
             let parentEl = element.parentNode.parentNode;
             let inactiveSiblings = $('li.is-inactive');
 
             projectsTl.to(element, {duration: 0.9, backgroundColor: '#000000'});
-            projectsTl.to(inactiveSiblings, { duration: 0.3, opacity: 0.5 });
-            projectsTl.to(fadeSections, { duration: 0.5, opacity:0 , onComplete: function () {
-                    gsap.to(window, {duration: 1.1, scrollTo: {y: projectsSummaryContainer, autoKill: false}, ease: "circ.inOut", onComplete : function() {
+            projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0.5});
+            projectsTl.to(fadeSections, {
+                duration: 0.5, opacity: 0, onComplete: function () {
+                    gsap.to(window, {
+                        duration: 1.1,
+                        scrollTo: {y: projectsSummaryContainer, autoKill: false},
+                        ease: "circ.inOut",
+                        onComplete: function () {
                             projectOpenActions();
-                        }});
-            }});
+                        }
+                    });
+                }
+            });
 
 
-
-            function projectOpenActions () {
+            function projectOpenActions() {
 
                 projectsTl.to(element, {duration: 0.6, className: "+=is-active", ease: "circ.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, top: 0, opacity: 1, ease: "expo.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, height: '100vh', ease: "expo.inOut(0.5)"});
                 projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0});
-                projectsTl.to(parentEl, {duration: 0.7, zIndex: '1000', backgroundColor: 'rgba(32,32,32,1.0)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
+                projectsTl.to(parentEl, {
+                    duration: 0.7,
+                    zIndex: '1000',
+                    backgroundColor: 'rgba(32,32,32,1.0)',
+                    opacity: 1,
+                    ease: "circ.inOut(0.3)",
+                    onComplete: function () {
 
-                    openDetail(parentEl);
+                        openDetail(parentEl);
 
                     }
                 });
@@ -455,23 +531,25 @@ mNineDScript.start = {
         }
 
 
-        function openDetail (element) {
+        function openDetail(element) {
 
             let detailEl = $1('.mn-projects-summary-detail-wrapper', element);
 
 
-            gsap.to(detailEl, {duration : 0.1, display: 'block'});
-            gsap.to(detailEl, {duration : 0.7, top: 0, opacity: 1, height: '100%', ease: "circ.inOut(0.5)", onComplete: function() {
+            gsap.to(detailEl, {duration: 0.1, display: 'block'});
+            gsap.to(detailEl, {
+                duration: 0.7, top: 0, opacity: 1, height: '100%', ease: "circ.inOut(0.5)", onComplete: function () {
 
-                _self.projectDetailControl();
+                    _self.projectDetailControl();
 
-            }});
+                }
+            });
         }
 
-        function resetProjectsWindow () {
+        function resetProjectsWindow() {
 
-            gsap.to(window, {duration: 0.9, scrollTo: {y:projectsSection, autoKill: false}, ease: "expo.inOut(0.6)"});
-            projectsTl.to(fadeSections, { duration: 0.5, opacity:1 });
+            gsap.to(window, {duration: 0.9, scrollTo: {y: projectsSection, autoKill: false}, ease: "expo.inOut(0.6)"});
+            projectsTl.to(fadeSections, {duration: 0.5, opacity: 1});
 
             // remove container class, and body class to remove fixed positioning etc
             removeClass(projectsSummaryContainer, 'is-active');
@@ -479,7 +557,7 @@ mNineDScript.start = {
         }
 
 
-        function resetProjects () {
+        function resetProjects() {
 
             let activeWrapper = $1('.is-active-wrapper');
             let activeDetail = $1('.mn-projects-summary-detail-wrapper', activeWrapper);
@@ -496,20 +574,27 @@ mNineDScript.start = {
             // hiding content here
             resetTl.to(projectCloseBtn, {duration: 0.5, opacity: 0, ease: "circ.inOut(0.5)"});
 
-            resetTl.to(activeDetail, {duration : 0.7, opacity: 0, ease: "circ.inOut(0.5)", onComplete: function () {
+            resetTl.to(activeDetail, {
+                duration: 0.7, opacity: 0, ease: "circ.inOut(0.5)", onComplete: function () {
 
-                activeDetail.style = '';
+                    activeDetail.style = '';
 
-            }});
+                }
+            });
 
             // set the summary item back to 65 px height
-            resetTl.to(activeWrapper, {duration : 0.9, height: itemHeight + 'px', ease: "circ.inOut(0.5)" });
+            resetTl.to(activeWrapper, {duration: 0.9, height: itemHeight + 'px', ease: "circ.inOut(0.5)"});
             // make the siblings visible again
             resetTl.to(inactiveSiblings, {duration: 0.7, opacity: 1});
             // move the summary item back to it's original position
-            resetTl.to(activeWrapper, {duration : 0.65, top: activeWrapperOriginalPos + 'px', ease: "expo.inOut(0.4)" });
+            resetTl.to(activeWrapper, {duration: 0.65, top: activeWrapperOriginalPos + 'px', ease: "expo.inOut(0.4)"});
             // move the anchor back to the left of the list
-            resetTl.to(activeAnchor, {duration : 0.7, translateX: '80px' , className:"-=is-active", ease: "circ.inOut(0.4)", onComplete : function () {
+            resetTl.to(activeAnchor, {
+                duration: 0.7,
+                translateX: '80px',
+                className: "-=is-active",
+                ease: "circ.inOut(0.4)",
+                onComplete: function () {
 
                     // take the inline style for bg color off
                     activeWrapper.style.removeProperty('background-color');
@@ -520,7 +605,7 @@ mNineDScript.start = {
                     // remove the class from the active wrapper
                     removeClass(activeWrapper, 'is-active-wrapper');
 
-                    removeClass(bodyEl,'is-projects-active');
+                    removeClass(bodyEl, 'is-projects-active');
                     // add the default class back to previously added element
                     addClass(activeWrapper, 'is-inactive');
 
@@ -529,10 +614,8 @@ mNineDScript.start = {
                     resetProjectsWindow();
 
 
-                }});
-
-
-
+                }
+            });
 
 
         }
@@ -545,7 +628,7 @@ mNineDScript.start = {
 
 
     },
-    projectDetailControl () {
+    projectDetailControl() {
 
         let projectDetailTl = gsap.timeline();
         const bttButton = $1('.mn-project-summary-btt');
@@ -559,57 +642,67 @@ mNineDScript.start = {
 
         });
 
-        projectDetailTl .to(projectCloseBtn, {duration : 0.6, opacity: 0.6, ease: "circ.inOut(0.5)" });
+        projectDetailTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.6, ease: "circ.inOut(0.5)"});
 
 
     },
-    activeSectionClasses () {
+    activeSectionClasses() {
 
         // for each section, we need a class added to body for the menu variations etc
         // this is done via waypoints js
 
         // also in this function, when we hit the top of the page, we want to clear the variation classes
 
-        let sections = $('.mn-section');
+        let sections = $('.mn-section-main');
         let bodyWrap = $1('body');
+        let _self = this;
 
         for (let i = 0; i < sections.length; i++) {
             let el = sections[i];
+            let elIndex = i;
             let elId = el.id;
+            console.log(i);
             let classToAdd = elId + '-is-active';
             let element = document.getElementById(elId);
 
             let waypointDown = new Waypoint({
                 element: element,
-                handler: function(direction) {
-                    bodyWrap.className ='';
+                handler: function (direction) {
+                    console.log('down');
+                    bodyWrap.className = '';
                     addClass(bodyWrap, classToAdd);
+                    _self.manageSliderClasses(elIndex);
                 },
                 offset: '15%'
             });
 
             let waypointUp = new Waypoint({
                 element: element,
-                handler: function(direction) {
-                    bodyWrap.className ='';
+                handler: function (direction) {
+                    bodyWrap.className = '';
                     addClass(bodyWrap, classToAdd);
+                    console.log('up');
+                    _self.manageSliderClasses(elIndex);
                 },
-                offset: '-25%'
+                offset: '-15%'
             });
 
         }
 
-        window.onscroll = function() {
-            if(window.pageYOffset === 0) {
-                bodyWrap.className ='';
+        _self.manageSliderClasses(0);
+
+        window.onscroll = function () {
+            if (window.pageYOffset === 0) {
+                bodyWrap.className = '';
                 addClass(bodyWrap, 'js-section-home-is-active');
+                _self.manageSliderClasses();
             } else if (window.pageYOffset > 100) {
                 //addClass(bodyWrap, 'body-scrolling-is-active');
 
             }
         };
     },
-    siteBtt () {
+    siteBtt() {
 
         let siteBtt = $1('.mn-site-footer-btt');
 
@@ -620,7 +713,7 @@ mNineDScript.start = {
 
         });
     },
-    'formValidation' () {
+    'formValidation'() {
 
 
         const formFeedbackWrap = $1('.mn-contact-feedback');
@@ -668,25 +761,58 @@ mNineDScript.start = {
         });
 
     },
-    triggerVideos () {
+    triggerVideos() {
 
-    let mediaWrappers = $('.mn-site-nav-video-bg');
-    let videoFormats = [{type : 'mp4'}, {type : 'webm'} ]; //, {type : 'webm'}
+        let ss = currScreenSize();
 
-    for(let i = 0; i < mediaWrappers.length; i ++) {
-        let wrapperEl = mediaWrappers[i];
-        let videoEl = wrapperEl.querySelector('video');
-        let videoUrl = wrapperEl.dataset.videoId;
+        if (ss === 'ss' || ss === 'ms') {
+            return;
+        }
 
-        for(let j = 0; j < videoFormats.length; j ++ ) {
+        let mediaWrappers = $('.mn-site-nav-video-bg');
+        let videoFormats = [{type: 'mp4'}, {type: 'webm'}]; //, {type : 'webm'}
 
-            let videoSourceType = videoUrl + '.' + videoFormats[j].type;
-            let videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
-            videoEl.innerHTML += videoTag;
+        for (let i = 0; i < mediaWrappers.length; i++) {
+            let wrapperEl = mediaWrappers[i];
+            let videoEl = wrapperEl.querySelector('video');
+            let videoUrl = wrapperEl.dataset.videoId;
+
+            for (let j = 0; j < videoFormats.length; j++) {
+
+                let videoSourceType = videoUrl + '.' + videoFormats[j].type;
+                let videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
+                videoEl.innerHTML += videoTag;
+            }
+
+        }
+    },
+    manageSliderClasses (elIndex) {
+
+
+        let slideListElements = $('.mpp-slide-list li');
+
+        slideListElements.forEach(function (el) {
+            removeClass(el, 'is-current');
+        });
+
+        if(elIndex) {
+
+            console.log(elIndex);
+
+
+            for( let i = 0; i < slideListElements.length; i ++) {
+
+                let currentEl = slideListElements[i];
+                if (i === elIndex) {
+                    console.log('match ! : ' + i);
+                    addClass(currentEl, 'is-current');
+                }
+            }
+        } else {
+            addClass(slideListElements[0], 'is-current');
         }
 
     }
-}
 
 };
 

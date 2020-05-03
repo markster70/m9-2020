@@ -1,4 +1,4 @@
-<section class="mn-section mn-section-contact mn-section-fade" id="js-contact-top">
+<section class="mn-section mn-section-contact mn-section-fade mn-section-main" id="js-contact-top">
     <div class="mn-section-inner" id="js-about-content">
         <div class="mn-section-contact-bd">
             <div class="mn-section-contact-content">
@@ -52,5 +52,4 @@
             </div>
         </div>
     </div>
-	<?php include '_counter.html'; ?>
 </section>

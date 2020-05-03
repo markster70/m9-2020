@@ -44,6 +44,7 @@
       background-color: transparent;
 
       @include breakpoint($bp-xl) {
+
         transform: translateX(80px);
         @include font-size(18);
       }
@@ -54,8 +55,15 @@
 
       a {
         opacity: 1.0;
-        @include font-size(22);
 
+
+      }
+    }
+
+    @include breakpoint($bp-xl) {
+
+      &:hover a {
+        @include font-size(22);
       }
     }
 
@@ -65,13 +73,17 @@
       -webkit-overflow-scrolling: touch;
       background-color: rgba($black, 0.1);
 
-      &:hover {
+      @media(hover: hover) and (pointer: fine) {
+        &:hover {
 
-        a {
-          @include font-size(18);
+          a {
+            @include font-size(18);
+          }
+
         }
 
       }
+
     }
 
     &:first-child {
@@ -88,12 +100,12 @@
 
 .mn-section-projects-inner {
   &.is-active {
-    //position: fixed;
-    //width: 100vw;
-    //height: 100vh;
-    //top: 0;
-    //left:0;
-    //z-index: 5000;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left:0;
+    z-index: 5000;
   }
 }
 
@@ -124,17 +136,27 @@
   @include button-reset();
   display: none;
   position: absolute;
-  width: 70px;
-  height: 70px;
-  left: 50%;
+  width: 50px;
+  height: 50px;
+
+  right: 10px;
   margin-left: -40px;
-  top: 5px;
+  top: 0.25rem;
   text-transform: uppercase;
   align-items: center;
   justify-content: center;
   opacity: 0;
-  @include std-transitions()
-;
+  padding: 0;
+
+  @include breakpoint($bp-xl) {
+    left: 50%;
+    right: unset;
+    width: 60px;
+    height: 60px;
+    top: 1.25rem;
+  }
+
+
   &:hover {
     opacity: 0.8;
     transform: scale(1.1);
@@ -182,9 +204,9 @@
 
 .mn-projects-summary-detail-hd {
   color : $primary-accent;
-  @include font-size(40);
+  @include font-size(23);
   letter-spacing: 5px;
-  line-height: 0;
+  line-height: 1;
   margin: 0 auto 2rem;
   font-weight: $font-weight-bold;
   text-align: center;
@@ -193,17 +215,29 @@
   border-bottom: 1px solid rgba($white,0.2);
   max-width: 80%;
   opacity: 0.8;
+
+  @include breakpoint($bp-xl){
+    line-height: 0;
+    @include font-size(40);
+  }
+
 }
 
 .mn-projects-summary-detail-sub-hb {
   text-align: center;
   color : $project-detail-header-color;
-  @include font-size(28);
+  @include font-size(17);
   font-weight: $font-weight-light;
-  max-width: 40%;
+  max-width: 95%;
   margin: 0 auto;
   letter-spacing: 3px;
   text-transform: uppercase;
+
+  @include breakpoint($bp-xl){
+    @include font-size(28);
+    max-width: 40%;
+  }
+
 }
 
 
@@ -220,17 +254,21 @@
 
 .mn-projects-summary-detail-logo {
   text-align: center;
-  padding: 2rem 0 1rem;
 
   img {
     max-width: 80px;
     height: auto;
   }
+
+  @include breakpoint($bp-xl) {
+    padding: 2rem 0 1rem;
+  }
+
 }
 
 .mn-projects-summary-detail-content {
 
-  max-width: 70%;
+  max-width: 90%;
   margin: 0 auto;
 
   h3 {
@@ -245,14 +283,26 @@
     color: $body-copy-color;
     font-weight: $font-weight-light;
     opacity: 0.6;
+    @include font-size(15);
   }
+
+  @include breakpoint($bp-xl) {
+    max-width: 70%;
+  }
+
 }
 
 .mn-projects-summary-tech-content {
 
-  width: 70%;
-  max-width: 70%;
+  width: 90%;
+  max-width: 90%;
   margin: 0 auto;
+
+
+  @include breakpoint($bp-xl) {
+    max-width: 70%;
+    width: 70%;
+  }
 
 
   h3 {
@@ -270,6 +320,7 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba($white,0.2);
     padding-left: 0;
+    flex-wrap: wrap;
 
     li {
 
@@ -278,18 +329,22 @@
       text-transform: uppercase;
       font-weight: $font-weight-medium;
       padding: 0.5rem;
-      margin-right: 1rem;
       background-color: rgba($black, 0.2);
+      margin: 0 1rem 1rem 0;
     }
   }
 }
 
 .mn-projects-summary-detail-images {
-  max-width: 70%;
+  max-width: 90%;
   margin: 1rem auto;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+
+  @include breakpoint($bp-xl) {
+    max-width: 70%;
+  }
 
   .is-inner-whole {
     flex-basis: 100%;
@@ -298,8 +353,13 @@
   }
 
   .is-inner {
-    flex-basis: 50%;
-    padding: 1rem;
+    flex-basis: 100%;
+
+
+    @include breakpoint($bp-xl) {
+      flex-basis: 50%;
+      padding: 1rem;
+    }
 
   }
 
@@ -322,6 +382,12 @@
   text-align: center;
   margin-top: auto;
   padding-top: 4rem;
+  margin-bottom: 4.5rem;
+
+  @include breakpoint($bp-xl) {
+    margin-bottom: 1.5rem;
+  }
+
 }
 
 .mn-section-projects-hd-copy {

@@ -1,4 +1,4 @@
-<section class="mn-section mn-section-home mn-section-fade" id="js-section-home">
+<section class="mn-section mn-section-home mn-section-fade mn-section-main" id="js-section-home">
     <div class="mn-section-inner is-padded">
         <div class="mn-section-home-strapline mn-section-strapline">
             <h2>

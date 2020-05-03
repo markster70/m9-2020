@@ -81,6 +81,7 @@
   text-align: center;
   flex-basis: 100%;
   font-style: normal;
+  display: block;
 
   @include breakpoint($bp-xl) {
     @include font-size(20);
