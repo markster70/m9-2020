@@ -468,7 +468,7 @@ mNineDScript.start = {
                             // need to look at pre-loader here
 
                             removeClass(elParent, 'is-inactive');
-                            addClass(elParent, 'is-active-wrapper');
+                            addClass(elParent, 'is-animating');
                             openProject(el);
 
                         }, 500);
@@ -519,6 +519,7 @@ mNineDScript.start = {
                     onComplete: function () {
 
                         openDetail(parentEl);
+                        addClass(parentEl, 'is-active-wrapper');
 
                     }
                 });
@@ -577,6 +578,7 @@ mNineDScript.start = {
                 duration: 0.7, opacity: 0, ease: "circ.inOut(0.5)", onComplete: function () {
 
                     activeDetail.style = '';
+                    activeWrapper.style.overflowY = 'hidden';
 
                 }
             });
@@ -596,8 +598,10 @@ mNineDScript.start = {
                     activeWrapper.style.zIndex = activeWrapperOriginalIndex;
                     // take the background color off the anchor as well
                     activeAnchor.style.removeProperty('background-color');
+                    activeWrapper.style.removeProperty('overflow-y');
                     // remove the class from the active wrapper
                     removeClass(activeWrapper, 'is-active-wrapper');
+                    removeClass(activeWrapper, 'is-animating');
 
                     removeClass(bodyEl, 'is-projects-active');
                     // add the default class back to previously added element

@@ -8385,7 +8385,7 @@ mNineDScript.start = {
           setTimeout(function () {
             // need to look at pre-loader here
             removeClass(elParent, 'is-inactive');
-            addClass(elParent, 'is-active-wrapper');
+            addClass(elParent, 'is-animating');
             openProject(el);
           }, 500);
         })["catch"](function () {// need to do something here with the error handler
@@ -8451,6 +8451,7 @@ mNineDScript.start = {
           ease: "circ.inOut(0.3)",
           onComplete: function onComplete() {
             openDetail(parentEl);
+            addClass(parentEl, 'is-active-wrapper');
           }
         }); // these will run as the timeline is running
 
@@ -8516,6 +8517,7 @@ mNineDScript.start = {
         ease: "circ.inOut(0.5)",
         onComplete: function onComplete() {
           activeDetail.style = '';
+          activeWrapper.style.overflowY = 'hidden';
         }
       }); // set the summary item back to 65 px height
 
@@ -8547,9 +8549,11 @@ mNineDScript.start = {
 
           activeWrapper.style.zIndex = activeWrapperOriginalIndex; // take the background color off the anchor as well
 
-          activeAnchor.style.removeProperty('background-color'); // remove the class from the active wrapper
+          activeAnchor.style.removeProperty('background-color');
+          activeWrapper.style.removeProperty('overflow-y'); // remove the class from the active wrapper
 
           removeClass(activeWrapper, 'is-active-wrapper');
+          removeClass(activeWrapper, 'is-animating');
           removeClass(bodyEl, 'is-projects-active'); // add the default class back to previously added element
 
           addClass(activeWrapper, 'is-inactive'); // move the window back to top of projects
