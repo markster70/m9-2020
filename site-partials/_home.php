@@ -16,7 +16,10 @@
             <img id="mn-home-logo" src="/dist/images/home-logo-shape.png" alt="m9 digital - website development, west sussex, england"/>
         </div>
     </div>
-    <div class="mn-home-grad-bg" role="presentation" aria-hidden="true"></div>
+    <div class="mn-home-grad-bg is-bg-a" role="presentation" aria-hidden="true"></div>
+    <div class="mn-home-grad-bg is-bg-b" role="presentation" aria-hidden="true"></div>
+    <div class="mn-home-grad-bg is-bg-c" role="presentation" aria-hidden="true"></div>
+    <div class="mn-home-grad-bg is-bg-d" role="presentation" aria-hidden="true"></div>
     <div class="mn-home-grad-grid-bg" role="presentation" aria-hidden="true">
         <div class="is-inner">
             <div class="mn-home-bg-circle"></div>

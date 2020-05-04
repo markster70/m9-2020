@@ -43,12 +43,12 @@
   padding: 2rem;
   transform-style: preserve-3d;
   background-color: rgba($black, 0.1);
-  transform:scale(0.4);
-  opacity: 0;
   border-bottom: 1px solid rgba($white, 0.1);
 
   @include breakpoint($bp-l) {
     border-bottom: 0;
+    transform:scale(0.4);
+    opacity: 0;
   }
 
 }

@@ -73,7 +73,7 @@
       -webkit-overflow-scrolling: touch;
       background-color: rgba($black, 0.1);
 
-      @media(hover: hover) and (pointer: fine) {
+      @media(hover: hover) and (pointer: fine) and (min-width: 1280px) {
         &:hover {
 
           a {
@@ -256,12 +256,17 @@
   text-align: center;
 
   img {
-    max-width: 80px;
+    max-width: 60px;
     height: auto;
   }
 
   @include breakpoint($bp-xl) {
-    padding: 2rem 0 1rem;
+    padding: 1rem 0;
+
+    img {
+      max-width: 70px;
+    }
+
   }
 
 }
@@ -269,6 +274,7 @@
 .mn-projects-summary-detail-content {
 
   max-width: 90%;
+  width: 90%;
   margin: 0 auto;
 
   h3 {
@@ -288,6 +294,7 @@
 
   @include breakpoint($bp-xl) {
     max-width: 70%;
+    width: 70%;
   }
 
 }

@@ -7951,7 +7951,7 @@ mNineDScript.start = {
 
     var currSS = currScreenSize();
 
-    if (currSS === 'ls' | currSS === 'xls') {
+    if (currSS === 'xls') {
       this.cursorSetup();
     }
 
@@ -8097,11 +8097,15 @@ mNineDScript.start = {
     }
 
     function startVideo() {
-      video.play();
+      if (hasClass(video, 'has-video')) {
+        video.play();
+      }
     }
 
     function stopVideo() {
-      video.pause();
+      if (hasClass(video, 'has-video')) {
+        video.pause();
+      }
     }
 
     function addVisibleNavItemClass() {
@@ -8144,11 +8148,15 @@ mNineDScript.start = {
             duration: 0.7,
             ease: "circ.out"
           });
-          tl.to(navVideoWrap, {
-            opacity: 0,
-            duration: 0.5,
-            ease: "circ.inOut"
-          });
+
+          if (hasClass(video, 'has-video')) {
+            tl.to(navVideoWrap, {
+              opacity: 0,
+              duration: 0.5,
+              ease: "circ.inOut"
+            });
+          }
+
           tl.to(navLinks, {
             opacity: 0,
             duration: 0.3
@@ -8192,17 +8200,21 @@ mNineDScript.start = {
             opacity: 1,
             duration: 0.5
           });
-          tl.to(navVideoWrap, {
-            opacity: 1,
-            duration: 2,
-            ease: "circ.inOut",
-            onComplete: startVideo
-          });
+
+          if (hasClass(video, 'has-video')) {
+            tl.to(navVideoWrap, {
+              opacity: 1,
+              duration: 2,
+              ease: "circ.inOut",
+              onComplete: startVideo
+            });
+          }
+
           tl.to(navStrapLine, {
             opacity: 1,
             duration: 0.5,
             ease: "circ.out"
-          }, ">-0.4");
+          }, "<-1.0");
         }
       }
     }
@@ -8344,7 +8356,11 @@ mNineDScript.start = {
     var fadeSections = $('.mn-section-fade');
     var projectContainerClass = '.mn-projects-summary-detail-wrapper';
 
-    var _self = this;
+    var _self = this; // 2 possible values for resetting the project items
+
+
+    var resetItemValues = ['20px', '80px'];
+    var currItemResetValue = resetItemValues[0];
 
     for (var i = 0; i < projectWrappers.length; i++) {
       var el = projectWrappers[i];
@@ -8521,7 +8537,7 @@ mNineDScript.start = {
 
       resetTl.to(activeAnchor, {
         duration: 0.7,
-        translateX: '80px',
+        translateX: currItemResetValue,
         className: "-=is-active",
         ease: "circ.inOut(0.4)",
         onComplete: function onComplete() {
@@ -8540,11 +8556,42 @@ mNineDScript.start = {
           resetProjectsWindow();
         }
       });
+    } // when close button for project is clicked, need screen size to evaluate the transform
+    // position to tween to - it's one of 2 values in array at top of function
+    // so get the screen size, if largest screens, pick that value from array
+    // if not, assign th other one for gsap to use
+
+
+    function getResetValue() {
+      var currSS = currScreenSize();
+
+      if (currSS === 'xls') {
+        currItemResetValue = resetItemValues[1];
+      } else {
+        currItemResetValue = resetItemValues[0];
+      }
     }
 
     projectSummaryClose.addEventListener('click', function () {
+      getResetValue(); // triggering the reset of projects here
+
       resetProjects();
-    });
+    }); // reset on escape
+
+    window.addEventListener('keydown', function (evt) {
+      getResetValue();
+
+      if (evt.key === 'Escape') {
+        resetProjects();
+      }
+    }); // resetting the position here for the triggers in case they shift across screen sizes
+
+    var resetProjectItemPosition = debounce(function () {
+      projectSummaryTriggers.forEach(function (el) {
+        el.style = '';
+      });
+    }, 300);
+    window.addEventListener('resize', resetProjectItemPosition);
   },
   projectDetailControl: function projectDetailControl() {
     var projectDetailTl = gsap.timeline();
@@ -8564,7 +8611,7 @@ mNineDScript.start = {
     });
     projectDetailTl.to(projectCloseBtn, {
       duration: 0.6,
-      opacity: 0.6,
+      opacity: 0.8,
       ease: "circ.inOut(0.5)"
     });
   },
@@ -8581,13 +8628,11 @@ mNineDScript.start = {
       var el = sections[i];
       var elIndex = i;
       var elId = el.id;
-      console.log(i);
       var classToAdd = elId + '-is-active';
       var element = document.getElementById(elId);
       var waypointDown = new Waypoint({
         element: element,
         handler: function handler(direction) {
-          console.log('down');
           bodyWrap.className = '';
           addClass(bodyWrap, classToAdd);
 
@@ -8600,7 +8645,6 @@ mNineDScript.start = {
         handler: function handler(direction) {
           bodyWrap.className = '';
           addClass(bodyWrap, classToAdd);
-          console.log('up');
 
           _self.manageSliderClasses(elIndex);
         },
@@ -8620,7 +8664,6 @@ mNineDScript.start = {
         addClass(bodyWrap, 'js-section-home-is-active');
 
         _self.manageSliderClasses();
-      } else if (window.pageYOffset > 100) {//addClass(bodyWrap, 'body-scrolling-is-active');
       }
     };
   },
@@ -8703,6 +8746,7 @@ mNineDScript.start = {
         var videoSourceType = videoUrl + '.' + videoFormats[j].type;
         var videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
         videoEl.innerHTML += videoTag;
+        addClass(videoEl, 'has-video');
       }
     }
   },
@@ -8713,19 +8757,92 @@ mNineDScript.start = {
     });
 
     if (elIndex) {
-      console.log(elIndex);
-
       for (var i = 0; i < slideListElements.length; i++) {
         var currentEl = slideListElements[i];
 
         if (i === elIndex) {
-          console.log('match ! : ' + i);
           addClass(currentEl, 'is-current');
         }
       }
     } else {
       addClass(slideListElements[0], 'is-current');
     }
+  },
+  homeSquaresAnimation: function homeSquaresAnimation() {
+    // probably only want to run this for larger screens
+    var currSS = currScreenSize();
+
+    if (currSS === 'ss' || currSS === 'ms') {
+      return;
+    }
+
+    var bgB = $1('.mn-home-grad-bg.is-bg-b');
+    var bgC = $1('.mn-home-grad-bg.is-bg-c');
+    var bgD = $1('.mn-home-grad-bg.is-bg-d');
+    var gradGridBg = $1('.mn-home-grad-grid-bg');
+    var bodyEl = $1('.body'); // tween is repeated infinitely here
+
+    var homeSqTl = gsap.timeline({
+      repeat: -1
+    });
+    var opacityDuration = gsap.utils.random(1.0, 6.0);
+    var staggerStart = gsap.utils.random(-2, 1.5); // gsap timeline to cycle through the background on a random basis
+    // start of each tween is also randomised in places to give the overall animation an organic feel
+
+    homeSqTl.to(bgB, {
+      duration: opacityDuration,
+      opacity: 1
+    }, staggerStart);
+    homeSqTl.to(bgB, {
+      duration: 1.2,
+      opacity: 0
+    });
+    homeSqTl.to(bgC, {
+      duration: 1.0,
+      opacity: 0.5
+    });
+    homeSqTl.to(gradGridBg, {
+      duration: 4.0,
+      opacity: 0
+    });
+    homeSqTl.to(bgC, {
+      duration: 0.65,
+      opacity: 0
+    });
+    homeSqTl.to(bgD, {
+      duration: opacityDuration,
+      opacity: 0.5
+    }, staggerStart);
+    homeSqTl.to(gradGridBg, {
+      duration: 3.0,
+      opacity: 1
+    });
+    homeSqTl.to(bgD, {
+      duration: 1.2,
+      opacity: 0
+    }); // only really want this animation underway when a visitor is at the top of the page
+    // so some functionality to control the play pause, based on the offset of the window, and debounced for performance
+
+    function pauseTl() {
+      homeSqTl.pause();
+    }
+
+    function resumeTl() {
+      homeSqTl.play();
+    }
+
+    window.onscroll = function () {
+      toggleAnimation();
+    }; // resetting the position here for the triggers in case they shift across screen sizes
+
+
+    var toggleAnimation = debounce(function () {
+      if (window.pageYOffset < 200) {
+        resumeTl();
+      } else {
+        pauseTl();
+      }
+    }, 300);
   }
 };
 window.addEventListener('DOMContentLoaded', function () {
@@ -8736,4 +8853,5 @@ window.addEventListener('DOMContentLoaded', function () {
 });
 window.addEventListener('load', function () {
   mNineDScript.start.triggerVideos();
+  mNineDScript.start.homeSquaresAnimation();
 });

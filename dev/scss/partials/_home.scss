@@ -58,14 +58,9 @@
     font-weight: $font-weight-light;
 
     @include breakpoint($bp-l) {
-      @include font-size(17);
+      @include font-size(15);
       max-width: 80%;
 
-    }
-
-    @include breakpoint($bp-xl) {
-
-      @include font-size(19);
     }
 
 
@@ -110,50 +105,6 @@
   mix-blend-mode: color;
   background: linear-gradient(150deg, rgba(0,0,0,0) 0%, rgba(7,7,7,0) 60%, rgba(39,39,39,1) 89%);
 
-
-  @-webkit-keyframes mnHomeAnimate {
-    0%{
-      background-position:15% 0%;
-      opacity: 1;
-    }
-    50%{
-      opacity: 0.3;
-      background-position:86% 100%
-    }
-    100%{
-      opacity: 1;
-      background-position:15% 0%;
-    }
-  }
-  @-moz-keyframes mnHomeAnimate {
-    0%{
-      background-position:15% 0%;
-      opacity: 1;
-    }
-    50%{
-      opacity: 0.3;
-      background-position:86% 100%
-    }
-    100%{
-      opacity: 1;
-      background-position:15% 0%;
-    }
-  }
-  @keyframes mnHomeAnimate {
-    0%{
-      background-position:15% 0%;
-      opacity: 1;
-    }
-    50%{
-      opacity: 0.3;
-      background-position:86% 100%
-    }
-    100%{
-      opacity: 1;
-      background-position:15% 0%;
-    }
-  }
-
   .is-inner {
     position: relative;
     height: 100%;
@@ -171,8 +122,63 @@
   height: 90vh;
   z-index: 1;
   width: 100vw;
-
-  background: url("/dist/images/home-bg-squares.png") no-repeat bottom right;
   background-size: 80%;
+}
+
+.mn-home-grad-bg.is-bg-a {
+  background: url("/dist/images/home-bg-squares.png") no-repeat bottom right;
+  z-index: 1;
+  background-size: 120%;
+
+  @include ssLandscape () {
+    opacity: 0.2;
+    background-size: 90%;
+  }
+
+  @include breakpoint($bp-l) {
+
+    background-size: 80%;
+  }
+
+}
+
+.mn-home-grad-bg.is-bg-b {
+
+  @supports (mix-blend-mode: color ) {
+
+    @include breakpoint($bp-l) {
+
+      background: url("/dist/images/home-bg-squares-hue.jpg") no-repeat bottom right;
+      z-index: 2;
+      opacity: 0;
+      background-size: 80%;
+      mix-blend-mode: color;
+    }
+  }
+}
+
+.mn-home-grad-bg.is-bg-c {
+
+  @include breakpoint($bp-l) {
+
+    background: url("/dist/images/home-bg-squares-spots.png") no-repeat bottom right;
+    z-index: 3;
+    opacity: 0;
+    background-size: 80%;
+  }
+}
+
+.mn-home-grad-bg.is-bg-d {
+  @supports (mix-blend-mode: screen ) {
+
+    @include breakpoint($bp-l) {
+
+      background: url("/dist/images/home-bg-squares-vivid.jpg") no-repeat bottom right;
+      z-index: 4;
+      opacity: 0;
+      background-size: 80%;
+      mix-blend-mode: screen;
+    }
+  }
 }
 

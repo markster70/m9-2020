@@ -9,7 +9,7 @@
        </header>
         <div class="mn-section-services-wrapper">
             <div class="mn-section-services-grid">
-                <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="500">
+                <article class="mn-section-services-item">
                     <div class="mn-section-services-svg-wrap" role="presentation" aria-hidden="true">
 		                <?php include '_services-svg-a.html'; ?>
                     </div>
@@ -21,7 +21,7 @@
                         <li>Poster / Banner Design</li>
                     </ul>
                 </article>
-                <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="1200">
+                <article class="mn-section-services-item">
                     <div class="mn-section-services-svg-wrap"  role="presentation" aria-hidden="true">
 		                <?php include '_services-svg-b.html'; ?>
                     </div>
@@ -36,7 +36,7 @@
                         </ul>
 
                 </article>
-                <article class="mn-section-services-item" data-tilt data-tilt-max="10" data-tilt-speed="800" data-tilt-perspective="1200">
+                <article class="mn-section-services-item">
                     <div class="mn-section-services-svg-wrap"  role="presentation" aria-hidden="true">
 		                <?php include '_services-svg-c.html'; ?>
                     </div>

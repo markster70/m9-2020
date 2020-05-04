@@ -16,7 +16,7 @@ mNineDScript.start = {
 
         let currSS = currScreenSize();
 
-        if (currSS === 'ls' | currSS === 'xls') {
+        if (currSS === 'xls') {
             this.cursorSetup();
         }
 
@@ -183,11 +183,19 @@ mNineDScript.start = {
         }
 
         function startVideo() {
-            video.play();
+
+            if(hasClass(video, 'has-video')) {
+
+                video.play();
+            }
         }
 
         function stopVideo() {
-            video.pause();
+
+            if(hasClass(video, 'has-video')) {
+
+                video.pause();
+            }
         }
 
         function addVisibleNavItemClass() {
@@ -228,16 +236,11 @@ mNineDScript.start = {
 
                     tl.call(toggleNavTriggerClass);
                     tl.to(navStrapLine, {opacity: 0, duration: 0.7, ease: "circ.out"});
-                    tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
+                    if(hasClass(video, 'has-video')) {
+                        tl.to(navVideoWrap, {opacity: 0, duration: 0.5, ease: "circ.inOut"});
+                    }
                     tl.to(navLinks, {opacity: 0, duration: 0.3});
-                    tl.to(navItems, {
-                        left: 200,
-                        opacity: 0,
-                        duration: 0.15,
-                        stagger: 0.15,
-                        ease: "circ.Out",
-                        onComplete: removeVisibleNavItemClass
-                    }, ">-0.4");
+                    tl.to(navItems, {left: 200, opacity: 0, duration: 0.15, stagger: 0.15, ease: "circ.Out", onComplete: removeVisibleNavItemClass}, ">-0.4");
                     tl.to(navWrapper, {
                         x: '100%', duration: 1, ease: "circ.inOut", onComplete: function () {
                             removeNavClass();
@@ -253,17 +256,12 @@ mNineDScript.start = {
 
                     tl.call(toggleNavTriggerClass);
                     tl.to(navWrapper, {x: 0, duration: 1, ease: "circ.inOut", onComplete: addNavClass});
-                    tl.to(navItems, {
-                        left: 0,
-                        opacity: 1,
-                        duration: 0.35,
-                        stagger: 0.35,
-                        ease: "circ.Out",
-                        onStart: addVisibleNavItemClass
-                    }, ">-0.4");
+                    tl.to(navItems, {left: 0, opacity: 1, duration: 0.35, stagger: 0.35, ease: "circ.Out", onStart: addVisibleNavItemClass}, ">-0.4");
                     tl.to(navLinks, {opacity: 1, duration: 0.5});
-                    tl.to(navVideoWrap, {opacity: 1, duration: 2, ease: "circ.inOut", onComplete: startVideo});
-                    tl.to(navStrapLine, {opacity: 1, duration: 0.5, ease: "circ.out"}, ">-0.4");
+                    if(hasClass(video, 'has-video')) {
+                        tl.to(navVideoWrap, {opacity: 1, duration: 2, ease: "circ.inOut", onComplete: startVideo});
+                    }
+                    tl.to(navStrapLine, {opacity: 1, duration: 0.5, ease: "circ.out"}, "<-1.0");
 
                 }
             }
@@ -432,8 +430,10 @@ mNineDScript.start = {
         const projectsSection = $1('#js-projects-top');
         const fadeSections = $('.mn-section-fade');
         const projectContainerClass = '.mn-projects-summary-detail-wrapper';
-
         const _self = this;
+        // 2 possible values for resetting the project items
+        const resetItemValues = ['20px', '80px'];
+        let currItemResetValue = resetItemValues[0];
 
 
         for (let i = 0; i < projectWrappers.length; i++) {
@@ -568,7 +568,6 @@ mNineDScript.start = {
             const projectCloseBtn = $1('.mn-projects-summary-detail-close');
             const resetTl = gsap.timeline();
 
-
             // need to hide content first here
 
             // hiding content here
@@ -589,12 +588,7 @@ mNineDScript.start = {
             // move the summary item back to it's original position
             resetTl.to(activeWrapper, {duration: 0.65, top: activeWrapperOriginalPos + 'px', ease: "expo.inOut(0.4)"});
             // move the anchor back to the left of the list
-            resetTl.to(activeAnchor, {
-                duration: 0.7,
-                translateX: '80px',
-                className: "-=is-active",
-                ease: "circ.inOut(0.4)",
-                onComplete: function () {
+            resetTl.to(activeAnchor, {duration: 0.7, translateX: currItemResetValue, className: "-=is-active", ease: "circ.inOut(0.4)", onComplete: function () {
 
                     // take the inline style for bg color off
                     activeWrapper.style.removeProperty('background-color');
@@ -620,11 +614,55 @@ mNineDScript.start = {
 
         }
 
+        // when close button for project is clicked, need screen size to evaluate the transform
+        // position to tween to - it's one of 2 values in array at top of function
+        // so get the screen size, if largest screens, pick that value from array
+        // if not, assign th other one for gsap to use
+
+        function getResetValue () {
+
+            let currSS = currScreenSize();
+
+            if(currSS === 'xls') {
+                currItemResetValue = resetItemValues[1];
+            } else {
+                currItemResetValue = resetItemValues[0];
+            }
+
+        }
+
         projectSummaryClose.addEventListener('click', () => {
 
+           getResetValue();
+
+            // triggering the reset of projects here
             resetProjects();
 
         });
+
+        // reset on escape
+        window.addEventListener('keydown', (evt) => {
+
+            getResetValue();
+
+
+            if (evt.key === 'Escape') {
+
+                resetProjects();
+            }
+        });
+
+        // resetting the position here for the triggers in case they shift across screen sizes
+        let resetProjectItemPosition = debounce(function() {
+           projectSummaryTriggers.forEach((el) => {
+               el.style = '';
+           });
+        }, 300);
+
+
+        window.addEventListener('resize', resetProjectItemPosition);
+
+
 
 
     },
@@ -642,7 +680,7 @@ mNineDScript.start = {
 
         });
 
-        projectDetailTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.6, ease: "circ.inOut(0.5)"});
+        projectDetailTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.8, ease: "circ.inOut(0.5)"});
 
 
     },
@@ -661,14 +699,12 @@ mNineDScript.start = {
             let el = sections[i];
             let elIndex = i;
             let elId = el.id;
-            console.log(i);
             let classToAdd = elId + '-is-active';
             let element = document.getElementById(elId);
 
             let waypointDown = new Waypoint({
                 element: element,
                 handler: function (direction) {
-                    console.log('down');
                     bodyWrap.className = '';
                     addClass(bodyWrap, classToAdd);
                     _self.manageSliderClasses(elIndex);
@@ -681,7 +717,6 @@ mNineDScript.start = {
                 handler: function (direction) {
                     bodyWrap.className = '';
                     addClass(bodyWrap, classToAdd);
-                    console.log('up');
                     _self.manageSliderClasses(elIndex);
                 },
                 offset: '-15%'
@@ -696,15 +731,12 @@ mNineDScript.start = {
                 bodyWrap.className = '';
                 addClass(bodyWrap, 'js-section-home-is-active');
                 _self.manageSliderClasses();
-            } else if (window.pageYOffset > 100) {
-                //addClass(bodyWrap, 'body-scrolling-is-active');
-
             }
         };
     },
     siteBtt() {
 
-        let siteBtt = $1('.mn-site-footer-btt');
+        const siteBtt = $1('.mn-site-footer-btt');
 
         // back to top button for each wrapper
         siteBtt.addEventListener('click', () => {
@@ -782,6 +814,7 @@ mNineDScript.start = {
                 let videoSourceType = videoUrl + '.' + videoFormats[j].type;
                 let videoTag = '<source src="' + videoSourceType + '" type="video/' + videoFormats[j].type + '">';
                 videoEl.innerHTML += videoTag;
+                addClass(videoEl, 'has-video');
             }
 
         }
@@ -797,20 +830,85 @@ mNineDScript.start = {
 
         if(elIndex) {
 
-            console.log(elIndex);
-
 
             for( let i = 0; i < slideListElements.length; i ++) {
 
                 let currentEl = slideListElements[i];
                 if (i === elIndex) {
-                    console.log('match ! : ' + i);
                     addClass(currentEl, 'is-current');
                 }
             }
         } else {
             addClass(slideListElements[0], 'is-current');
         }
+
+    },
+    homeSquaresAnimation () {
+
+
+        // probably only want to run this for larger screens
+        let currSS = currScreenSize();
+
+        if(currSS === 'ss' || currSS === 'ms') {
+            return;
+        }
+
+        let bgB = $1('.mn-home-grad-bg.is-bg-b');
+        let bgC = $1('.mn-home-grad-bg.is-bg-c');
+        let bgD = $1('.mn-home-grad-bg.is-bg-d');
+        let gradGridBg = $1('.mn-home-grad-grid-bg');
+        let bodyEl = $1('.body');
+
+        // tween is repeated infinitely here
+        const homeSqTl = gsap.timeline({repeat: -1});
+
+
+        let opacityDuration = gsap.utils.random(1.0, 6.0);
+        let staggerStart =   gsap.utils.random(-2, 1.5);
+
+
+        // gsap timeline to cycle through the background on a random basis
+        // start of each tween is also randomised in places to give the overall animation an organic feel
+
+
+        homeSqTl.to(bgB, {duration: opacityDuration, opacity: 1}, staggerStart);
+        homeSqTl.to(bgB, {duration: 1.2, opacity: 0});
+        homeSqTl.to(bgC, {duration: 1.0, opacity: 0.5});
+        homeSqTl.to(gradGridBg, {duration: 4.0, opacity: 0});
+        homeSqTl.to(bgC, {duration: 0.65, opacity: 0});
+        homeSqTl.to(bgD, {duration: opacityDuration, opacity: 0.5},staggerStart);
+        homeSqTl.to(gradGridBg, {duration: 3.0, opacity: 1});
+        homeSqTl.to(bgD, {duration: 1.2, opacity: 0});
+
+
+        // only really want this animation underway when a visitor is at the top of the page
+        // so some functionality to control the play pause, based on the offset of the window, and debounced for performance
+        function pauseTl () {
+            homeSqTl.pause();
+        }
+
+        function resumeTl () {
+            homeSqTl.play();
+        }
+
+
+        window.onscroll = function () {
+           toggleAnimation();
+        };
+
+
+        // resetting the position here for the triggers in case they shift across screen sizes
+        let toggleAnimation = debounce(function() {
+
+            if (window.pageYOffset < 200) {
+                resumeTl();
+            } else {
+                pauseTl();
+
+            }
+
+        }, 300);
+
 
     }
 
@@ -832,6 +930,6 @@ window.addEventListener('DOMContentLoaded', () => {
 window.addEventListener('load', () => {
 
     mNineDScript.start.triggerVideos();
-
+    mNineDScript.start.homeSquaresAnimation();
 
 });

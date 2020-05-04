@@ -13,7 +13,7 @@
 
 
 .mn-site-nav-wrapper {
-  width: 90%;
+  width: 100%;
   height: 100%;
   margin: 0 auto;
   display: flex;
@@ -21,11 +21,11 @@
   position: relative;
   flex-wrap: wrap;
 
-  padding-top: 6rem;
+  padding: 6rem 2rem 0;
 
 
   @include breakpoint($bp-xl) {
-    padding-top: 0;
+    padding: 0;
     width: 100%;
     align-content: flex-end;
     align-items: center;
@@ -68,7 +68,7 @@
 }
 
 .mn-site-nav-link-item {
-  @include font-size(24);
+  @include font-size(18);
   padding: 7px 12px 5px;
 
   @include breakpoint($bp-l) {
@@ -113,7 +113,7 @@
     &:hover {
 
       opacity: 1!important;
-      transform: rotateY(-5deg);
+      //transform: rotateY(-5deg);
       color: $tertiary-accent;
     }
 
@@ -153,6 +153,8 @@
 
 
   align-self: flex-end;
+  position: relative;
+  z-index: 2;
 
   margin-top: 1rem;
   text-align: right;
@@ -169,7 +171,7 @@
     display: block;
     margin: 1rem 0;
     opacity: 0;
-    @include font-size(18);
+    @include font-size(15);
     text-transform: uppercase;
     letter-spacing: 3px;
 
@@ -223,13 +225,12 @@
 .mn-site-nav-wrapper {
 
   .mn-section-nav-strapline {
-    left: 0;
+    left: 2rem;
     opacity: 0;
     top: 2rem;
 
-    @include breakpoint($bp-l) {
+    @include breakpoint($bp-xxl) {
 
-      left: 2rem;
       top: 45%;
 
     }

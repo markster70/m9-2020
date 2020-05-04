@@ -57,6 +57,7 @@
 
 
 .mn-page-indicators {
+  @include std-transitions($speed: 800ms);
 
   @include breakpoint($bp-xl-max, max-width) {
     display: none;
@@ -148,6 +149,12 @@
   .mn-page-indicators a {
     background-color: $black;
     color: $white;
+
+
+    &:hover {
+      background-color: rgba($black, 0.8);
+    }
+
   }
 
   .mn-page-indicators .is-current {
