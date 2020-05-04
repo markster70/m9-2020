@@ -258,3 +258,10 @@
   }
 
 }
+
+.mn-contact-feedback {
+  @include breakpoint(900) {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+}

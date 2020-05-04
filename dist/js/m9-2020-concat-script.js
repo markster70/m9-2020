@@ -8098,6 +8098,7 @@ mNineDScript.start = {
 
     function startVideo() {
       if (hasClass(video, 'has-video')) {
+        video.playbackRate = 0.75;
         video.play();
       }
     }
@@ -8708,7 +8709,7 @@ mNineDScript.start = {
       },
       submitHandler: function submitHandler(form, values, ajax) {
         ajax({
-          url: 'php-partials/form-handler.php',
+          url: '/site-partials/form-handler.php',
           method: 'POST',
           data: values,
           async: true,

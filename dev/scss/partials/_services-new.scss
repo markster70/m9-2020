@@ -85,7 +85,6 @@
   @include std-transitions();
 
 
-
 }
 
 .mn-section-services-item-list {
@@ -98,14 +97,14 @@
   flex-wrap: wrap;
   align-content: flex-start;
   width: 100%;
-  top: 50px;
-  opacity: 0;
   position: relative;
 
 
   @include breakpoint($bp-xl) {
     height: 400px;
     padding: 3rem 2rem;
+    opacity: 0;
+    top: 50px;
   }
 
   li {
@@ -157,9 +156,13 @@
 }
 
 .mn-section-services-item-hd {
-  opacity: 0;
-  transform: scale3d(1.5,1.5,1.5);
-  filter: blur(12px);
+
+
+  @include breakpoint($bp-xl) {
+    opacity: 0;
+    transform: scale3d(1.5,1.5,1.5);
+    filter: blur(12px);
+  }
 }
 
 
