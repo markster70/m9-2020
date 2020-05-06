@@ -87,6 +87,12 @@ function currScreenSize() {
     } else if ( size === 40 ) {
         screenDef = 'xls';
     }
+    else if ( size === 50 ) {
+        screenDef = 'xxl';
+    }
+    else if ( size === 60 ) {
+        screenDef = 'massive';
+    }
 
     return screenDef;
 }

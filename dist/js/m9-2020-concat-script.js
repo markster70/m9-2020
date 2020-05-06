@@ -7823,6 +7823,10 @@ function currScreenSize() {
     screenDef = 'ls';
   } else if (size === 40) {
     screenDef = 'xls';
+  } else if (size === 50) {
+    screenDef = 'xxl';
+  } else if (size === 60) {
+    screenDef = 'massive';
   }
 
   return screenDef;
@@ -7951,7 +7955,7 @@ mNineDScript.start = {
 
     var currSS = currScreenSize();
 
-    if (currSS === 'xls') {
+    if (currSS === 'xls' || currSS === 'xxl' || currSS === 'massive') {
       this.cursorSetup();
     }
 
@@ -8097,8 +8101,7 @@ mNineDScript.start = {
     }
 
     function startVideo() {
-      if (hasClass(video, 'has-video')) {
-        video.playbackRate = 0.75;
+      if (hasClass(video, 'has-video') && hasClass(video, 'video-ready')) {
         video.play();
       }
     }
@@ -8570,7 +8573,7 @@ mNineDScript.start = {
     function getResetValue() {
       var currSS = currScreenSize();
 
-      if (currSS === 'xls') {
+      if (currSS === 'xls' || currSS === 'xxl' || currSS === 'massive') {
         currItemResetValue = resetItemValues[1];
       } else {
         currItemResetValue = resetItemValues[0];
@@ -8731,7 +8734,7 @@ mNineDScript.start = {
   triggerVideos: function triggerVideos() {
     var ss = currScreenSize();
 
-    if (ss === 'ss' || ss === 'ms') {
+    if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss === 'xls') {
       return;
     }
 
@@ -8742,7 +8745,7 @@ mNineDScript.start = {
       type: 'webm'
     }]; //, {type : 'webm'}
 
-    for (var i = 0; i < mediaWrappers.length; i++) {
+    var _loop3 = function _loop3(i) {
       var wrapperEl = mediaWrappers[i];
       var videoEl = wrapperEl.querySelector('video');
       var videoUrl = wrapperEl.dataset.videoId;
@@ -8753,6 +8756,16 @@ mNineDScript.start = {
         videoEl.innerHTML += videoTag;
         addClass(videoEl, 'has-video');
       }
+
+      videoEl.addEventListener('loadeddata', function () {
+        if (videoEl.readyState >= 3) {
+          addClass(videoEl, 'video-ready');
+        }
+      });
+    };
+
+    for (var i = 0; i < mediaWrappers.length; i++) {
+      _loop3(i);
     }
   },
   manageSliderClasses: function manageSliderClasses(elIndex) {
@@ -8785,7 +8798,8 @@ mNineDScript.start = {
     var bgC = $1('.mn-home-grad-bg.is-bg-c');
     var bgD = $1('.mn-home-grad-bg.is-bg-d');
     var gradGridBg = $1('.mn-home-grad-grid-bg');
-    var bodyEl = $1('.body'); // tween is repeated infinitely here
+    var bodyEl = $1('.body');
+    var siteNav = $1('.mn-site-nav'); // tween is repeated infinitely here
 
     var homeSqTl = gsap.timeline({
       repeat: -1
@@ -8847,7 +8861,27 @@ mNineDScript.start = {
       } else {
         pauseTl();
       }
-    }, 300);
+    }, 300); // adding a mutationObserver here for the navigation and the video to take the
+    //strain off the gpu / cpu
+
+    if ("MutationObserver" in window) {
+      var animStateToggle = function animStateToggle(mutationsList) {
+        mutationsList.forEach(function (mutation) {
+          if (mutation.attributeName === 'class') {
+            if (hasClass(siteNav, 'is-active')) {
+              pauseTl();
+            } else {
+              resumeTl();
+            }
+          }
+        });
+      };
+
+      var navMutationObserver = new MutationObserver(animStateToggle);
+      navMutationObserver.observe(siteNav, {
+        attributes: true
+      });
+    }
   }
 };
 window.addEventListener('DOMContentLoaded', function () {

@@ -58,8 +58,17 @@
     font-weight: $font-weight-light;
 
     @include breakpoint($bp-l) {
-      @include font-size(15);
+      @include font-size(16);
       max-width: 80%;
+      font-weight: 400;
+
+    }
+
+
+    @include breakpoint($bp-xxl) {
+      @include font-size(18);
+      max-width: 100%;
+
 
     }
 
@@ -81,9 +90,15 @@
     max-height: 150px;
     width: auto;
 
+    @include breakpoint($bp-l) {
+      max-height: 190px;
+      align-self: center;
+    }
+
     @include breakpoint($bp-xl) {
       max-height: 300px;
       justify-content: center;
+      align-self: unset;
 
     }
   }

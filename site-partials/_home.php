@@ -9,7 +9,7 @@
         </div>
         <div class="mn-section-home-copy">
             <h1 class="mn-section-home-hello">Hello..</h1>
-            <p class="mn-body-copy">We’re <span class="is-primary-txt">M9 Digital.</span>A small UI / Website development business based on the South Coast of the UK.</p>
+            <p class="mn-body-copy">We’re <span class="is-primary-txt">M9 Digital.</span> A small UI / website development business based on the South Coast of the UK.</p>
             <p class="mn-body-copy">We work with large and small companies around the world to help them create, develop, improve, and maintain their websites, and applications.</p>
         </div>
         <div class="mn-section-home-brand">

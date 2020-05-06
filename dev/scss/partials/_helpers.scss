@@ -131,3 +131,22 @@ head {
     display: none;
   }
 }
+
+
+
+@include breakpoint($bp-xxl) {
+  // xtra-xtra-large
+  head {
+    font-size: 50px;
+    display: none;
+  }
+}
+
+
+@include breakpoint($bp-massive) {
+  // massive
+  head {
+    font-size: 60px;
+    display: none;
+  }
+}

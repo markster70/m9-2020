@@ -16,7 +16,7 @@ mNineDScript.start = {
 
         let currSS = currScreenSize();
 
-        if (currSS === 'xls') {
+        if (currSS === 'xls' || currSS ==='xxl' || currSS ==='massive') {
             this.cursorSetup();
         }
 
@@ -184,9 +184,9 @@ mNineDScript.start = {
 
         function startVideo() {
 
-            if(hasClass(video, 'has-video')) {
-                video.playbackRate = 0.75;
-                video.play();
+            if(hasClass(video, 'has-video') && hasClass(video, 'video-ready' )) {
+
+                    video.play();
             }
         }
 
@@ -627,7 +627,7 @@ mNineDScript.start = {
 
             let currSS = currScreenSize();
 
-            if(currSS === 'xls') {
+            if(currSS === 'xls' || currSS === 'xxl' || currSS === 'massive') {
                 currItemResetValue = resetItemValues[1];
             } else {
                 currItemResetValue = resetItemValues[0];
@@ -801,7 +801,7 @@ mNineDScript.start = {
 
         let ss = currScreenSize();
 
-        if (ss === 'ss' || ss === 'ms') {
+        if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss ==='xls') {
             return;
         }
 
@@ -820,6 +820,18 @@ mNineDScript.start = {
                 videoEl.innerHTML += videoTag;
                 addClass(videoEl, 'has-video');
             }
+
+            videoEl.addEventListener('loadeddata', function() {
+
+                if ( videoEl.readyState >=3)  {
+
+
+                    addClass(videoEl, 'video-ready');
+
+                }
+
+
+            });
 
         }
     },
@@ -862,6 +874,7 @@ mNineDScript.start = {
         let bgD = $1('.mn-home-grad-bg.is-bg-d');
         let gradGridBg = $1('.mn-home-grad-grid-bg');
         let bodyEl = $1('.body');
+        let siteNav = $1('.mn-site-nav');
 
         // tween is repeated infinitely here
         const homeSqTl = gsap.timeline({repeat: -1});
@@ -912,6 +925,31 @@ mNineDScript.start = {
             }
 
         }, 300);
+
+        // adding a mutationObserver here for the navigation and the video to take the
+        //strain off the gpu / cpu
+
+        if ("MutationObserver" in window) {
+
+            const navMutationObserver = new MutationObserver(animStateToggle);
+
+            navMutationObserver.observe(
+                siteNav,
+                {attributes: true}
+            );
+
+            function animStateToggle(mutationsList) {
+                mutationsList.forEach(mutation => {
+                    if (mutation.attributeName === 'class') {
+                        if (hasClass(siteNav, 'is-active')) {
+                            pauseTl();
+                        } else {
+                            resumeTl();
+                        }
+                    }
+                })
+            }
+        }
 
 
     }
