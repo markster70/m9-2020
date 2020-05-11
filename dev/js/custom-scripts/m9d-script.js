@@ -168,6 +168,7 @@ mNineDScript.start = {
         const navStrapLine = $1('.mn-section-nav-strapline');
         const navLinks = $('.mn-site-nav-contact-link');
         const video = $1('#mn-site-nav-vid');
+        const navLast = $1('.is-nav-last');
 
         const tl = gsap.timeline();
 
@@ -267,6 +268,7 @@ mNineDScript.start = {
             }
         }
 
+
         navItems.forEach((el) => {
             el.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -285,6 +287,19 @@ mNineDScript.start = {
             });
 
         });
+
+
+        // accessibility trap to provide circular tabbing for menu via keyboard when open
+        function accessTrap () {
+
+            navLast.addEventListener('blur', function(e) {
+                if(hasClass(navWrapper, 'is-active')){
+                    navTrigger.focus();
+                }
+            });
+        }
+
+        accessTrap();
 
     },
     runScrollAnimations() {

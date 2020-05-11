@@ -8088,6 +8088,7 @@ mNineDScript.start = {
     var navStrapLine = $1('.mn-section-nav-strapline');
     var navLinks = $('.mn-site-nav-contact-link');
     var video = $1('#mn-site-nav-vid');
+    var navLast = $1('.is-nav-last');
     var tl = gsap.timeline();
 
     function toggleNavTriggerClass() {
@@ -8235,7 +8236,17 @@ mNineDScript.start = {
           }, 3000);
         }
       });
-    });
+    }); // accessibility trap to provide circular tabbing for menu via keyboard when open
+
+    function accessTrap() {
+      navLast.addEventListener('blur', function (e) {
+        if (hasClass(navWrapper, 'is-active')) {
+          navTrigger.focus();
+        }
+      });
+    }
+
+    accessTrap();
   },
   runScrollAnimations: function runScrollAnimations() {
     var aboutTitleHd = $1('.mn-section-about-hd-lg');

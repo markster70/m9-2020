@@ -14,7 +14,7 @@
                     <span class="mn-contact-lbl">Here's our Email :</span>
                     <span>mark at m9digital.co.uk</span>
                 </h3>
-                <form name="mn-contact-frm" novalidate class="mn-contact-frm">
+                <form name="mn-contact-frm" novalidate class="mn-contact-frm" action="/site-partials/form-handler.php" method="post">
                     <p class="mn-contact-req-msg">* Denotes required field</p>
                     <div class="mn-contact-frm-inner">
                         <div class="mn-ff-input-wrapper">

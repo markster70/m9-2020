@@ -1,0 +1,83 @@
+.no-javascript {
+
+  cursor: default!important;
+
+  body {
+    &,
+    * {
+      cursor: default!important;
+    }
+  }
+
+
+  .mn-site-nav {
+    display: block;
+    position: static;
+    width: 100%;
+    transform: translate(0,0);
+    height: auto;
+  }
+
+  .mn-site-nav-links li {
+    text-align: center!important;
+  }
+
+  .mn-site-nav-link-item {
+    opacity: 1;
+    left: 0;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+  }
+
+  .mn-site-nav-content {
+    max-width: 50%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .mn-site-nav-wrapper {
+    display: block;
+    text-align: center;
+  }
+
+  #primary-navigation, .hamburger {
+    display: none;
+  }
+
+  .mn-section-projects-summary .mn-section-project-summary-item {
+    position: relative;
+  }
+
+  .mn-section-home-strapline, .mn-counter-wrapper, .mn-page-indicators {
+    display: none;
+  }
+
+  .mn-section-services-hd-lg, .mn-section-services-hd-anim, .mn-section-about-hd-lg, .mn-section-about-hd-anim {
+    opacity: 1;
+    left: 0;
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    top: 0;
+  }
+
+  .mn-section-services-item {
+    opacity: 1;
+    transform: scale(1.0);
+  }
+
+  .mn-section-services-item-hd {
+    opacity: 1;
+    filter: blur(0);
+    -webkit-filter: blur(0);
+    transform: scale(1);
+  }
+
+  .mn-section-services-item-list {
+    opacity: 1;
+    top: 0;
+  }
+
+}

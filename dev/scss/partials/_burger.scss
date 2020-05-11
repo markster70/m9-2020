@@ -47,8 +47,12 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
   margin: 0;
   overflow: visible;
 
-  &:active, &:focus {
-    outline: none;
+  &:active {
+    outline:none;
+  }
+
+  &:focus {
+    outline: 1px dotted rgba($white, 0.2);
   }
 
 }
