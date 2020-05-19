@@ -44,11 +44,18 @@
       padding: 0 1rem;
       background-color: transparent;
       overflow: hidden;
+      position: relative;
+      min-width: 80%;
+
+      @include breakpoint($bp-l) {
+        min-width: 40%;
+      }
 
       @include breakpoint($bp-xl) {
 
         transform: translateX(80px);
         @include font-size(18);
+        min-width: 380px;
       }
 
     }
@@ -66,7 +73,7 @@
 
       &:hover a {
         //@include font-size(22);
-        background-color: rgba($black, 0.15);
+        background-color: rgba($black, 0.25);
       }
     }
 
@@ -437,4 +444,16 @@
     text-align: center;
     margin-top: 2.5rem;
   }
+}
+
+.mn-section-project-summary-item-ico {
+  display: inline-block;
+  height: 16px;
+  width: 16px;
+  margin-left: 12px;
+  background: url('/dist/images/project-next.png') no-repeat center center;
+  background-size: 24px 24px;;
+  position: absolute;
+  right: 5px;
+  top: 24px;
 }

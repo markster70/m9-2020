@@ -308,23 +308,13 @@ mNineDScript.start = {
         const aboutTitleEls = $('.mn-section-about-hd-anim');
 
         const scrollController = new ScrollMagic.Controller();
+
+        // about section animation logic
+
         let aboutTl = gsap.timeline({paused: true});
 
-        let aboutTitleTween = aboutTl.to(aboutTitleHd, {
-            duration: 0.7,
-            opacity: 1,
-            left: 0,
-            '-webkit-filter': " blur(0px)",
-            ease: "circ.inOut(0.5)"
-        }, 0.5);
-        let aboutElsTween = aboutTl.to(aboutTitleEls, {
-            duration: 0.8,
-            stagger: 0.25,
-            opacity: 1,
-            top: 0,
-            '-webkit-filter': " blur(0px)",
-            ease: "circ.inOut(0.5)"
-        }, ">-0.3");
+        let aboutTitleTween = aboutTl.to(aboutTitleHd, {duration: 0.7, opacity: 1, left: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, 0.5);
+        let aboutElsTween = aboutTl.to(aboutTitleEls, {duration: 0.8, stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, ">-0.3");
 
 
         let aboutScene = new ScrollMagic.Scene({
@@ -332,15 +322,15 @@ mNineDScript.start = {
             offset: -100
 
         })
-            .on("enter", function (e) {
+            .on("enter", function () {
                 aboutTl.play();
-
-            })
-            .on("leave", function (e) {
+        })
+            .on("leave", function () {
                 aboutTl.reverse();
-            })
+        })
             .addTo(scrollController);
 
+        // services section animation logic
 
         const servicesTl = gsap.timeline({paused: true});
 
@@ -351,46 +341,11 @@ mNineDScript.start = {
         const serviceItems = $('.mn-section-services-item-list');
 
 
-        let serveTitleTween = servicesTl.to(servTitleHd, {
-            duration: 0.7,
-            opacity: 1,
-            left: 0,
-            delay: 1.0,
-            '-webkit-filter': " blur(0px)",
-            ease: "circ.inOut(0.5)"
-        });
-        let serveElsTween = servicesTl.to(servTitleEls, {
-            duration: 0.8,
-            stagger: 0.25,
-            opacity: 1,
-            top: 0,
-            '-webkit-filter': " blur(0px)",
-            ease: "circ.inOut(0.5)"
-        }, ">-0.3");
-        let servePanelTween = servicesTl.to(servicePanels, {
-            duration: 2,
-            stagger: 0.3,
-            opacity: 1,
-            scaleX: 1,
-            scaleY: 1,
-            ease: "elastic.out(0.8)"
-        });
-        let serveHeadingsTween = servicesTl.to(serviceHeadings, {
-            duration: 0.2,
-            opacity: 1,
-            stagger: 0.2,
-            scaleX: 1,
-            scaleY: 1,
-            '-webkit-filter': " blur(0px)",
-            ease: "circ.inOut(0.3)"
-        }, ">-1.8");
-        let serveItemsTween = servicesTl.to(serviceItems, {
-            duration: 0.4,
-            stagger: 0.17,
-            opacity: 1,
-            top: 0,
-            ease: "circ.out(0.4)"
-        }, ">0.2");
+        let serveTitleTween = servicesTl.to(servTitleHd, {duration: 0.7, opacity: 1, left: 0, delay: 1.0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"});
+        let serveElsTween = servicesTl.to(servTitleEls, {duration: 0.8, stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, ">-0.3");
+        let servePanelTween = servicesTl.to(servicePanels, {duration: 2, stagger: 0.3, opacity: 1, scaleX: 1, scaleY: 1, ease: "elastic.out(0.8)"});
+        let serveHeadingsTween = servicesTl.to(serviceHeadings, {duration: 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"}, ">-1.8");
+        let serveItemsTween = servicesTl.to(serviceItems, {duration: 0.4, stagger: 0.17, opacity: 1, top: 0, ease: "circ.out(0.4)"}, ">0.2");
 
 
         let servicesScene = new ScrollMagic.Scene({
@@ -398,11 +353,10 @@ mNineDScript.start = {
             offset: -100
 
         })
-            .on("enter", function (e) {
+            .on("enter", function () {
                 servicesTl.play();
-
-            })
-            .on("leave", function (e) {
+        })
+            .on("leave", function () {
                 servicesTl.reverse();
             })
             .addTo(scrollController);
@@ -446,6 +400,7 @@ mNineDScript.start = {
         const fadeSections = $('.mn-section-fade');
         const projectContainerClass = '.mn-projects-summary-detail-wrapper';
         const _self = this;
+
         // 2 possible values for resetting the project items
         const resetItemValues = ['20px', '80px'];
         let currItemResetValue = resetItemValues[0];

@@ -8251,7 +8251,8 @@ mNineDScript.start = {
   runScrollAnimations: function runScrollAnimations() {
     var aboutTitleHd = $1('.mn-section-about-hd-lg');
     var aboutTitleEls = $('.mn-section-about-hd-anim');
-    var scrollController = new ScrollMagic.Controller();
+    var scrollController = new ScrollMagic.Controller(); // about section animation logic
+
     var aboutTl = gsap.timeline({
       paused: true
     });
@@ -8273,11 +8274,12 @@ mNineDScript.start = {
     var aboutScene = new ScrollMagic.Scene({
       triggerElement: '#js-about-top',
       offset: -100
-    }).on("enter", function (e) {
+    }).on("enter", function () {
       aboutTl.play();
-    }).on("leave", function (e) {
+    }).on("leave", function () {
       aboutTl.reverse();
-    }).addTo(scrollController);
+    }).addTo(scrollController); // services section animation logic
+
     var servicesTl = gsap.timeline({
       paused: true
     });
@@ -8329,9 +8331,9 @@ mNineDScript.start = {
     var servicesScene = new ScrollMagic.Scene({
       triggerElement: '#js-services-top',
       offset: -100
-    }).on("enter", function (e) {
+    }).on("enter", function () {
       servicesTl.play();
-    }).on("leave", function (e) {
+    }).on("leave", function () {
       servicesTl.reverse();
     }).addTo(scrollController);
   },
