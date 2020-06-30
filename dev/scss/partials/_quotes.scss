@@ -11,7 +11,7 @@
 }
 
 .mn-blockquote-item {
-  @include font-size(22);
+  @include font-size(18);
   text-align: center;
   color: rgba($white,0.7);
   max-width: 90%;
@@ -19,6 +19,7 @@
   position: relative;
   flex-basis: 100%;
   padding: 3rem;
+  font-weight: $font-weight-regular;
 
   @include breakpoint($bp-xl) {
     max-width: 50%;

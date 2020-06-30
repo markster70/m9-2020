@@ -45,7 +45,7 @@
   background-color: rgba($black, 0.1);
   border-bottom: 1px solid rgba($white, 0.1);
 
-  @include breakpoint($bp-l) {
+  @include breakpoint($bp-xl) {
     border-bottom: 0;
     transform:scale(0.4);
     opacity: 0;
@@ -78,11 +78,15 @@
   margin: 1rem auto 2rem;
   color: $primary-accent;
   text-align: center;
-  @include font-size(24);
+  @include font-size(23);
   padding-bottom: 2rem;
   border-bottom: 1px solid rgba($white, 0.1);
   text-transform: uppercase;
   @include std-transitions();
+
+  @include breakpoint($bp-xl) {
+    @include font-size(24);
+  }
 
 
 }

@@ -64,7 +64,7 @@
   }
 
   position: fixed;
-  z-index: 1000;
+  z-index: 4000;
   bottom : 40%;
   left: 1.5rem;
 
@@ -186,6 +186,6 @@
 
 .is-nav-active {
   .mn-counter-wrapper, .mn-page-indicators {
-    opacity: 0;
+    opacity: 0!important;
   }
 }

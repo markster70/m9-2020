@@ -32,6 +32,11 @@
   line-height: 1.2;
   letter-spacing: 8px;
 
+  @include breakpoint($bp-m) {
+    @include font-size(60);
+  }
+
+
   @include breakpoint($bp-xl) {
     @include font-size(100);
   }
@@ -90,8 +95,12 @@
     max-height: 150px;
     width: auto;
 
+    @include breakpoint($bp-m) {
+      max-height: 180px;
+    }
+
     @include breakpoint($bp-l) {
-      max-height: 190px;
+      max-height: 230px;
       align-self: center;
     }
 

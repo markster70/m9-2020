@@ -18,6 +18,17 @@
                     <ul class="mn-section-projects-summary">
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
+                                <a class="mn-section-project-summary-trigger" href="/projects/pegasus.php" data-content="/projects/includes/pegasus-content.html" aria-controls="pegasus-project-content">
+                                    <span class="mn-section-project-summary-item-title">Pegasus Public Relations</span>
+                                    <span class="mn-section-project-summary-item-ico"></span>
+                                </a>
+                            </div>
+                            <article class="mn-projects-summary-detail-wrapper" id="pegasus-project-content" aria-live="polite">
+                                <!-- content to be injected here -->
+                            </article>
+                        </li>
+                        <li class="mn-section-project-summary-item">
+                            <div class="mn-section-projects-item-inner">
                                 <a class="mn-section-project-summary-trigger" href="/projects/zishi.php" data-content="/projects/includes/zishi-content.html" aria-controls="zishi-project-content">
                                     <span class="mn-section-project-summary-item-title">Zishi Adaptive</span>
                                     <span class="mn-section-project-summary-item-ico"></span>

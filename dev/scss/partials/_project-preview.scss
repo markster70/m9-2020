@@ -1,0 +1,43 @@
+//.mn-section-projects-hover-content {
+//  position: absolute;
+//  right: 5vw;
+//  min-height: 80%;
+//  top: 10%;
+//  bottom: 10%;
+//  width: 25vw;
+//  z-index: 500;
+//  transform: rotate3d(0,0.45,0,45deg);
+//  opacity: 0.5;
+//
+//
+//
+//  .is-inner {
+//    width: 100%;
+//    height: 100%;
+//    position: relative;
+//    transition: transform 1s;
+//    transform-style: preserve-3d;
+//    transform: translateX(-100%) rotateY(180deg);
+//
+//  }
+//
+//
+//  .is-card {
+//    position: absolute;
+//    height: 100%;
+//    width: 100%;
+//    backface-visibility: hidden;
+//
+//  }
+//
+//  .mn-section-projects-hover-back {
+//    transform: rotateY(-180deg);
+//    background: url("/dist/images/project-images/pegasus-example-b.jpg") no-repeat 50% 50%;
+//    background-size: contain;
+//  }
+//
+//}
+//
+//.mn-section-projects {
+//  perspective: 1200px;
+//}

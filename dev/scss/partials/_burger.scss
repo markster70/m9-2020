@@ -31,7 +31,7 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
   position: fixed;
   top: 1rem;
   right: 1rem;
-  z-index: 5000;
+  z-index: 4001;
 
   transition-property: all;
   transition-duration: 0.15s;
@@ -60,6 +60,7 @@ $hamburger-active-hover-filter: $hamburger-hover-filter !default;
 .is-projects-active {
   .hamburger {
     visibility: hidden;
+    z-index: -1;
   }
 }
 

@@ -33,6 +33,7 @@
                             <li>Javascript Applications ( Vue.js )</li>
                             <li>CMS Development</li>
                             <li>Wordpress Theme Creation</li>
+                            <li>Shopify Themes / Store Creation</li>
                         </ul>
 
                 </article>

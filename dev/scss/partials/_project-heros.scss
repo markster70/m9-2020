@@ -39,6 +39,10 @@
   background: url("/dist/images/project-images/smart-inv-work-example.jpg") no-repeat 50% 50% fixed;
 }
 
+.is-pegasus-hero {
+  background: url("/dist/images/project-images/pegasus-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
 .mn-projects-summary-detail-hero {
   min-height: 200px;
   width: 100vw;
@@ -98,7 +102,7 @@
 
     @include breakpoint($bp-xl) {
       padding: 2rem 6rem;
-      @include font-size(16);
+      @include font-size(22);
     }
 
 

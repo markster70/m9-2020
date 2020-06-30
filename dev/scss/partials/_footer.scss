@@ -29,5 +29,10 @@
     font-weight: $font-weight-light;
     color: $white;
     letter-spacing: 3px;
+
+    span {
+      display: block;
+    }
+
   }
 }

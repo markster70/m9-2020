@@ -1,8 +1,11 @@
-html,
-body {
-  &,
-  * {
-    cursor: none;
+@include breakpoint($bp-xxl) {
+
+  html,
+  body {
+    &,
+    * {
+      cursor: none;
+    }
   }
 }
 

@@ -8397,15 +8397,19 @@ mNineDScript.start = {
         var contentToLoad = el.dataset.content;
         var elParent = el.parentNode.parentNode;
         var projectContainer = $1(projectContainerClass, elParent);
-        partialLoader(projectContainer, contentToLoad).then(function () {
-          setTimeout(function () {
-            // need to look at pre-loader here
-            removeClass(elParent, 'is-inactive');
-            addClass(elParent, 'is-animating');
-            openProject(el);
-          }, 500);
-        })["catch"](function () {// need to do something here with the error handler
-        });
+
+        if (hasClass(elParent, 'is-inactive')) {
+          partialLoader(projectContainer, contentToLoad).then(function () {
+            setTimeout(function () {
+              // need to look at pre-loader here
+              removeClass(elParent, 'is-inactive');
+              addClass(elParent, 'is-animating');
+              openProject(el);
+            }, 500);
+          })["catch"](function () {// need to do something here with the error handler
+          });
+        } // end if
+
       });
     });
 
@@ -8594,7 +8598,8 @@ mNineDScript.start = {
     }
 
     projectSummaryClose.addEventListener('click', function () {
-      getResetValue(); // triggering the reset of projects here
+      getResetValue(); //console.log('reset');
+      // triggering the reset of projects here
 
       resetProjects();
     }); // reset on escape
@@ -8616,18 +8621,20 @@ mNineDScript.start = {
   },
   projectDetailControl: function projectDetailControl() {
     var projectDetailTl = gsap.timeline();
-    var bttButton = $1('.mn-project-summary-btt');
+    var bttButtons = $('.mn-project-summary-btt');
     var detailWrapper = $1('.mn-section-project-summary-item.is-active-wrapper');
     var projectCloseBtn = $1('.mn-projects-summary-detail-close'); // back to top button for each wrapper
 
-    bttButton.addEventListener('click', function () {
-      gsap.to(detailWrapper, {
-        duration: 0.8,
-        scrollTo: {
-          y: 0,
-          autoKill: false
-        },
-        ease: "circ.inOut"
+    bttButtons.forEach(function (el) {
+      el.addEventListener('click', function () {
+        gsap.to(detailWrapper, {
+          duration: 0.8,
+          scrollTo: {
+            y: 0,
+            autoKill: false
+          },
+          ease: "circ.inOut"
+        });
       });
     });
     projectDetailTl.to(projectCloseBtn, {

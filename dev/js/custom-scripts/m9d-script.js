@@ -426,28 +426,31 @@ mNineDScript.start = {
 
                 e.preventDefault();
 
+
                 let contentToLoad = el.dataset.content;
                 let elParent = el.parentNode.parentNode;
                 let projectContainer = $1(projectContainerClass, elParent);
 
+                if(hasClass(elParent, 'is-inactive')) {
 
-                partialLoader(projectContainer, contentToLoad)
-                    .then(function () {
-                        setTimeout(function () {
+                    partialLoader(projectContainer, contentToLoad)
+                        .then(function () {
+                            setTimeout(function () {
 
-                            // need to look at pre-loader here
+                                // need to look at pre-loader here
 
-                            removeClass(elParent, 'is-inactive');
-                            addClass(elParent, 'is-animating');
-                            openProject(el);
+                                removeClass(elParent, 'is-inactive');
+                                addClass(elParent, 'is-animating');
+                                openProject(el);
 
-                        }, 500);
+                            }, 500);
 
-                    })
-                    .catch(function () {
-                        // need to do something here with the error handler
-                    });
+                        })
+                        .catch(function () {
+                            // need to do something here with the error handler
+                        });
 
+                } // end if
 
             });
         });
@@ -609,6 +612,8 @@ mNineDScript.start = {
 
            getResetValue();
 
+           //console.log('reset');
+
             // triggering the reset of projects here
             resetProjects();
 
@@ -643,15 +648,20 @@ mNineDScript.start = {
     projectDetailControl() {
 
         let projectDetailTl = gsap.timeline();
-        const bttButton = $1('.mn-project-summary-btt');
+        const bttButtons = $('.mn-project-summary-btt');
         const detailWrapper = $1('.mn-section-project-summary-item.is-active-wrapper');
         const projectCloseBtn = $1('.mn-projects-summary-detail-close');
 
+
         // back to top button for each wrapper
-        bttButton.addEventListener('click', () => {
 
-            gsap.to(detailWrapper, {duration: 0.8, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
+        bttButtons.forEach((el) => {
 
+            el.addEventListener('click', () => {
+
+                gsap.to(detailWrapper, {duration: 0.8, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
+
+            });
         });
 
         projectDetailTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.8, ease: "circ.inOut(0.5)"});

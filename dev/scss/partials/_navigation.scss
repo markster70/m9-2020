@@ -119,14 +119,21 @@
 
   }
 
-  &:hover {
 
-    &:before {
-      height: 3px;
-      top: calc(50% - 1px);
-      background-color: $white;
+  @media(hover: hover) and (pointer: fine) {
+
+    &:hover {
+
+      &:before {
+        height: 3px;
+        top: calc(50% - 1px);
+        background-color: $white;
+      }
     }
+
   }
+
+
 
 }
 
