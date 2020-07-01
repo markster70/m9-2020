@@ -7,7 +7,8 @@
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
 <?php include '../site-partials/_navigation-no-js.html'; ?>
-<?php include 'includes/pegasus-content.html'; ?>
+<!-- non js wrapper needs to be here -->
+<?php include 'includes/body-face-content.html'; ?>
 </body>
-</html>
 
+</html>

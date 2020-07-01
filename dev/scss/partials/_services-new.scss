@@ -3,8 +3,10 @@
 
   .mn-section-inner {
 
-    background: url("/dist/images/m9-logo-large.png") bottom right no-repeat;
-    background-size: 220px auto;
+    @include breakpoint($bp-l) {
+      background: url("/dist/images/m9-logo-large.png") bottom right no-repeat;
+      background-size: 220px auto;
+    }
   }
 }
 

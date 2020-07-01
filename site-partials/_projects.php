@@ -7,6 +7,7 @@
             </header>
             <div class="mn-section-projects-inner" id="js-projects-summary-container">
                 <div class="mn-projects-summary-wrap">
+                    <div class="mn-section-projects-summary-bg" role="presentation"></div>
                     <button class="mn-projects-summary-detail-close">
                         <svg viewBox="0 0 91 113.75">
                             <g>
@@ -19,7 +20,7 @@
                         <li class="mn-section-project-summary-item">
                             <div class="mn-section-projects-item-inner">
                                 <a class="mn-section-project-summary-trigger" href="/projects/pegasus.php" data-content="/projects/includes/pegasus-content.html" aria-controls="pegasus-project-content">
-                                    <span class="mn-section-project-summary-item-title">Pegasus Public Relations</span>
+                                    <span class="mn-section-project-summary-item-title">Pegasus PR</span>
                                     <span class="mn-section-project-summary-item-ico"></span>
                                 </a>
                             </div>
@@ -46,6 +47,17 @@
                             </a>
                             </div>
                             <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="frotcom-project-content">
+                                <!-- content to be injected here -->
+                            </article>
+                        </li>
+                        <li class="mn-section-project-summary-item">
+                            <div class="mn-section-projects-item-inner">
+                                <a class="mn-section-project-summary-trigger" href="/projects/body-face.php" data-content="/projects/includes/body-face-content.html" aria-controls="body-face-project-content">
+                                    <span class="mn-section-project-summary-item-title">Body &amp; Face Beauty</span>
+                                    <span class="mn-section-project-summary-item-ico"></span>
+                                </a>
+                            </div>
+                            <article class="mn-projects-summary-detail-wrapper" aria-live="polite" id="body-face-project-content">
                                 <!-- content to be injected here -->
                             </article>
                         </li>

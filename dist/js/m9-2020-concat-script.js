@@ -7937,7 +7937,31 @@ function getCookie(name) {
   }
 
   return null;
-}
+} // const scrollStop = function (callback) {
+//
+//     // Make sure a valid callback was provided
+//     if (!callback || typeof callback !== 'function') return;
+//
+//     // Setup scrolling variable
+//     let isScrolling;
+//
+//     // Listen for scroll events
+//     window.addEventListener('scroll', function (event) {
+//
+//         // Clear our timeout throughout the scroll
+//         window.clearTimeout(isScrolling);
+//
+//         // Set a timeout to run after scrolling ends
+//         isScrolling = setTimeout(function() {
+//
+//             // Run the callback
+//             callback();
+//
+//         }, 150);
+//
+//     }, false);
+//
+// };
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 var mNineDScript = {};
@@ -8368,13 +8392,15 @@ mNineDScript.start = {
     var itemHeight = 65;
     var projectsSummaryContainer = $1('#js-projects-summary-container');
     var bodyEl = $1('body');
+    var docEl = document.documentElement;
     var projectSummaryClose = $1('.mn-projects-summary-detail-close');
     var projectsSection = $1('#js-projects-top');
     var fadeSections = $('.mn-section-fade');
     var projectContainerClass = '.mn-projects-summary-detail-wrapper';
 
-    var _self = this; // 2 possible values for resetting the project items
+    var _self = this;
 
+    var projectSummaryBg = $1('.mn-section-projects-summary-bg '); // 2 possible values for resetting the project items
 
     var resetItemValues = ['20px', '80px'];
     var currItemResetValue = resetItemValues[0];
@@ -8463,6 +8489,10 @@ mNineDScript.start = {
           duration: 0.3,
           opacity: 0
         });
+        projectsTl.to(projectSummaryBg, {
+          duration: 0.5,
+          opacity: 0
+        });
         projectsTl.to(parentEl, {
           duration: 0.7,
           zIndex: '1000',
@@ -8476,7 +8506,7 @@ mNineDScript.start = {
         }); // these will run as the timeline is running
 
         addClass(projectsSummaryContainer, 'is-active');
-        addClass(bodyEl, 'is-projects-active');
+        addClass(docEl, 'is-projects-active');
       }
     }
 
@@ -8550,6 +8580,11 @@ mNineDScript.start = {
       resetTl.to(inactiveSiblings, {
         duration: 0.7,
         opacity: 1
+      }); // rest opacity of section bg
+
+      resetTl.to(projectSummaryBg, {
+        duration: 0.5,
+        opacity: 1
       }); // move the summary item back to it's original position
 
       resetTl.to(activeWrapper, {
@@ -8574,7 +8609,7 @@ mNineDScript.start = {
 
           removeClass(activeWrapper, 'is-active-wrapper');
           removeClass(activeWrapper, 'is-animating');
-          removeClass(bodyEl, 'is-projects-active'); // add the default class back to previously added element
+          removeClass(docEl, 'is-projects-active'); // add the default class back to previously added element
 
           addClass(activeWrapper, 'is-inactive'); // move the window back to top of projects
 
@@ -8610,14 +8645,7 @@ mNineDScript.start = {
       if (evt.key === 'Escape') {
         resetProjects();
       }
-    }); // resetting the position here for the triggers in case they shift across screen sizes
-
-    var resetProjectItemPosition = debounce(function () {
-      projectSummaryTriggers.forEach(function (el) {
-        el.style = '';
-      });
-    }, 300);
-    window.addEventListener('resize', resetProjectItemPosition);
+    });
   },
   projectDetailControl: function projectDetailControl() {
     var projectDetailTl = gsap.timeline();

@@ -395,11 +395,13 @@ mNineDScript.start = {
         const itemHeight = 65;
         const projectsSummaryContainer = $1('#js-projects-summary-container');
         const bodyEl = $1('body');
+        const docEl = document.documentElement;
         const projectSummaryClose = $1('.mn-projects-summary-detail-close');
         const projectsSection = $1('#js-projects-top');
         const fadeSections = $('.mn-section-fade');
         const projectContainerClass = '.mn-projects-summary-detail-wrapper';
         const _self = this;
+        const projectSummaryBg = $1('.mn-section-projects-summary-bg ');
 
         // 2 possible values for resetting the project items
         const resetItemValues = ['20px', '80px'];
@@ -483,13 +485,8 @@ mNineDScript.start = {
                 projectsTl.to(parentEl, {duration: 0.7, top: 0, opacity: 1, ease: "expo.inOut(0.5)"});
                 projectsTl.to(parentEl, {duration: 0.7, height: '100vh', ease: "expo.inOut(0.5)"});
                 projectsTl.to(inactiveSiblings, {duration: 0.3, opacity: 0});
-                projectsTl.to(parentEl, {
-                    duration: 0.7,
-                    zIndex: '1000',
-                    backgroundColor: 'rgba(32,32,32,1.0)',
-                    opacity: 1,
-                    ease: "circ.inOut(0.3)",
-                    onComplete: function () {
+                projectsTl.to(projectSummaryBg, {duration: 0.5, opacity: 0});
+                projectsTl.to(parentEl, {duration: 0.7, zIndex: '1000', backgroundColor: 'rgba(32,32,32,1.0)', opacity: 1, ease: "circ.inOut(0.3)", onComplete: function () {
 
                         openDetail(parentEl);
                         addClass(parentEl, 'is-active-wrapper');
@@ -499,7 +496,7 @@ mNineDScript.start = {
 
                 // these will run as the timeline is running
                 addClass(projectsSummaryContainer, 'is-active');
-                addClass(bodyEl, 'is-projects-active');
+                addClass(docEl, 'is-projects-active');
             }
 
         }
@@ -560,6 +557,8 @@ mNineDScript.start = {
             resetTl.to(activeWrapper, {duration: 0.9, height: itemHeight + 'px', ease: "circ.inOut(0.5)"});
             // make the siblings visible again
             resetTl.to(inactiveSiblings, {duration: 0.7, opacity: 1});
+            // rest opacity of section bg
+            resetTl.to(projectSummaryBg, {duration: 0.5, opacity: 1});
             // move the summary item back to it's original position
             resetTl.to(activeWrapper, {duration: 0.65, top: activeWrapperOriginalPos + 'px', ease: "expo.inOut(0.4)"});
             // move the anchor back to the left of the list
@@ -576,7 +575,7 @@ mNineDScript.start = {
                     removeClass(activeWrapper, 'is-active-wrapper');
                     removeClass(activeWrapper, 'is-animating');
 
-                    removeClass(bodyEl, 'is-projects-active');
+                    removeClass(docEl, 'is-projects-active');
                     // add the default class back to previously added element
                     addClass(activeWrapper, 'is-inactive');
 
@@ -630,18 +629,6 @@ mNineDScript.start = {
                 resetProjects();
             }
         });
-
-        // resetting the position here for the triggers in case they shift across screen sizes
-        let resetProjectItemPosition = debounce(function() {
-           projectSummaryTriggers.forEach((el) => {
-               el.style = '';
-           });
-        }, 300);
-
-
-        window.addEventListener('resize', resetProjectItemPosition);
-
-
 
 
     },
@@ -930,7 +917,6 @@ mNineDScript.start = {
                 })
             }
         }
-
 
     }
 

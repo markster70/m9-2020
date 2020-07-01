@@ -7,7 +7,7 @@
   position: relative;
   z-index: 3;
   &.is-padded {
-    padding: 2rem;
+    padding: 0.5rem 2rem;
 
     @include breakpoint($bp-xl) {
       padding: 0 6rem;

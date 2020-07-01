@@ -46,8 +46,8 @@
   &:before {
 
     background-image: url("/dist/images/quote.png");
-    left: 0;
-    top: 30px;
+    left: 10px;
+    top: 10px;
 
     @include breakpoint($bp-xl) {
       left: -60px;
@@ -61,8 +61,8 @@
 
     background-image: url("/dist/images/close-quote.png");
 
-    right: 0;
-    bottom: 60px;
+    right: 10px;
+    bottom: 10px;
 
     @include breakpoint($bp-xl) {
       right: -60px;
@@ -90,4 +90,12 @@
     @include font-size(20);
   }
 
+}
+
+.mn-parralax-about {
+  blockquote {
+    @include breakpoint($bp-xl-max, max-width) {
+      background-color: rgba($black, 0.4);
+    }
+  }
 }

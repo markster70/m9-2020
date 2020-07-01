@@ -1,4 +1,4 @@
-<section class="mn-section mn-section-services" id="js-services-top">
+<section class="mn-section mn-section-services mn-section-fade" id="js-services-top">
     <div class="mn-section-inner">
        <header class="mn-section-services-hd mn-section-hd">
            <h1 class="mn-section-hd-title">

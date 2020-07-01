@@ -43,20 +43,27 @@
   background: url("/dist/images/project-images/pegasus-example-hero.jpg") no-repeat 50% 50% fixed;
 }
 
+.is-bf-hero {
+  background: url("/dist/images/project-images/bf-example-hero.jpg") no-repeat 50% 50% fixed;
+}
+
+
 .mn-projects-summary-detail-hero {
   min-height: 200px;
   width: 100vw;
-  background-size: cover;
+  background-size: contain;
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   border-top: 1px solid rgba($white, 0.2);
   border-bottom: 1px solid rgba($white, 0.2);
+  background-color: darken($body-base-bg, 2%);
 
 
-  @include breakpoint($bp-xl) {
+  @include breakpoint($bp-m) {
     min-height: 500px;
+    background-size: cover;
   }
 
 
@@ -72,7 +79,7 @@
   }
 
   blockquote {
-    padding: 2rem;
+    //padding: 2rem;
     line-height: 1.5;
     font-weight: $font-weight-thin;
     max-width: 90%;
