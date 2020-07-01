@@ -387,7 +387,7 @@ mNineDScript.start = {
     },
     projectsSummaryControl() {
 
-        // this needs re-factor to make more manageable
+        // function to control the project summaries, and their animation with GSAP
 
         const projectSummaryTriggers = $('.mn-section-project-summary-trigger');
         const projectsTl = gsap.timeline();
