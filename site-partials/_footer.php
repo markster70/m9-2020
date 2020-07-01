@@ -1,3 +1,4 @@
+<!-- site footer -->
 <footer class="mn-site-footer">
     <div class="mn-footer-cta">
         <button class="mn-site-footer-btt" aria-label="back-to-top-of-site">

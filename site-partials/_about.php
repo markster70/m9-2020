@@ -1,3 +1,4 @@
+<!-- about section mark-up -->
 <section class="mn-section mn-section-about mn-section-fade mn-section-main" id="js-about-top">
     <div class="mn-section-inner is-padded" id="js-about-content">
         <header class="mn-section-hd">

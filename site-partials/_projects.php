@@ -1,3 +1,4 @@
+<!-- projects section mark-up -->
 <section class="mn-section mn-section-projects mn-section-main" id="js-projects-top">
     <div class="mn-section-inner">
         <div class="mn-section-projects-bd">
