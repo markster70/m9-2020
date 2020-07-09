@@ -50,8 +50,8 @@
     top: 10px;
 
     @include breakpoint($bp-xl) {
-      left: -60px;
-      top: -60px;
+      left: -80px;
+      top: -80px;
     }
 
   }
@@ -65,8 +65,8 @@
     bottom: 10px;
 
     @include breakpoint($bp-xl) {
-      right: -60px;
-      bottom: -60px;
+      right: -80px;
+      bottom: -80px;
     }
   }
 
@@ -94,8 +94,9 @@
 
 .mn-parralax-about {
   blockquote {
+    background-color: rgba($black, 0.4);
     @include breakpoint($bp-xl-max, max-width) {
-      background-color: rgba($black, 0.4);
+
     }
   }
 }

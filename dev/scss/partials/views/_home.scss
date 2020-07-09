@@ -31,15 +31,25 @@
   text-transform: uppercase;
   margin: 0;
   line-height: 1.2;
-  letter-spacing: 8px;
+
+  font-weight: $font-weight-regular;
 
   @include breakpoint($bp-m) {
     @include font-size(60);
   }
 
+  @include breakpoint($bp-l) {
+    @include font-size(85);
+  }
+
 
   @include breakpoint($bp-xl) {
-    @include font-size(100);
+    @include font-size(115);
+    letter-spacing: 20px;
+  }
+
+  @include bpLargeMinHeight($bp-height-min, $bp-xl) {
+    @include font-size(220);
   }
 
 }
@@ -52,28 +62,44 @@
     margin-top: 2rem;
   }
 
+  @include breakpoint($bp-m) {
+    padding-top: 2rem;
+  }
+
+  @include breakpoint($bp-l) {
+    padding-top: 0;
+  }
+
   @include breakpoint($bp-xl) {
-    flex-basis: 50%;
+    flex-basis: 60%;
     align-self: unset;
   }
 
   p {
-    color: $white;
+    color: $grey-accent;
     @include font-size(14);
     letter-spacing: 4px;
     font-weight: $font-weight-light;
 
-    @include breakpoint($bp-l) {
-      @include font-size(16);
+    @include breakpoint($bp-m) {
+      @include font-size(18);
       max-width: 80%;
       font-weight: 400;
+    }
 
+    @include breakpoint($bp-l) {
+      @include font-size(20);
+
+    }
+
+    @include breakpoint($bp-xl) {
+      max-width: 100%;
     }
 
 
     @include breakpoint($bp-xxl) {
-      @include font-size(18);
-      max-width: 100%;
+      @include font-size(22);
+      letter-spacing: 6px;
 
 
     }
@@ -114,7 +140,7 @@
   }
 
   @include breakpoint($bp-xl) {
-    flex-basis: 50%;
+    flex-basis: 40%;
   }
 
 }

@@ -1,28 +1,28 @@
-@import "partials/variables";
-@import "partials/mixins";
+@import "partials/abstracts/variables";
+@import "partials/abstracts/mixins";
 
-@import "partials/normalize";
+@import "partials/globals/normalize";
 
-@import "partials/base";
-@import "partials/layout";
-@import "partials/type";
-@import "partials/buttons";
-@import "partials/burger";
-@import "partials/navigation";
-@import "partials/theme";
-@import "partials/home";
-@import "partials/about";
-@import "partials/services-new";
-@import "partials/quotes";
-@import "partials/projects";
-@import "partials/project-heros";
-@import "partials/_project-preview";
-@import "partials/_contact";
-@import "partials/cursor";
-@import "partials/counter";
-@import "partials/strapline";
-@import "partials/footer";
+@import "partials/globals/base";
+@import "partials/globals/layout";
+@import "partials/globals/type";
+@import "partials/components/buttons";
+@import "partials/components/burger";
+@import "partials/components/navigation";
+@import "partials/globals/theme";
+@import "partials/views/home";
+@import "partials/views/about";
+@import "partials/views/services-new";
+@import "partials/components/quotes";
+@import "partials/views/projects";
+@import "partials/components/project-heros";
+@import "partials/components/project-preview";
+@import "partials/views/contact";
+@import "partials/components/cursor";
+@import "partials/components/counter";
+@import "partials/components/strapline";
+@import "partials/views/footer";
 
-@import "partials/helpers";
+@import "partials/helpers-generics/helpers";
 
-@import "partials/no-script";
+@import "partials/helpers-generics/no-script";

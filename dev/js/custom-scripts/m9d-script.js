@@ -334,23 +334,15 @@ mNineDScript.start = {
 
         const servicesTl = gsap.timeline({paused: true});
 
-        const servTitleHd = $1('.mn-section-services-hd-lg');
-        const servTitleEls = $('.mn-section-services-hd-anim');
-        const servicePanels = $('.mn-section-services-item');
         const serviceHeadings = $('.mn-section-services-item-hd');
         const serviceItems = $('.mn-section-services-item-list');
 
-
-        let serveTitleTween = servicesTl.to(servTitleHd, {duration: 0.7, opacity: 1, left: 0, delay: 1.0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"});
-        let serveElsTween = servicesTl.to(servTitleEls, {duration: 0.8, stagger: 0.25, opacity: 1, top: 0, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.5)"}, ">-0.3");
-        let servePanelTween = servicesTl.to(servicePanels, {duration: 2, stagger: 0.3, opacity: 1, scaleX: 1, scaleY: 1, ease: "elastic.out(0.8)"});
-        let serveHeadingsTween = servicesTl.to(serviceHeadings, {duration: 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"}, ">-1.8");
-        let serveItemsTween = servicesTl.to(serviceItems, {duration: 0.4, stagger: 0.17, opacity: 1, top: 0, ease: "circ.out(0.4)"}, ">0.2");
+         servicesTl.to(serviceHeadings, {duration: 0.2, opacity: 1, stagger: 0.2, scaleX: 1, scaleY: 1, '-webkit-filter': " blur(0px)", ease: "circ.inOut(0.3)"}, ">-1.8");
+         servicesTl.to(serviceItems, {duration: 0.4, stagger: 0.17, opacity: 1, top: 0, ease: "circ.out(0.4)"}, ">0.2");
 
 
         let servicesScene = new ScrollMagic.Scene({
             triggerElement: '#js-services-top',
-            offset: -100
 
         })
             .on("enter", function () {

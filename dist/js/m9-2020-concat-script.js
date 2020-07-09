@@ -8307,36 +8307,9 @@ mNineDScript.start = {
     var servicesTl = gsap.timeline({
       paused: true
     });
-    var servTitleHd = $1('.mn-section-services-hd-lg');
-    var servTitleEls = $('.mn-section-services-hd-anim');
-    var servicePanels = $('.mn-section-services-item');
     var serviceHeadings = $('.mn-section-services-item-hd');
     var serviceItems = $('.mn-section-services-item-list');
-    var serveTitleTween = servicesTl.to(servTitleHd, {
-      duration: 0.7,
-      opacity: 1,
-      left: 0,
-      delay: 1.0,
-      '-webkit-filter': " blur(0px)",
-      ease: "circ.inOut(0.5)"
-    });
-    var serveElsTween = servicesTl.to(servTitleEls, {
-      duration: 0.8,
-      stagger: 0.25,
-      opacity: 1,
-      top: 0,
-      '-webkit-filter': " blur(0px)",
-      ease: "circ.inOut(0.5)"
-    }, ">-0.3");
-    var servePanelTween = servicesTl.to(servicePanels, {
-      duration: 2,
-      stagger: 0.3,
-      opacity: 1,
-      scaleX: 1,
-      scaleY: 1,
-      ease: "elastic.out(0.8)"
-    });
-    var serveHeadingsTween = servicesTl.to(serviceHeadings, {
+    servicesTl.to(serviceHeadings, {
       duration: 0.2,
       opacity: 1,
       stagger: 0.2,
@@ -8345,7 +8318,7 @@ mNineDScript.start = {
       '-webkit-filter': " blur(0px)",
       ease: "circ.inOut(0.3)"
     }, ">-1.8");
-    var serveItemsTween = servicesTl.to(serviceItems, {
+    servicesTl.to(serviceItems, {
       duration: 0.4,
       stagger: 0.17,
       opacity: 1,
@@ -8353,8 +8326,7 @@ mNineDScript.start = {
       ease: "circ.out(0.4)"
     }, ">0.2");
     var servicesScene = new ScrollMagic.Scene({
-      triggerElement: '#js-services-top',
-      offset: -100
+      triggerElement: '#js-services-top'
     }).on("enter", function () {
       servicesTl.play();
     }).on("leave", function () {
@@ -8385,7 +8357,7 @@ mNineDScript.start = {
     });
   },
   projectsSummaryControl: function projectsSummaryControl() {
-    // this needs re-factor to make more manageable
+    // function to control the project summaries, and their animation with GSAP
     var projectSummaryTriggers = $('.mn-section-project-summary-trigger');
     var projectsTl = gsap.timeline();
     var projectWrappers = $('.mn-section-project-summary-item');

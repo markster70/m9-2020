@@ -11,6 +11,12 @@
   @media(#{$min-max}: #{$em}em) { @content; }
 }
 
+@mixin bpLargeMinHeight ($minHeight: 1000, $minWidth: $bp-l) {
+  @media screen and (min-height:  #{$minHeight}px) and (min-width: #{$minWidth}px) {
+    @content;
+  }
+}
+
 @mixin ssLandscape() {
   @media (max-device-width: 799px) and (orientation: landscape) {
     @content;

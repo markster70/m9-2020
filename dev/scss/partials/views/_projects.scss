@@ -157,7 +157,13 @@
   max-height: 0;
   opacity: 0;
   display: none;
-  margin: 4rem auto;
+  margin: 1.5rem auto;
+
+
+  @include breakpoint($bp-l) {
+    margin: 2rem auto;
+  }
+
 
 }
 
@@ -234,15 +240,13 @@
 
 
 
-
-
 .mn-projects-summary-detail-hd {
   color : $primary-accent;
   @include font-size(23);
   letter-spacing: 5px;
   line-height: 1;
   margin: 0 auto 2rem;
-  font-weight: $font-weight-bold;
+  font-weight: $font-weight-medium;
   text-align: center;
   text-transform: uppercase;
   padding-bottom: 3rem;
@@ -288,7 +292,7 @@
 
 .mn-projects-summary-detail-logo {
   text-align: center;
-
+  padding: 1rem 0 0;
   img {
     max-width: 60px;
     height: auto;
@@ -296,7 +300,6 @@
 
   @include breakpoint($bp-xl) {
     padding: 1rem 0;
-
     img {
       max-width: 70px;
     }
@@ -317,6 +320,7 @@
     font-size: $font-weight-medium;
     padding-bottom: 1rem;
     border-bottom: 1px solid rgba($white,0.2);
+    margin-top: 0;
   }
 
   p {
@@ -406,12 +410,15 @@
       padding: 1rem;
     }
 
+    img {
+      opacity: 0.5;
+    }
+
   }
 
   img {
     max-width: 100%;
     height: auto;
-    opacity: 0.5;
     box-shadow: 11px 9px 9px -4px rgba(0,0,0,0.19);
     @include std-transitions();
 

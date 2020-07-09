@@ -1,6 +1,6 @@
+// styles relating to the about section of M9 Digital Only
 .mn-section-about {
   position: relative;
-
 }
 
 .mn-parralax-about {
@@ -11,14 +11,13 @@
   @include breakpoint($bp-xl) {
     height: 550px;
   }
-
 }
 
 .mn-parralax-about {
+
   .mn-parralax-inner {
     background-image: url("/dist/images/mn-quote-parra-bg.jpg");
     height: 100%;
-
     background-repeat: repeat;
     background-size: cover;
     background-position: 50% 0;
@@ -34,10 +33,8 @@
       background-attachment: fixed;
       padding: 6rem 0;
     }
-
   }
 }
-
 
 .mn-about-parralax-text {
   opacity: 0;
@@ -56,6 +53,7 @@
     top: 0;
     left: -2rem;
   }
+
   &:after {
     content: close-quote;
     padding-left: 1rem;
@@ -72,47 +70,30 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
   }
-
-
 }
-
-
 
 .mn-section-about-grid {
   border-bottom: 1px solid rgba($white,0.1);
 }
 
-
 .mn-section-about-grid-item-inner {
-
-
   padding: 0 0 2rem ;
 
   @include breakpoint($bp-massive) {
     padding: 6rem;
   }
-
 }
-
 
 .mn-section-about-hd-lg {
 
-
   @include breakpoint($bp-xl) {
-    opacity: 0;
     position: relative;
-    left: -150px;
   }
-
 }
 
 .mn-section-about-hd-anim {
 
   @include breakpoint($bp-xl) {
-    filter: blur(36px);
-    opacity: 0;
-    top: 80px;
     position: relative;
   }
-
 }
