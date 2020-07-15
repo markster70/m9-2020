@@ -1,3 +1,6 @@
+// styles for the animated 'follow' cursor in use within site
+// i prefer to only apply this to larger screens which avoids
+// issues with mobile type devices
 @include breakpoint($bp-xxl) {
 
   html,
@@ -27,7 +30,6 @@
   $size: 8px;
   width: $size;
   height: $size;
-  //background-color: $primary-accent;
   background-color: $tertiary-accent;
 }
 
@@ -35,7 +37,6 @@
   $size: 50px;
   width: $size;
   height: $size;
-  //background-color: rgba($white, 0.2);
   background-color: rgba(black, 0.2);
 }
 

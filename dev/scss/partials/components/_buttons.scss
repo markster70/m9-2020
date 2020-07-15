@@ -1,5 +1,9 @@
-.mn-project-summary-btt, .mn-site-footer-btt {
+// buttons used minimally on this project
+// but any in use defined here
+.mn-project-summary-btt,
+.mn-site-footer-btt {
 
+  // reset in first to neutralize us stylesheet defaults
   @include button-reset();
   padding: 1rem;
   background-color: $black;
@@ -19,7 +23,6 @@
 
   }
 
-
   &:focus {
     outline: none;
     background-color: lighten($black, 5%);
@@ -29,7 +32,5 @@
     }
 
   }
-
-
 
 }

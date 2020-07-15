@@ -1,3 +1,6 @@
+// counter is used for dual purposes - to give a visual indication of where in the scroll a user is
+// and to provide a quick secondary nav for users to click through
+
 .mn-counter-wrapper {
   position: absolute;
   bottom: 3rem;
@@ -17,11 +20,10 @@
   height: 0;
   width: 0;
   overflow: hidden;
-  @include std-transitions();
   display: block;
-
-
   margin: 0.5rem 0 0 0.5rem;
+
+  @include std-transitions();
 
   svg {
     fill: $primary-accent;
@@ -30,11 +32,8 @@
   }
 }
 
-
-
 .js-section-home-is-active {
   .mn-scroll-indicator-wrap {
-
 
     width: 60px;
     height: 60px;
@@ -48,25 +47,18 @@
 }
 
 
-
-.is-nav-active {
-  .mn-counter-wrapper {
-    opacity: 0;
-  }
-}
-
-
+// nesting used to encapsulate the page indicators as component
 .mn-page-indicators {
+  position: fixed;
+  z-index: 4000;
+  bottom : 40%;
+  left: 1.5rem;
+
   @include std-transitions($speed: 800ms);
 
   @include breakpoint($bp-xl-max, max-width) {
     display: none;
   }
-
-  position: fixed;
-  z-index: 4000;
-  bottom : 40%;
-  left: 1.5rem;
 
   @include breakpoint($bp-l) {
     bottom: 30%;
@@ -145,6 +137,8 @@
   }
 }
 
+// when the contact section is active the presentaion of the counter elements
+// inverts, so styles are wrapped here to effect that ui state change
 .js-contact-top-is-active {
   .mn-page-indicators a {
     background-color: $black;
@@ -160,7 +154,6 @@
   .mn-page-indicators .is-current {
 
     a {
-
       border: 1px solid transparent;
       background-color: $standout;
       color: $white;
@@ -184,6 +177,7 @@
 
 }
 
+// the counter does not need to be visible when the primary nav is is open
 .is-nav-active {
   .mn-counter-wrapper, .mn-page-indicators {
     opacity: 0!important;
