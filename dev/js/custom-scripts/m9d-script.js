@@ -23,10 +23,13 @@ mNineDScript.start = {
         this.runNav();
         this.runScrollAnimations();
         this.scrollToSection();
-        this.projectsSummaryControl();
+        //this.projectsSummaryControl();
         this.activeSectionClasses();
         this.siteBtt();
         this.formValidation();
+
+        this.projectGridActions();
+        this.projectCaseStudyControl();
     },
     cursorSetup() {
         let cursor = {
@@ -624,29 +627,6 @@ mNineDScript.start = {
 
 
     },
-    projectDetailControl() {
-
-        let projectDetailTl = gsap.timeline();
-        const bttButtons = $('.mn-project-summary-btt');
-        const detailWrapper = $1('.mn-section-project-summary-item.is-active-wrapper');
-        const projectCloseBtn = $1('.mn-projects-summary-detail-close');
-
-
-        // back to top button for each wrapper
-
-        bttButtons.forEach((el) => {
-
-            el.addEventListener('click', () => {
-
-                gsap.to(detailWrapper, {duration: 0.8, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
-
-            });
-        });
-
-        projectDetailTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.8, ease: "circ.inOut(0.5)"});
-
-
-    },
     activeSectionClasses() {
 
         // for each section, we need a class added to body for the menu variations etc
@@ -910,7 +890,177 @@ mNineDScript.start = {
             }
         }
 
-    }
+    },
+    projectGridActions () {
+        const pGridItems = $('.mn-project-grid-item-content');
+
+        console.log('ps =' + pGridItems);
+
+        for(let i =0; i < pGridItems.length; i ++) {
+            let el = pGridItems[i];
+
+            el.addEventListener('mouseenter', (e) =>{
+
+                for(let j = 0; j < pGridItems.length; j ++) {
+
+                    let el = pGridItems[j];
+                    let elParent = el.parentNode;
+
+                   if(el !== e.currentTarget) {
+                       addClass(elParent, 'items-active')
+                   } else {
+
+                        addClass(elParent, 'is-current-grid-item');
+                    }
+               }
+             });
+
+            el.addEventListener('mouseleave', () =>{
+
+                for(let j = 0; j < pGridItems.length; j ++) {
+
+                    let el = pGridItems[j];
+                    let elParent = el.parentNode;
+
+                    removeClass(elParent, 'items-active');
+                    removeClass(elParent, 'is-current-grid-item');
+                }
+            })
+
+        }
+
+    },
+    projectCaseStudyControl() {
+        const csTriggers = $('.mn-project-grid-item-trigger');
+        let csWrapper = $1('.mn-project-grid-item-cs-wrap');
+        const wrapperTl = gsap.timeline()
+;
+        for(let i = 0; i< csTriggers.length; i ++) {
+
+            let el = csTriggers[i];
+
+            el.addEventListener('click', (e) => {
+
+                e.preventDefault();
+                addClass(csWrapper, 'is-active');
+                addClass(el, 'is-active');
+
+                this.csWrapperAnimation('go');
+;               this.loadProjectPartial(el);
+            });
+
+        }
+
+    },
+    csWrapperAnimation (direction) {
+
+        let csWrapper = $1('.mn-project-grid-item-cs-wrap');
+        const wrapperTl = gsap.timeline();
+
+        const projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
+        const docEl = document.documentElement;
+        const projectCloseBtn = $1('.mn-projects-summary-detail-close');
+        const projectParentItemInner = $1('.mn-section-projects-inner');
+        const projectItems = $('.mn-project-grid-item');
+
+        const csTriggers = $('.mn-project-grid-item-trigger');
+
+
+        if(direction === 'go') {
+
+            wrapperTl.to(projectItems, {duration: 0.2, stagger: 0.1, opacity: 0, top: '250px', ease: 'circ.inOut'});
+            wrapperTl.to(csWrapper, {duration: 0.3, height: '100vh', ease: 'circ.inOut'}, '<0.3');
+            wrapperTl.to(csWrapper, {duration: 0.8, opacity: 1.0, ease: 'circ.inOut'},'<-0.5');
+            wrapperTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.8, ease: "circ.inOut(0.5)"});
+
+        } else {
+
+            wrapperTl.to(projectCloseBtn, {duration: 0.6, opacity: 0, ease: "circ.inOut(0.5)"});
+            wrapperTl.to(projectContainer, {duration: 0.7, top: '6rem', opacity: 0, ease: "circ.inOut(0.5)"});
+            wrapperTl.to(csWrapper, {duration: 0.5, opacity: 0, ease: 'circ.in', onComplete: function () {
+
+                    for(let i = 0; i< csTriggers.length; i ++) {
+
+                        let el = csTriggers[i];
+
+                        removeClass(el, 'is-active');
+                    }
+                    removeClass(csWrapper, 'is-active');
+                    removeClass(docEl, 'is-projects-active');
+
+                }});
+            wrapperTl.to(projectItems, {duration: 0.25, stagger: 0.1, opacity: 1, top: 0, ease: 'circ.out'});
+            wrapperTl.to(csWrapper, {duration: 0.1, height: 0, ease: 'circ.in'});
+
+        }
+
+    },
+    loadProjectPartial(el) {
+
+
+        let contentToLoad = el.dataset.content;
+        //let elParent = el.parentNode.parentNode;
+        let projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
+
+        const _self = this;
+
+        //if(hasClass(elParent, 'is-inactive')) {
+
+            partialLoader(projectContainer, contentToLoad)
+                .then(function () {
+                    setTimeout(function () {
+
+                        _self.runCaseTimeline();
+
+                    }, 800);
+
+                })
+                .catch(function () {
+                    // need to do something here with the error handler
+                });
+
+       // } // end if
+    },
+    runCaseTimeline () {
+
+        let projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
+        let caseTl = gsap.timeline({paused : true});
+        const docEl = document.documentElement;
+        const _self = this;
+
+        caseTl.to(projectContainer, {duration: 0.7, top: 0, opacity: 1, ease: "circ.inOut(0.5)", onComplete: function () {
+                addClass(docEl, 'is-projects-active');
+                _self.projectDetailControl();
+
+            }});
+
+        caseTl.play();
+    },
+    projectDetailControl() {
+
+        const bttButtons = $('.mn-project-summary-btt');
+        const detailWrapper = $1('.mn-project-grid-item-cs-wrap');
+        const projectCloseBtn = $1('.mn-projects-summary-detail-close');
+
+        // back to top button for each wrapper
+
+        bttButtons.forEach((el) => {
+
+            el.addEventListener('click', () => {
+
+
+                gsap.to(detailWrapper, {duration: 0.8, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
+
+            });
+        });
+
+        projectCloseBtn.addEventListener('click', () => {
+
+            this.csWrapperAnimation();
+
+        });
+
+    },
 
 };
 
