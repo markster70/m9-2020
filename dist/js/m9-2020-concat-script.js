@@ -8922,9 +8922,6 @@ mNineDScript.start = {
         e.preventDefault();
         addClass(csWrapper, 'is-active');
         addClass(el, 'is-active');
-
-        _this2.csWrapperAnimation('go');
-
         ;
 
         _this2.loadProjectPartial(el);
@@ -8941,28 +8938,40 @@ mNineDScript.start = {
     var projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
     var docEl = document.documentElement;
     var projectCloseBtn = $1('.mn-projects-summary-detail-close');
-    var projectParentItemInner = $1('.mn-section-projects-inner');
     var projectItems = $('.mn-project-grid-item');
     var csTriggers = $('.mn-project-grid-item-trigger');
 
+    var _self = this;
+
     if (direction === 'go') {
+      wrapperTl.to(csWrapper, {
+        duration: 0.3,
+        height: '100vh',
+        ease: 'circ.inOut'
+      });
       wrapperTl.to(projectItems, {
-        duration: 0.2,
-        stagger: 0.1,
+        duration: 0.1,
+        stagger: 0.15,
         opacity: 0,
         top: '250px',
         ease: 'circ.inOut'
       });
       wrapperTl.to(csWrapper, {
-        duration: 0.3,
-        height: '100vh',
-        ease: 'circ.inOut'
-      }, '<0.3');
-      wrapperTl.to(csWrapper, {
-        duration: 0.8,
+        duration: 0.2,
         opacity: 1.0,
         ease: 'circ.inOut'
-      }, '<-0.5');
+      }, '<1');
+      wrapperTl.to(projectContainer, {
+        duration: 0.6,
+        top: 0,
+        opacity: 1,
+        ease: "circ.inOut(0.5)",
+        onComplete: function onComplete() {
+          addClass(docEl, 'is-projects-active');
+
+          _self.projectDetailControl();
+        }
+      }, '<');
       wrapperTl.to(projectCloseBtn, {
         duration: 0.6,
         opacity: 0.8,
@@ -8976,7 +8985,7 @@ mNineDScript.start = {
       });
       wrapperTl.to(projectContainer, {
         duration: 0.7,
-        top: '6rem',
+        top: '20rem',
         opacity: 0,
         ease: "circ.inOut(0.5)"
       });
@@ -8995,8 +9004,8 @@ mNineDScript.start = {
         }
       });
       wrapperTl.to(projectItems, {
-        duration: 0.25,
-        stagger: 0.1,
+        duration: 0.2,
+        stagger: 0.15,
         opacity: 1,
         top: 0,
         ease: 'circ.out'
@@ -9004,7 +9013,10 @@ mNineDScript.start = {
       wrapperTl.to(csWrapper, {
         duration: 0.1,
         height: 0,
-        ease: 'circ.in'
+        ease: 'circ.in',
+        onComplete: function onComplete() {
+          projectContainer.innerHTML = '';
+        }
       });
     }
   },
@@ -9013,37 +9025,12 @@ mNineDScript.start = {
 
     var projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
 
-    var _self = this; //if(hasClass(elParent, 'is-inactive')) {
-
-
-    partialLoader(projectContainer, contentToLoad).then(function () {
-      setTimeout(function () {
-        _self.runCaseTimeline();
-      }, 800);
-    })["catch"](function () {// need to do something here with the error handler
-    }); // } // end if
-  },
-  runCaseTimeline: function runCaseTimeline() {
-    var projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
-    var caseTl = gsap.timeline({
-      paused: true
-    });
-    var docEl = document.documentElement;
-
     var _self = this;
 
-    caseTl.to(projectContainer, {
-      duration: 0.7,
-      top: 0,
-      opacity: 1,
-      ease: "circ.inOut(0.5)",
-      onComplete: function onComplete() {
-        addClass(docEl, 'is-projects-active');
-
-        _self.projectDetailControl();
-      }
+    partialLoader(projectContainer, contentToLoad).then(function () {
+      _self.csWrapperAnimation('go');
+    })["catch"](function () {// need to do something here with the error handler
     });
-    caseTl.play();
   },
   projectDetailControl: function projectDetailControl() {
     var _this3 = this;

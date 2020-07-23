@@ -945,7 +945,6 @@ mNineDScript.start = {
                 addClass(csWrapper, 'is-active');
                 addClass(el, 'is-active');
 
-                this.csWrapperAnimation('go');
 ;               this.loadProjectPartial(el);
             });
 
@@ -960,23 +959,29 @@ mNineDScript.start = {
         const projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
         const docEl = document.documentElement;
         const projectCloseBtn = $1('.mn-projects-summary-detail-close');
-        const projectParentItemInner = $1('.mn-section-projects-inner');
         const projectItems = $('.mn-project-grid-item');
 
         const csTriggers = $('.mn-project-grid-item-trigger');
 
+        const _self = this;
+
 
         if(direction === 'go') {
 
-            wrapperTl.to(projectItems, {duration: 0.2, stagger: 0.1, opacity: 0, top: '250px', ease: 'circ.inOut'});
-            wrapperTl.to(csWrapper, {duration: 0.3, height: '100vh', ease: 'circ.inOut'}, '<0.3');
-            wrapperTl.to(csWrapper, {duration: 0.8, opacity: 1.0, ease: 'circ.inOut'},'<-0.5');
+            wrapperTl.to(csWrapper, {duration: 0.3, height: '100vh', ease: 'circ.inOut'});
+            wrapperTl.to(projectItems, {duration: 0.1, stagger: 0.15, opacity: 0, top: '250px', ease: 'circ.inOut'});
+            wrapperTl.to(csWrapper, {duration: 0.2, opacity: 1.0, ease: 'circ.inOut'},'<1');
+            wrapperTl.to(projectContainer, {duration: 0.6, top: 0, opacity: 1, ease: "circ.inOut(0.5)", onComplete: function () {
+                    addClass(docEl, 'is-projects-active');
+                    _self.projectDetailControl();
+
+                }},'<');
             wrapperTl.to(projectCloseBtn, {duration: 0.6, opacity: 0.8, ease: "circ.inOut(0.5)"});
 
         } else {
 
             wrapperTl.to(projectCloseBtn, {duration: 0.6, opacity: 0, ease: "circ.inOut(0.5)"});
-            wrapperTl.to(projectContainer, {duration: 0.7, top: '6rem', opacity: 0, ease: "circ.inOut(0.5)"});
+            wrapperTl.to(projectContainer, {duration: 0.7, top: '20rem', opacity: 0, ease: "circ.inOut(0.5)"});
             wrapperTl.to(csWrapper, {duration: 0.5, opacity: 0, ease: 'circ.in', onComplete: function () {
 
                     for(let i = 0; i< csTriggers.length; i ++) {
@@ -988,9 +993,11 @@ mNineDScript.start = {
                     removeClass(csWrapper, 'is-active');
                     removeClass(docEl, 'is-projects-active');
 
-                }});
-            wrapperTl.to(projectItems, {duration: 0.25, stagger: 0.1, opacity: 1, top: 0, ease: 'circ.out'});
-            wrapperTl.to(csWrapper, {duration: 0.1, height: 0, ease: 'circ.in'});
+            }});
+            wrapperTl.to(projectItems, {duration: 0.2, stagger: 0.15, opacity: 1, top: 0, ease: 'circ.out'});
+            wrapperTl.to(csWrapper, {duration: 0.1, height: 0, ease: 'circ.in', onComplete : function () {
+                    projectContainer.innerHTML = '';
+            }});
 
         }
 
@@ -1004,37 +1011,13 @@ mNineDScript.start = {
 
         const _self = this;
 
-        //if(hasClass(elParent, 'is-inactive')) {
-
             partialLoader(projectContainer, contentToLoad)
                 .then(function () {
-                    setTimeout(function () {
-
-                        _self.runCaseTimeline();
-
-                    }, 800);
-
+                    _self.csWrapperAnimation('go');
                 })
                 .catch(function () {
                     // need to do something here with the error handler
                 });
-
-       // } // end if
-    },
-    runCaseTimeline () {
-
-        let projectContainer = $1('.mn-project-grid-item-cs-wrap-inner');
-        let caseTl = gsap.timeline({paused : true});
-        const docEl = document.documentElement;
-        const _self = this;
-
-        caseTl.to(projectContainer, {duration: 0.7, top: 0, opacity: 1, ease: "circ.inOut(0.5)", onComplete: function () {
-                addClass(docEl, 'is-projects-active');
-                _self.projectDetailControl();
-
-            }});
-
-        caseTl.play();
     },
     projectDetailControl() {
 
