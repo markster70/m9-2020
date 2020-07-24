@@ -120,8 +120,16 @@
   display: flex;
   overflow: hidden;
   transition: all 650ms cubic-bezier(0.230, 1.000, 0.320, 1.000); /* easeOutQuint */
-  min-height: 300px;
+  min-height: 320px;
   text-decoration: none;
+
+  @include breakpoint($bp-m) {
+    min-height: 400px;
+  }
+
+  @include breakpoint($bp-l) {
+    min-height: 300px;
+  }
 
 
 
@@ -219,7 +227,7 @@
     @include breakpoint($bp-l) {
       max-width: 60%;
       @include font-size(20);
-      font-weight: $font-weight-bold;
+      font-weight: $font-weight-medium;
     }
 
   }

@@ -10215,8 +10215,7 @@ mNineDScript.start = {
     }
 
     projectSummaryClose.addEventListener('click', function () {
-      getResetValue(); //console.log('reset');
-      // triggering the reset of projects here
+      getResetValue(); // triggering the reset of projects here
 
       resetProjects();
     }); // reset on escape
@@ -10522,7 +10521,7 @@ mNineDScript.start = {
 
     var csTriggers = $('.mn-project-grid-item-trigger');
     var csWrapper = $1('.mn-project-grid-item-cs-wrap');
-    var wrapperTl = gsap.timeline();
+    ;
 
     var _loop4 = function _loop4(i) {
       var el = csTriggers[i];
@@ -10564,7 +10563,7 @@ mNineDScript.start = {
           stagger: {
             // wrap advanced options in an object
             each: 0.1,
-            from: "random"
+            from: "center"
           },
           opacity: 0,
           top: '250px',
@@ -10586,6 +10585,8 @@ mNineDScript.start = {
           addClass(docEl, 'is-projects-active');
 
           _self.projectDetailControl();
+
+          csWrapper.setAttribute('aria-expanded', 'true');
         }
       }, '<');
       wrapperTl.to(projectCloseBtn, {
@@ -10617,12 +10618,13 @@ mNineDScript.start = {
 
           removeClass(csWrapper, 'is-active');
           removeClass(docEl, 'is-projects-active');
+          csWrapper.setAttribute('aria-expanded', 'false');
         }
       });
 
       if (!m9Vars.isSmallScreen) {
         wrapperTl.to(projectItems, {
-          duration: 0.2,
+          duration: 0.3,
           stagger: {
             // wrap advanced options in an object
             each: 0.15,
@@ -10630,7 +10632,7 @@ mNineDScript.start = {
           },
           opacity: 1,
           top: 0,
-          ease: 'circ.out'
+          ease: 'expo.out'
         });
       }
 
