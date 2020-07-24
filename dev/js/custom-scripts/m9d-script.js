@@ -1,3 +1,12 @@
+
+const m9Vars = {
+    smallScreenCategories : ['ss', 'ms'],
+    largeScreenCategories : ['ls', 'xl', 'xxl', 'massive'],
+    isSmallScreen: false,
+    flickityOpts : { "wrapAround": true }
+};
+
+
 const mNineDScript = {};
 
 
@@ -20,6 +29,7 @@ mNineDScript.start = {
             this.cursorSetup();
         }
 
+        this.resizeActions();
         this.runNav();
         this.runScrollAnimations();
         this.scrollToSection();
@@ -30,6 +40,7 @@ mNineDScript.start = {
 
         this.projectGridActions();
         this.projectCaseStudyControl();
+
     },
     cursorSetup() {
         let cursor = {
@@ -969,7 +980,16 @@ mNineDScript.start = {
         if(direction === 'go') {
 
             wrapperTl.to(csWrapper, {duration: 0.3, height: '100vh', ease: 'circ.inOut'});
-            wrapperTl.to(projectItems, {duration: 0.1, stagger: 0.15, opacity: 0, top: '250px', ease: 'circ.inOut'});
+
+            if (!m9Vars.isSmallScreen) {
+
+                wrapperTl.to(projectItems, {
+                    duration: 0.1, stagger: { // wrap advanced options in an object
+                        each: 0.1,
+                        from: "random",
+                    }, opacity: 0, top: '250px', ease: 'circ.inOut'
+                });
+            }
             wrapperTl.to(csWrapper, {duration: 0.2, opacity: 1.0, ease: 'circ.inOut'},'<1');
             wrapperTl.to(projectContainer, {duration: 0.6, top: 0, opacity: 1, ease: "circ.inOut(0.5)", onComplete: function () {
                     addClass(docEl, 'is-projects-active');
@@ -994,7 +1014,16 @@ mNineDScript.start = {
                     removeClass(docEl, 'is-projects-active');
 
             }});
-            wrapperTl.to(projectItems, {duration: 0.2, stagger: 0.15, opacity: 1, top: 0, ease: 'circ.out'});
+
+            if (!m9Vars.isSmallScreen) {
+
+                wrapperTl.to(projectItems, {
+                    duration: 0.2, stagger: { // wrap advanced options in an object
+                        each: 0.15,
+                        from: "end",
+                    }, opacity: 1, top: 0, ease: 'circ.out'
+                });
+            }
             wrapperTl.to(csWrapper, {duration: 0.1, height: 0, ease: 'circ.in', onComplete : function () {
                     projectContainer.innerHTML = '';
             }});
@@ -1032,7 +1061,7 @@ mNineDScript.start = {
             el.addEventListener('click', () => {
 
 
-                gsap.to(detailWrapper, {duration: 0.8, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
+                gsap.to(detailWrapper, {duration: 1.3, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
 
             });
         });
@@ -1044,6 +1073,69 @@ mNineDScript.start = {
         });
 
     },
+    resizeActions () {
+
+        const docEl = document.documentElement;
+
+        function determineScreenSize () {
+            let screenSizeTest = currScreenSize();
+
+
+            m9Vars.isSmallScreen = m9Vars.smallScreenCategories.includes(screenSizeTest);
+
+            if (m9Vars.isSmallScreen) {
+                addClass(docEl, 'is-small-screen');
+
+            } else {
+                removeClass(docEl, 'is-small-screen');
+                // this may have to be forced as scrollMagic controller update is not great at picking up these changes
+
+            }
+        }
+
+        determineScreenSize();
+
+        const assessScreenSize = debounce( () => {
+            determineScreenSize();
+
+        }, 500);
+
+        // check for large screen & reload if needed
+        window.addEventListener('resize', assessScreenSize );
+
+    },
+    setUpCarousel () {
+
+
+        function initCarousel () {
+
+            if(m9Vars.isSmallScreen) {
+
+                //console.log('setup carousel');
+
+                m9Vars.flkty = new Flickity('.carousel', m9Vars.flickityOpts);
+
+            } else {
+
+                if(m9Vars.flkty) {
+                    m9Vars.flkty.destroy();
+                }
+
+            }
+
+        }
+
+        initCarousel();
+
+        const resetCarousel = debounce( () => {
+            initCarousel();
+
+        }, 500);
+
+
+        window.addEventListener('resize', resetCarousel );
+
+    }
 
 };
 
@@ -1064,5 +1156,6 @@ window.addEventListener('load', () => {
 
     mNineDScript.start.triggerVideos();
     mNineDScript.start.homeSquaresAnimation();
+    mNineDScript.start.setUpCarousel();
 
 });

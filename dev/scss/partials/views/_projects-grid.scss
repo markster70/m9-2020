@@ -3,15 +3,17 @@
 // work portfolio is good
 
 .mn-section-projects-inner {
-  display: grid;
-  max-width: $project-grid-max-width;
-  margin: 0 auto;
 
-
-  grid-gap: 1rem;
+  padding: 0 1rem;
+  max-width: 100%;
 
   @include breakpoint($bp-l) {
     grid-template-columns: 1fr 1fr;
+    display: grid;
+    max-width: $project-grid-max-width;
+    margin: 0 auto;
+    grid-gap: 1rem;
+    padding: 0;
   }
 
   @include breakpoint($bp-xl) {
@@ -27,6 +29,11 @@
 
 .mn-project-grid-item {
   position: relative;
+
+  @include breakpoint($bp-l-max, max-width) {
+    width: 100%;
+  }
+
 }
 
 .mn-project-grid-item-cs-wrap {
@@ -42,6 +49,8 @@
   &.is-active {
     z-index: 100;
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
   }
 
 }
@@ -70,22 +79,9 @@
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
 }
 
-.mn-project-grid-item-title-el {
-  flex-basis: 100%;
-  padding-top: 1rem;
-
-  h4 {
-    color: $white;
-    max-width: 60%;
-    margin: 0 auto;
-    @include font-size(20);
-    text-align: center;
-    font-weight: $font-weight-bold;
-  }
-
-}
 
 .mn-project-grid-item-categories {
   flex-basis: 100%;
@@ -116,6 +112,7 @@
   transition: all 1000ms cubic-bezier(0.230, 1.000, 0.320, 1.000); /* easeOutQuint */
   position: relative;
   left: 0;
+  margin-bottom: 2rem;
 }
 
 .mn-project-grid-item-content {
@@ -130,21 +127,36 @@
 
   &:before {
     content: '';
-    transform: scale(0);
+
     left: 0;
     width: 100%;
     height: 100%;
     transform-origin: center;
-    background-color: transparent;
     position: absolute;
     z-index: 2;
     transition: all 500ms cubic-bezier(0.230, 1.000, 0.320, 1.000); /* easeOutQuint */
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
+
+    transform: scale(1.1);
+    background-color: rgba($body-base-bg, 0.3);
+
+    @include hoverMouse () {
+      transform: scale(0);
+      background-color: transparent;
+    }
   }
 
+  @include hoverMouse () {
+    &:hover  {
+      &:before {
+        transform: scale(1.1);
+        background-color: rgba($body-base-bg, 0.8);
+      }
+    }
+  }
 
-  &:hover, &.is-active  {
+  &.is-active  {
     &:before {
       transform: scale(1.1);
       background-color: rgba($body-base-bg, 0.8);
@@ -174,60 +186,138 @@
   align-items: center;
 
   p {
+
+    display: none;
     color: $primary-accent;
     margin: 0 0.5rem 0;
+
+    @include breakpoint($bp-l) {
+      display: inline-flex;
+    }
+
+  }
+
+}
+
+.mn-project-grid-item-title-el {
+  flex-basis: 100%;
+  align-self: flex-start;
+
+  @include breakpoint($bp-l) {
+    padding-top: 1rem;
+  }
+
+  h4 {
+    color: $white;
+    margin: 0 auto;
+    @include font-size(14);
+    letter-spacing: 3px;
+    text-align: center;
+    max-width: 100%;
+
+
+    @include breakpoint($bp-l) {
+      max-width: 60%;
+      @include font-size(20);
+      font-weight: $font-weight-bold;
+    }
+
   }
 
 }
 
 
 .mn-project-grid-item-title {
-  opacity: 0;
-  top: 60px;
+
   transition: all 300ms cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
   position: relative;
-  background-color: rgba($black, 0.5);
+  background-color: rgba($black, 1.0);
   padding: 0.3rem 1rem;
+
+  @include breakpoint($bp-l) {
+    background-color: rgba($black, 0.5);
+  }
+
+  @include breakpoint($bp-l-max, max-width) {
+    width: 100%;
+  }
+
+  @include hoverMouse () {
+    opacity: 0;
+    top: 60px;
+  }
+
 }
 
 .mn-project-grid-item-categories {
   position: relative;
-  top: 150px;
-  opacity: 0;
   transition: all 550ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+
+  @include hoverMouse () {
+    top: 150px;
+    opacity: 0;
+  }
 }
 
 .mn-project-grid-item-link {
+
+  background-color: rgba($black, 0.5);
+
+  @include hoverMouse () {
+    background-color: transparent;
+  }
+
+  padding: 0 1rem;
+  height: 40px;
+
+
+  @include breakpoint($bp-l) {
+    height: auto;
+    background-color: transparent;
+  }
+
   p, img {
     position: relative;
-    opacity: 0;
     transition: all 600ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
     transition-delay: 0.15s;
+
+
+
+    @include hoverMouse () {
+      opacity: 0;
+
+      p {
+        left: -50px;
+      }
+
+      img {
+        left: 50px;
+      }
+
+    }
+
   }
 
-  p {
-    left: -50px;
-  }
-  img {
-    left: 50px;
-  }
 }
 
-.mn-project-grid-item-content:hover {
-  .mn-project-grid-item-title, .mn-project-grid-item-categories {
-    opacity: 1;
-    top: 0;
-    transition-delay: 0s;
-  }
+@include hoverMouse () {
 
-  .mn-project-grid-item-link {
-    p, img {
-      left: 0;
+  .mn-project-grid-item-content:hover {
+    .mn-project-grid-item-title, .mn-project-grid-item-categories {
       opacity: 1;
+      top: 0;
       transition-delay: 0s;
     }
-  }
 
+    .mn-project-grid-item-link {
+      p, img {
+        left: 0;
+        opacity: 1;
+        transition-delay: 0s;
+      }
+    }
+
+  }
 }
 
 .mn-project-grid-item.items-active {
@@ -253,4 +343,11 @@
 
 .mn-section-projects-inner {
   position: relative;
+}
+
+
+.is-projects-active {
+  .mn-section-fade {
+    opacity: 0;
+  }
 }

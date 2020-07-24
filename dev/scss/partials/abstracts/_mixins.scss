@@ -184,3 +184,9 @@
   padding: 0;
 }
 
+
+@mixin hoverMouse () {
+  @media(hover: hover) and (pointer: fine) {
+    @content;
+  }
+}
