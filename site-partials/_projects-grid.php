@@ -10,11 +10,11 @@
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/pegasus.php" data-content="/projects/includes/pegasus-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/pegasus-example-c.jpg" alt="pegasus animated website">
+                            <img src="/dist/images/project-images/project-previews/pegasus-example-preview.jpg" alt="pegasus animated website">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
-                                <h4 class="mn-project-grid-item-title">Animated Responsive Website for Medical Business</h4>
+                                <h4 class="mn-project-grid-item-title">Animated Website for Medical Business</h4>
                             </div>
                             <div class="mn-project-grid-item-link">
                                 <p>View Case Study</p>
@@ -30,11 +30,14 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Pegasus Public Relations</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/zishi.php" data-content="/projects/includes/zishi-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/zishi-example-b.jpg" alt="pvue js application for trading company">
+                            <img src="/dist/images/project-images/project-previews/zishi-example-preview.jpg" alt="vue js application for trading company">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
@@ -54,11 +57,14 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Zishi Adaptive</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+	                    <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/frotcom.php" data-content="/projects/includes/frotcom-content.html" aria-controls="case-study-wrapper" class="mn-project-grid-item-content mn-project-grid-item-trigger">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/frotcom-example-a.jpg" alt="wordpress based website development">
+                            <img src="/dist/images/project-images/project-previews/frotcom-example-preview.jpg" alt="wordpress based website development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
@@ -78,11 +84,14 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">FrotCom Ireland</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/body-face.php" data-content="/projects/includes/body-face-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/bf-example-a.jpg" alt="e-commerce website development">
+                            <img src="/dist/images/project-images/project-previews/bf-example-preview.jpg" alt="e-commerce website development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
@@ -103,11 +112,14 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Body &amp; Face Beauty Boutique</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/mpp.php" data-content="/projects/includes/mpp-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/mpp-example-b.jpg" alt="wordpress and e-commerce website development">
+                            <img src="/dist/images/project-images/project-previews/mpp-example-preview.jpg" alt="wordpress and e-commerce website development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
@@ -127,11 +139,14 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Mark Price Photography</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/collective.php" data-content="/projects/includes/collective-content.html"  class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/hyundai-example-a.jpg" alt="microsite development - Hyundai UK">
+                            <img src="/dist/images/project-images/project-previews/hyundai-example-preview.jpg" alt="microsite development - Hyundai UK">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
@@ -151,15 +166,18 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Collective London</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/ttc.php" data-content="/projects/includes/ttc-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/ttc-example-a.jpg" alt="Vue.Js Website Development">
+                            <img src="/dist/images/project-images/project-previews/ttc-example-preview.jpg" alt="Vue.Js Website Development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
-                                <h4 class="mn-project-grid-item-title">Website / Application Development for Travel Corporation</h4>
+                                <h4 class="mn-project-grid-item-title">Website / App Development for Travel Corporation</h4>
                             </div>
                             <div class="mn-project-grid-item-link">
                                 <p>View Case Study</p>
@@ -175,15 +193,18 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">The Travel Corporation</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/object-tech.php" data-content="/projects/includes/objecttech-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/otk-example-b.jpg" alt="Wordpress Website Development">
+                            <img src="/dist/images/project-images/project-previews/otk-example-preview.jpg" alt="Wordpress Website Development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
-                                <h4 class="mn-project-grid-item-title">Wordpress / Website Development for BlockChain Start-up</h4>
+                                <h4 class="mn-project-grid-item-title">Wordpress Development for BlockChain Start-up</h4>
                             </div>
                             <div class="mn-project-grid-item-link">
                                 <p>View Case Study</p>
@@ -199,15 +220,18 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">ObjectTech Limited</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/investec.php" data-content="/projects/includes/investec-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/investec-example-a.png" alt="Email Application Development">
+                            <img src="/dist/images/project-images/project-previews/investec-example-preview.jpg" alt="Email Application Development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
-                                <h4 class="mn-project-grid-item-title">Email Application Development for International Bank</h4>
+                                <h4 class="mn-project-grid-item-title">Email Application for International Bank</h4>
                             </div>
                             <div class="mn-project-grid-item-link">
                                 <p>View Case Study</p>
@@ -223,15 +247,18 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Investec Bank PLC</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/jisc.php" data-content="/projects/includes/jisc-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/jisc-example-a.jpg" alt="Front End Development">
+                            <img src="/dist/images/project-images/project-previews/jisc-example-preview.jpg" alt="Front End Development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
-                                <h4 class="mn-project-grid-item-title">Front-End Refactor / UI Design for University Website</h4>
+                                <h4 class="mn-project-grid-item-title">Front-End / UI Design for University Website</h4>
                             </div>
                             <div class="mn-project-grid-item-link">
                                 <p>View Case Study</p>
@@ -248,15 +275,18 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Jisc Collections</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/think-rise.php" data-content="/projects/includes/think-rise-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/think-rise-example-a.png" alt="Front End Development">
+                            <img src="/dist/images/project-images/project-previews/think-rise-example-preview.jpg" alt="Front End Development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
-                                <h4 class="mn-project-grid-item-title">Front-End Development for Fin-Tech Application Site</h4>
+                                <h4 class="mn-project-grid-item-title">Front-End Development for Fin-Tech Application </h4>
                             </div>
                             <div class="mn-project-grid-item-link">
                                 <p>View Case Study</p>
@@ -272,11 +302,14 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Think Rise</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/barclays.php" data-content="/projects/includes/barclays-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
-                            <img src="/dist/images/project-images/smart-inv-example-c.png" alt="Front End Development">
+                            <img src="/dist/images/project-images/project-previews/smart-inv-example-preview.jpg" alt="Front End Development">
                         </div>
                         <div class="mn-project-grid-item-inner">
                             <div class="mn-project-grid-item-title-el">
@@ -296,6 +329,9 @@
                         </div>
                     </a>
                     <h4 class="mn-project-grid-item-label">Barclays Smart Investor</h4>
+                    <div class="mn-site-nav-projects-grid-item-load-ind">
+		                <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+                    </div>
                 </article>
             </div>
         </div>

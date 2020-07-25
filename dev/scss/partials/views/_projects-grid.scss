@@ -30,47 +30,17 @@
 .mn-project-grid-item {
   position: relative;
 
+  @include breakpoint($bp-m-max, max-width) {
+    min-height: 350px;
+  }
+
   @include breakpoint($bp-l-max, max-width) {
     width: 100%;
+    background-color: rgba($black, 0.1);
   }
 
 }
 
-.mn-project-grid-item-cs-wrap {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 0;
-  width: 100vw;
-  z-index: -1;
-  opacity: 0;
-  background-color: $body-base-bg;
-
-  &.is-active {
-    z-index: 100;
-    overflow-y: scroll;
-    -webkit-overflow-scrolling: touch;
-    overflow-scrolling: touch;
-  }
-
-}
-
-.mn-project-grid-item-cs-wrap-inner {
-  padding-top: 3rem;
-  opacity: 0;
-  top: 20rem;
-  position: relative;
-  height: auto;
-
-}
-
-
-.mn-project-grid-item-cs-wrap.is-active {
-  .mn-projects-summary-detail-close {
-    display: block;
-    z-index: 6000;
-  }
-}
 
 .mn-project-grid-item-inner {
   position: relative;
@@ -80,6 +50,7 @@
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 
@@ -87,51 +58,76 @@
   flex-basis: 100%;
   align-self: flex-end;
   width: 100%;
-  background-color: $black;
-  padding: 1rem;
+  position: relative;
+  transition: all 550ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
+
+
   text-align: center;
+
+  @include breakpoint($bp-l) {
+    background-color: $black;
+    padding: 1rem;
+  }
+
+  .is-hover-device & {
+
+    @include breakpoint($bp-l) {
+      top: 150px;
+      opacity: 0;
+    }
+
+  }
 
   span {
     color: $white;
-    @include font-size(12);
+    @include font-size(10);
     text-transform: uppercase;
     display: inline-block;
     padding-right: 0.3rem;
+    opacity: 0.3;
+
+    @include breakpoint($bp-l) {
+      @include font-size(12);
+      opacity: 1;
+    }
+
   }
 }
 
 
 
 .mn-project-grid-item-label {
-  @include font-size(13);
+  @include font-size(14);
   color: $white;
   text-transform: uppercase;
   letter-spacing: 3px;
   font-weight: $font-weight-medium;
   opacity: 0.4;
   transition: all 1000ms cubic-bezier(0.230, 1.000, 0.320, 1.000); /* easeOutQuint */
-  position: relative;
-  left: 0;
   margin-bottom: 2rem;
+  text-align: center;
+
+
+  @include breakpoint($bp-l) {
+    @include font-size(13);
+    position: relative;
+    left: 0;
+    text-align: left;
+  }
+
+
 }
 
 .mn-project-grid-item-content {
   position: relative;
-  display: flex;
-  overflow: hidden;
   transition: all 650ms cubic-bezier(0.230, 1.000, 0.320, 1.000); /* easeOutQuint */
-  min-height: 320px;
   text-decoration: none;
-
-  @include breakpoint($bp-m) {
-    min-height: 400px;
-  }
 
   @include breakpoint($bp-l) {
     min-height: 300px;
+    display: flex;
+    overflow: hidden;
   }
-
-
 
   &:before {
     content: '';
@@ -156,7 +152,7 @@
   }
 
   @include hoverMouse () {
-    &:hover  {
+    &:hover {
       &:before {
         transform: scale(1.1);
         background-color: rgba($body-base-bg, 0.8);
@@ -164,34 +160,118 @@
     }
   }
 
-  &.is-active  {
+  &.is-active {
     &:before {
       transform: scale(1.1);
       background-color: rgba($body-base-bg, 0.8);
     }
   }
 
-  .mn-project-grid-item-img {
+}
+
+
+.mn-project-grid-item-img {
+
+  width: 90%;
+  z-index: 1;
+  overflow: hidden;
+  margin: 1rem auto;
+  padding: 1rem;
+  background-color: rgba($white, 0.03);
+
+  @include breakpoint($bp-m) {
+    height: 360px;
+  }
+
+
+  @include breakpoint($bp-l) {
     position: absolute;
     left: 0;
     top: 0;
     height: 100%;
-    width: 100%;
-    z-index: 1;
     max-height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 
-    img {
-      object-fit: cover;
-      height: 100%;
-      width: 100%;
+  img {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+
+
+.mn-project-grid-item-title-el {
+  flex-basis: 100%;
+  align-self: flex-start;
+
+  background-color: transparent;
+
+  @include breakpoint($bp-l) {
+    padding-top: 1rem;
+
+  }
+
+}
+
+.mn-project-grid-item-title {
+
+  transition: all 300ms cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
+  position: relative;
+  padding: 0.3rem 1rem;
+  color: $white;
+  margin: 0 auto;
+  @include font-size(14);
+  letter-spacing: 2px;
+  text-align: center;
+  max-width: 100%;
+  opacity: 0.6;
+
+  @include breakpoint($bp-l-max, max-width) {
+    width: 100%;
+  }
+
+  @include breakpoint($bp-l) {
+    max-width: 80%;
+    @include font-size(20);
+    font-weight: $font-weight-medium;
+    background-color: rgba($black, 0.5);
+    opacity: 1;
+  }
+
+  .is-hover-device & {
+    @include breakpoint($bp-l) {
+      opacity: 0;
+      top: 60px;
     }
   }
 
 }
 
+
 .mn-project-grid-item-link {
-  display: flex;
+
+  background-color: rgba($black, 0.5);
+  display: none;
   align-items: center;
+
+  .is-hover-device & {
+
+    @include breakpoint($bp-l) {
+      background-color: transparent;
+    }
+
+  }
+
+  @include breakpoint($bp-l) {
+    height: auto;
+    background-color: rgba($black, 0.5);
+    padding: 0.1rem 1rem;
+    display: flex;
+  }
 
   p {
 
@@ -205,103 +285,25 @@
 
   }
 
-}
-
-.mn-project-grid-item-title-el {
-  flex-basis: 100%;
-  align-self: flex-start;
-
-  @include breakpoint($bp-l) {
-    padding-top: 1rem;
-  }
-
-  h4 {
-    color: $white;
-    margin: 0 auto;
-    @include font-size(14);
-    letter-spacing: 3px;
-    text-align: center;
-    max-width: 100%;
-
-
-    @include breakpoint($bp-l) {
-      max-width: 60%;
-      @include font-size(20);
-      font-weight: $font-weight-medium;
-    }
-
-  }
-
-}
-
-
-.mn-project-grid-item-title {
-
-  transition: all 300ms cubic-bezier(0.250, 0.460, 0.450, 0.940); /* easeOutQuad */
-  position: relative;
-  background-color: rgba($black, 1.0);
-  padding: 0.3rem 1rem;
-
-  @include breakpoint($bp-l) {
-    background-color: rgba($black, 0.5);
-  }
-
-  @include breakpoint($bp-l-max, max-width) {
-    width: 100%;
-  }
-
-  @include hoverMouse () {
-    opacity: 0;
-    top: 60px;
-  }
-
-}
-
-.mn-project-grid-item-categories {
-  position: relative;
-  transition: all 550ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
-
-  @include hoverMouse () {
-    top: 150px;
-    opacity: 0;
-  }
-}
-
-.mn-project-grid-item-link {
-
-  background-color: rgba($black, 0.5);
-
-  @include hoverMouse () {
-    background-color: transparent;
-  }
-
-  padding: 0 1rem;
-  height: 40px;
-
-
-  @include breakpoint($bp-l) {
-    height: auto;
-    background-color: transparent;
-  }
-
   p, img {
     position: relative;
     transition: all 600ms cubic-bezier(0.075, 0.820, 0.165, 1.000); /* easeOutCirc */
     transition-delay: 0.15s;
 
+  }
 
+  @include hoverMouse () {
 
-    @include hoverMouse () {
+    p, img {
       opacity: 0;
+    }
 
-      p {
-        left: -50px;
-      }
+    p {
+      left: -50px;
+    }
 
-      img {
-        left: 50px;
-      }
-
+    img {
+      left: 50px;
     }
 
   }
@@ -357,5 +359,72 @@
 .is-projects-active {
   .mn-section-fade {
     opacity: 0;
+  }
+}
+
+// case study wrapper
+
+
+.mn-project-grid-item-cs-wrap {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 0;
+  width: 100vw;
+  z-index: -1;
+  opacity: 0;
+  background-color: $body-base-bg;
+
+  &.is-active {
+    z-index: 100;
+    overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+  }
+
+}
+
+.mn-project-grid-item-cs-wrap-inner {
+  padding-top: 5rem;
+  opacity: 0;
+  top: 20rem;
+  position: relative;
+  height: auto;
+
+}
+
+
+.mn-project-grid-item-cs-wrap.is-active {
+  .mn-projects-summary-detail-close {
+    display: block;
+    z-index: 6000;
+  }
+}
+
+// loading element for small screens
+
+
+.mn-site-nav-projects-grid-item-load-ind {
+  text-align: center;
+  padding-bottom: 1.5rem;
+
+  @include std-transitions();
+  opacity: 0;
+
+  svg {
+    max-height: 10px;
+    width: auto;
+  }
+
+  @include breakpoint($bp-l) {
+    display: none!important;
+  }
+
+}
+
+
+.mn-project-grid-item.is-active {
+  .mn-site-nav-projects-grid-item-load-ind {
+    opacity: 1;
   }
 }

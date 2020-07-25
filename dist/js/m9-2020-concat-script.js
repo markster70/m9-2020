@@ -9584,6 +9584,7 @@ mNineDScript.start = {
       }
     }
 
+    this.canHover();
     var currSS = currScreenSize();
 
     if (currSS === 'xls' || currSS === 'xxl' || currSS === 'massive') {
@@ -9710,6 +9711,14 @@ mNineDScript.start = {
       }
     };
     cursor.init();
+  },
+  canHover: function canHover() {
+    // if we have proper hover
+    var docEl = document.documentElement;
+
+    if (window.matchMedia('(hover: hover)').matches) {
+      addClass(docEl, 'is-hover-device');
+    }
   },
   runNav: function runNav() {
     var _this = this;
@@ -10529,6 +10538,7 @@ mNineDScript.start = {
         e.preventDefault();
         addClass(csWrapper, 'is-active');
         addClass(el, 'is-active');
+        addClass(el.parentNode, 'is-active');
         ;
 
         _this2.loadProjectPartial(el);
@@ -10614,6 +10624,7 @@ mNineDScript.start = {
           for (var i = 0; i < csTriggers.length; i++) {
             var el = csTriggers[i];
             removeClass(el, 'is-active');
+            removeClass(el.parentNode, 'is-active');
           }
 
           removeClass(csWrapper, 'is-active');

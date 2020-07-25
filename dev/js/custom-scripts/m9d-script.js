@@ -23,6 +23,8 @@ mNineDScript.start = {
             }
         }
 
+        this.canHover();
+
         let currSS = currScreenSize();
 
         if (currSS === 'xls' || currSS ==='xxl' || currSS ==='massive') {
@@ -172,6 +174,16 @@ mNineDScript.start = {
         };
 
         cursor.init();
+    },
+    canHover () {
+        // if we have proper hover
+
+        const docEl = document.documentElement;
+
+        if(window.matchMedia('(hover: hover)').matches) {
+            addClass(docEl, 'is-hover-device');
+        }
+
     },
     runNav() {
         const navTrigger = $1('.hamburger');
@@ -952,6 +964,7 @@ mNineDScript.start = {
                 e.preventDefault();
                 addClass(csWrapper, 'is-active');
                 addClass(el, 'is-active');
+                addClass(el.parentNode, 'is-active');
 
 ;               this.loadProjectPartial(el);
             });
@@ -1008,6 +1021,7 @@ mNineDScript.start = {
                         let el = csTriggers[i];
 
                         removeClass(el, 'is-active');
+                        removeClass(el.parentNode, 'is-active');
                     }
                     removeClass(csWrapper, 'is-active');
                     removeClass(docEl, 'is-projects-active');
@@ -1060,7 +1074,6 @@ mNineDScript.start = {
         bttButtons.forEach((el) => {
 
             el.addEventListener('click', () => {
-
 
                 gsap.to(detailWrapper, {duration: 1.3, scrollTo: {y: 0, autoKill: false}, ease: "circ.inOut",});
 
