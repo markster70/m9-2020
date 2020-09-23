@@ -879,6 +879,10 @@ mNineDScript.start = {
     },
     setUpCarousel () {
 
+        // function to initiate flickity carousel
+        // carousel is used for work portfolio at small screen only
+        // on resize the screen size is re-asesseed
+        // and carousel instantiated, or destroyed
 
         function initCarousel () {
 
@@ -893,9 +897,7 @@ mNineDScript.start = {
                 if(m9Vars.flkty) {
                     m9Vars.flkty.destroy();
                 }
-
             }
-
         }
 
         initCarousel();
@@ -910,6 +912,9 @@ mNineDScript.start = {
 
     },
     setOfflineElements () {
+        // function to set a class on the doc el if the network is available, or not
+        // within the ajax parts of the site, images are not shown when site is off-grid to keep the cache size reasonable
+        // for a user
         const toggleNavigatorDisplay = () => {
             if(navigator.onLine) {
                 addClass(document.documentElement, 'is-online');
