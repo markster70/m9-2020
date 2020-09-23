@@ -1,0 +1,26 @@
+.mn-projects-offline-notify {
+	max-width: 90%;
+	margin: 0 auto;
+	
+	h4 {
+		background-color: $black;
+		padding: 1rem 3rem;
+		color : $white;
+		@include font-size(32)
+	}
+	
+}
+
+
+.is-online {
+	
+	.offline-only {
+		display: none;
+	}
+}
+
+.is-offline {
+	.online-only {
+		display: none;
+	}
+}

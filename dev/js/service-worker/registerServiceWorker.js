@@ -1,5 +1,5 @@
 // grab workbox-window from repo
-import {Workbox} from '/examples/service-worker/dist/js/workbox-window.js';
+import {Workbox} from '/dist/js/workbox-window.js';
 
 // this file takes care of the service worker installation
 // using google's workbox tools
@@ -17,6 +17,7 @@ import {Workbox} from '/examples/service-worker/dist/js/workbox-window.js';
 
 window.addEventListener('load', () => {
 
+
     if ('serviceWorker' in navigator) {
         // set ref to the Workbox class
         // api ref is here
@@ -24,12 +25,12 @@ window.addEventListener('load', () => {
         const wb = new Workbox('service-worker.js');
 
         const viewRoutes = [
-            '/index.html'
+            '/',
         ];
 
-        // note EXAMPlE_SITE_CACHE_OBJECT is derived from siteCacheValues.js
+        // note BERINERT_SITE_CACHE_OBJECT is derived from siteCacheValues.js
 
-        const staticCacheName = EXAMPlE_SITE_CACHE_OBJECT.viewsCacheName;
+        const staticCacheName = M9_SITE_CACHE_OBJECT.viewsCacheName;
 
 
         // this adds the urls to the caches when caches are available
@@ -38,7 +39,9 @@ window.addEventListener('load', () => {
             await myCache.addAll(urls);
         }
 
+
         addToCache(viewRoutes);
+
 
         // this event will fire when the service worker is initially installed, and if there is a new service worker will advise the user
         // with a prompt
@@ -50,11 +53,13 @@ window.addEventListener('load', () => {
                     window.location.reload();
                 }
             }
+
         });
 
 
         wb.addEventListener('activated', event => {
             console.info('Service worker Activated The application is available offline. :)');
+
 
         });
 
@@ -62,7 +67,6 @@ window.addEventListener('load', () => {
         wb.addEventListener('controlling', () => {
             console.info('page under sw control');
         });
-
 
         // service worker registration happens here
         wb.register();
@@ -76,8 +80,6 @@ window.addEventListener('load', () => {
 
             console.info('Workbox active - The application is available offline. :)');
 
-            //document.querySelector('.ber-sw-success').classList.add('is-sw-active');
-
         // if fails for some reason
         // we can show the network only message
         }).catch(() => {
@@ -88,11 +90,12 @@ window.addEventListener('load', () => {
 
             // constructing the precache name here, based on the version in siteCacheValues
 
-            let preCacheName =  `${EXAMPlE_SITE_CACHE_OBJECT.precachePrefix}-precache-${EXAMPlE_SITE_CACHE_OBJECT.precacheSuffix}`;
+            let mnPreCacheName =  `${M9_SITE_CACHE_OBJECT.precachePrefix}-precache-${M9_SITE_CACHE_OBJECT.precacheSuffix}`;
 
-            // array holding both current cache names - derived from object in siteCacheValues, and the preCacheName var
+            // array holding both current cache names - derived from object is siteCacheValues, and passed around application
+            // to service worker and cache API scripts
 
-            let cachesToKeep = [EXAMPlE_SITE_CACHE_OBJECT.viewsCacheName,preCacheName];
+            var cachesToKeep = [M9_SITE_CACHE_OBJECT.viewsCacheName,mnPreCacheName];
 
             // this should loop through the caches and bin off any old ones
 
@@ -107,17 +110,37 @@ window.addEventListener('load', () => {
         });
 
 
-        wb.addEventListener('fetch', function(event) {
+        wb.addEventListener('fetch', (event) => {
             event.respondWith(
                 caches.match(event.request)
                     .then(function(response) {
-                            // Cache hit - return response
-                            if (response) {
+                        // Cache hit - return response
+                        if (response) {
+                            return response;
+                        }
+
+                        return fetch(event.request).then(
+                            function(response) {
+                                // Check if we received a valid response
+                                if(!response || response.status !== 200 || response.type !== 'basic') {
+                                    return response;
+                                }
+
+                                // IMPORTANT: Clone the response. A response is a stream
+                                // and because we want the browser to consume the response
+                                // as well as the cache consuming the response, we need
+                                // to clone it so we have two streams.
+                                var responseToCache = response.clone();
+
+                                caches.open(M9_SITE_CACHE_OBJECT.viewsCacheName)
+                                    .then(function(cache) {
+                                        cache.put(event.request, responseToCache);
+                                    });
+
                                 return response;
                             }
-                            return fetch(event.request);
-                        }
-                    )
+                        );
+                    })
             );
         });
 
@@ -129,21 +152,11 @@ window.addEventListener('load', () => {
 
     }
 
-    // function to trigger login
-
-
-    function activateStartUp() {
-
-        console.log('go');
-
-    }
 
     // this is a fallback function - will allow user to login, but will display a message advising them
     // that the app is only available online, and they should reload
     function swFailed () {
 
-
-       console.log('sw-failed');
 
     }
 

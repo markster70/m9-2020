@@ -17,15 +17,23 @@ const notify = require('gulp-notify');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const touch = require('gulp-touch-fd');
+const workboxBuild = require('workbox-build');
+
+
+const path = require('path');
+const fs = require('fs');
+
+const distDir = 'dist/';
+const devDir = 'dev/';
+const swSrc = `${devDir}js/service-worker`;
 
 
 // BrowserSync
 function browserSync(done) {
     browsersync.init({
         injectChanges: true,
-        proxy: "http://m9-digital-2020:8080",
-        port: 3001
-
+        proxy: "https://m9-digital-2020:7443",
+        port: 3001,
     });
     done();
 }
@@ -76,7 +84,7 @@ function createImages() {
         .pipe(newer('dist/images'))
         .pipe(imagemin({optimizationLevel: 3, progressive: true, interlaced: true}))
         .pipe(gulp.dest('dist/images'))
-        .pipe(notify({ message: 'Image Compression complete' }));
+        .pipe(notify({ message: 'Image Compression complete', onLast: true }));
 }
 
 function lintScripts () {
@@ -136,6 +144,19 @@ function watchFiles() {
 
 }
 
+// simple task to copy over the service worker registration code
+gulp.task('copyServiceWorkerDependencies', () => {
+    return gulp.src([`${swSrc}/siteCacheValues.js`,`${swSrc}/native-sw-register.js`])
+        .pipe(gulp.dest(`${distDir}js`))
+});
+
+
+// simple task to copy over the service worker registration code
+gulp.task('copyServiceWorker', () => {
+    return gulp.src(`${swSrc}/service-worker.js`)
+        .pipe(gulp.dest('./'))
+});
+
 
 // Tasks
 gulp.task("images", createImages);
@@ -144,9 +165,8 @@ gulp.task("js", gulp.series(lintScripts,createScripts, copyStandaloneScripts));
 gulp.task("clean", clean);
 
 
-gulp.task(
-    "build",
-    gulp.series(clean, gulp.parallel(createCss, createImages, "js", copyFonts))
-);
+gulp.task("build", gulp.series(clean, gulp.parallel(createCss, createImages, "js", copyFonts), "copyServiceWorkerDependencies", "copyServiceWorker"));
+
+
 
 gulp.task("run", gulp.parallel("build",browserSync, watchFiles));

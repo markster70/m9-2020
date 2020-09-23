@@ -10,8 +10,8 @@
 // serviceWorker.js
 // main.js
 
-const EXAMPlE_SITE_CACHE_OBJECT = {
-    viewsCacheName : "sw-example-views-cache-v1.0",
-    precachePrefix: "swExampleE",
+const M9_SITE_CACHE_OBJECT = {
+    viewsCacheName : "mn-pages-cache-v1.01",
+    precachePrefix: "mN",
     precacheSuffix: "1.01"
 };

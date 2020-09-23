@@ -43,6 +43,8 @@ mNineDScript.start = {
         this.projectGridActions();
         this.projectCaseStudyControl();
 
+        this.setOfflineElements();
+
     },
     cursorSetup() {
         let cursor = {
@@ -519,7 +521,7 @@ mNineDScript.start = {
         // am only triggering the videos for screen sizes in the 'massive' category here -
         // those most likely to have the bandwith to smoothly play the video
         // it's for visual decoration only, so no functional need to be playe when the nav opens
-        if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss ==='xls') {
+        if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss ==='xls' || !navigator.onLine) {
             return;
         }
 
@@ -814,6 +816,7 @@ mNineDScript.start = {
             partialLoader(projectContainer, contentToLoad)
                 .then(function () {
                     _self.csWrapperAnimation('go');
+                    _self.setOfflineElements();
                 })
                 .catch(function () {
                     // need to do something here with the error handler
@@ -905,6 +908,22 @@ mNineDScript.start = {
 
         window.addEventListener('resize', resetCarousel );
 
+    },
+    setOfflineElements () {
+        const toggleNavigatorDisplay = () => {
+            if(navigator.onLine) {
+                addClass(document.documentElement, 'is-online');
+                removeClass(document.documentElement, 'is-offline');
+            } else {
+                addClass(document.documentElement, 'is-offline');
+                removeClass(document.documentElement, 'is-online');
+            }
+        };
+
+        toggleNavigatorDisplay();
+
+        window.addEventListener('online', toggleNavigatorDisplay);
+        window.addEventListener('offline', toggleNavigatorDisplay);
     }
 
 };
