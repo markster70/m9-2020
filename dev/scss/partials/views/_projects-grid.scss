@@ -230,6 +230,10 @@
   max-width: 100%;
   opacity: 0.6;
 
+  @include breakpoint($bp-m-max, max-width) {
+    width: 65%;
+  }
+
   @include breakpoint($bp-l-max, max-width) {
     width: 100%;
   }

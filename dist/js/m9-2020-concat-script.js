@@ -9536,6 +9536,23 @@ function getCookie(name) {
   }
 
   return null;
+}
+
+function toggleAriaExpanded(element) {
+  var attributeKey = 'aria-expanded';
+  var currentAriaState = element.getAttribute(attributeKey);
+
+  switch (currentAriaState) {
+    case 'true':
+      element.setAttribute(attributeKey, 'false');
+      break;
+
+    case 'false':
+      element.setAttribute(attributeKey, 'true');
+      break;
+
+    default:
+  }
 } // const scrollStop = function (callback) {
 //
 //     // Make sure a valid callback was provided
@@ -9585,17 +9602,16 @@ mNineDScript.start = {
     }
 
     this.canHover();
-    var currSS = currScreenSize();
+    var screenSizeTest = currScreenSize(); // see if the current screen size is in the large screen array
 
-    if (currSS === 'xls' || currSS === 'xxl' || currSS === 'massive') {
+    if (m9Vars.largeScreenCategories.includes(screenSizeTest)) {
       this.cursorSetup();
     }
 
     this.resizeActions();
     this.runNav();
     this.runScrollAnimations();
-    this.scrollToSection(); //this.projectsSummaryControl();
-
+    this.scrollToSection();
     this.activeSectionClasses();
     this.siteBtt();
     this.formValidation();
@@ -9975,268 +9991,6 @@ mNineDScript.start = {
       ease: "circ.inOut"
     });
   },
-  projectsSummaryControl: function projectsSummaryControl() {
-    // function to control the project summaries, and their animation with GSAP
-    var projectSummaryTriggers = $('.mn-section-project-summary-trigger');
-    var projectsTl = gsap.timeline();
-    var projectWrappers = $('.mn-section-project-summary-item');
-    var itemHeight = 65;
-    var projectsSummaryContainer = $1('#js-projects-summary-container');
-    var bodyEl = $1('body');
-    var docEl = document.documentElement;
-    var projectSummaryClose = $1('.mn-projects-summary-detail-close');
-    var projectsSection = $1('#js-projects-top');
-    var fadeSections = $('.mn-section-fade');
-    var projectContainerClass = '.mn-projects-summary-detail-wrapper';
-
-    var _self = this;
-
-    var projectSummaryBg = $1('.mn-section-projects-summary-bg '); // 2 possible values for resetting the project items
-
-    var resetItemValues = ['20px', '80px'];
-    var currItemResetValue = resetItemValues[0];
-
-    for (var i = 0; i < projectWrappers.length; i++) {
-      var el = projectWrappers[i];
-      addClass(el, 'is-inactive');
-      el.dataset.originalPosition = el.style.top = i * itemHeight;
-      el.dataset.originalIndex = i;
-
-      if (i > 0) {
-        el.style.top = i * itemHeight + 'px';
-        el.style.zIndex = i;
-      }
-    }
-
-    projectSummaryTriggers.forEach(function (el) {
-      el.addEventListener('click', function (e) {
-        e.preventDefault();
-        var contentToLoad = el.dataset.content;
-        var elParent = el.parentNode.parentNode;
-        var projectContainer = $1(projectContainerClass, elParent);
-
-        if (hasClass(elParent, 'is-inactive')) {
-          partialLoader(projectContainer, contentToLoad).then(function () {
-            setTimeout(function () {
-              // need to look at pre-loader here
-              removeClass(elParent, 'is-inactive');
-              addClass(elParent, 'is-animating');
-              openProject(el);
-            }, 500);
-          })["catch"](function () {// need to do something here with the error handler
-          });
-        } // end if
-
-      });
-    });
-
-    function openProject(element) {
-      var parentEl = element.parentNode.parentNode;
-      var inactiveSiblings = $('li.is-inactive');
-      projectsTl.to(element, {
-        duration: 0.9,
-        backgroundColor: '#000000'
-      });
-      projectsTl.to(inactiveSiblings, {
-        duration: 0.3,
-        opacity: 0.5
-      });
-      projectsTl.to(fadeSections, {
-        duration: 0.5,
-        opacity: 0,
-        onComplete: function onComplete() {
-          gsap.to(window, {
-            duration: 1.1,
-            scrollTo: {
-              y: projectsSummaryContainer,
-              autoKill: false
-            },
-            ease: "circ.inOut",
-            onComplete: function onComplete() {
-              projectOpenActions();
-            }
-          });
-        }
-      });
-
-      function projectOpenActions() {
-        projectsTl.to(element, {
-          duration: 0.6,
-          className: "+=is-active",
-          ease: "circ.inOut(0.5)"
-        });
-        projectsTl.to(parentEl, {
-          duration: 0.7,
-          top: 0,
-          opacity: 1,
-          ease: "expo.inOut(0.5)"
-        });
-        projectsTl.to(parentEl, {
-          duration: 0.7,
-          height: '100vh',
-          ease: "expo.inOut(0.5)"
-        });
-        projectsTl.to(inactiveSiblings, {
-          duration: 0.3,
-          opacity: 0
-        });
-        projectsTl.to(projectSummaryBg, {
-          duration: 0.5,
-          opacity: 0
-        });
-        projectsTl.to(parentEl, {
-          duration: 0.7,
-          zIndex: '1000',
-          backgroundColor: 'rgba(32,32,32,1.0)',
-          opacity: 1,
-          ease: "circ.inOut(0.3)",
-          onComplete: function onComplete() {
-            openDetail(parentEl);
-            addClass(parentEl, 'is-active-wrapper');
-          }
-        }); // these will run as the timeline is running
-
-        addClass(projectsSummaryContainer, 'is-active');
-        addClass(docEl, 'is-projects-active');
-      }
-    }
-
-    function openDetail(element) {
-      var detailEl = $1('.mn-projects-summary-detail-wrapper', element);
-      gsap.to(detailEl, {
-        duration: 0.1,
-        display: 'block'
-      });
-      gsap.to(detailEl, {
-        duration: 0.7,
-        top: 0,
-        opacity: 1,
-        height: '100%',
-        ease: "circ.inOut(0.5)",
-        onComplete: function onComplete() {
-          _self.projectDetailControl();
-        }
-      });
-    }
-
-    function resetProjectsWindow() {
-      gsap.to(window, {
-        duration: 0.9,
-        scrollTo: {
-          y: projectsSection,
-          autoKill: false
-        },
-        ease: "expo.inOut(0.6)"
-      });
-      projectsTl.to(fadeSections, {
-        duration: 0.5,
-        opacity: 1
-      }); // remove container class, and body class to remove fixed positioning etc
-
-      removeClass(projectsSummaryContainer, 'is-active');
-    }
-
-    function resetProjects() {
-      var activeWrapper = $1('.is-active-wrapper');
-      var activeDetail = $1('.mn-projects-summary-detail-wrapper', activeWrapper);
-      var activeAnchor = $1('.is-active', activeWrapper);
-      var activeWrapperOriginalPos = activeWrapper.dataset.originalPosition;
-      var activeWrapperOriginalIndex = activeWrapper.dataset.originalIndex;
-      var inactiveSiblings = $('li.is-inactive');
-      var projectCloseBtn = $1('.mn-projects-summary-detail-close');
-      var resetTl = gsap.timeline(); // need to hide content first here
-      // hiding content here
-
-      resetTl.to(projectCloseBtn, {
-        duration: 0.5,
-        opacity: 0,
-        ease: "circ.inOut(0.5)"
-      });
-      resetTl.to(activeDetail, {
-        duration: 0.7,
-        opacity: 0,
-        ease: "circ.inOut(0.5)",
-        onComplete: function onComplete() {
-          activeDetail.style = '';
-          activeWrapper.style.overflowY = 'hidden';
-        }
-      }); // set the summary item back to 65 px height
-
-      resetTl.to(activeWrapper, {
-        duration: 0.9,
-        height: itemHeight + 'px',
-        ease: "circ.inOut(0.5)"
-      }); // make the siblings visible again
-
-      resetTl.to(inactiveSiblings, {
-        duration: 0.7,
-        opacity: 1
-      }); // rest opacity of section bg
-
-      resetTl.to(projectSummaryBg, {
-        duration: 0.5,
-        opacity: 1
-      }); // move the summary item back to it's original position
-
-      resetTl.to(activeWrapper, {
-        duration: 0.65,
-        top: activeWrapperOriginalPos + 'px',
-        ease: "expo.inOut(0.4)"
-      }); // move the anchor back to the left of the list
-
-      resetTl.to(activeAnchor, {
-        duration: 0.7,
-        translateX: currItemResetValue,
-        className: "-=is-active",
-        ease: "circ.inOut(0.4)",
-        onComplete: function onComplete() {
-          // take the inline style for bg color off
-          activeWrapper.style.removeProperty('background-color'); // reset the z index for the element
-
-          activeWrapper.style.zIndex = activeWrapperOriginalIndex; // take the background color off the anchor as well
-
-          activeAnchor.style.removeProperty('background-color');
-          activeWrapper.style.removeProperty('overflow-y'); // remove the class from the active wrapper
-
-          removeClass(activeWrapper, 'is-active-wrapper');
-          removeClass(activeWrapper, 'is-animating');
-          removeClass(docEl, 'is-projects-active'); // add the default class back to previously added element
-
-          addClass(activeWrapper, 'is-inactive'); // move the window back to top of projects
-
-          resetProjectsWindow();
-        }
-      });
-    } // when close button for project is clicked, need screen size to evaluate the transform
-    // position to tween to - it's one of 2 values in array at top of function
-    // so get the screen size, if largest screens, pick that value from array
-    // if not, assign th other one for gsap to use
-
-
-    function getResetValue() {
-      var currSS = currScreenSize();
-
-      if (currSS === 'xls' || currSS === 'xxl' || currSS === 'massive') {
-        currItemResetValue = resetItemValues[1];
-      } else {
-        currItemResetValue = resetItemValues[0];
-      }
-    }
-
-    projectSummaryClose.addEventListener('click', function () {
-      getResetValue(); // triggering the reset of projects here
-
-      resetProjects();
-    }); // reset on escape
-
-    window.addEventListener('keydown', function (evt) {
-      getResetValue();
-
-      if (evt.key === 'Escape') {
-        resetProjects();
-      }
-    });
-  },
   activeSectionClasses: function activeSectionClasses() {
     // for each section, we need a class added to body for the menu variations etc
     // this is done via waypoints js
@@ -10346,7 +10100,9 @@ mNineDScript.start = {
     });
   },
   triggerVideos: function triggerVideos() {
-    var ss = currScreenSize();
+    var ss = currScreenSize(); // am only triggering the videos for screen sizes in the 'massive' category here -
+    // those most likely to have the bandwith to smoothly play the video
+    // it's for visual decoration only, so no functional need to be playe when the nav opens
 
     if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss === 'xls') {
       return;
@@ -10499,7 +10255,6 @@ mNineDScript.start = {
   },
   projectGridActions: function projectGridActions() {
     var pGridItems = $('.mn-project-grid-item-content');
-    console.log('ps =' + pGridItems);
 
     for (var i = 0; i < pGridItems.length; i++) {
       var el = pGridItems[i];

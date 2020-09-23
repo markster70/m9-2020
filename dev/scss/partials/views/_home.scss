@@ -61,10 +61,8 @@
   @include ssLandscape() {
     margin-top: 2rem;
   }
-
-  @include breakpoint($bp-m) {
+  
     padding-top: 2rem;
-  }
 
   @include breakpoint($bp-l) {
     padding-top: 0;

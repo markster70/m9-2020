@@ -199,6 +199,23 @@ function getCookie(name) {
 }
 
 
+function toggleAriaExpanded (element) {
+    const attributeKey = 'aria-expanded';
+
+    let currentAriaState = element.getAttribute(attributeKey);
+
+    switch (currentAriaState) {
+        case 'true':
+            element.setAttribute(attributeKey, 'false');
+            break;
+        case 'false':
+            element.setAttribute(attributeKey, 'true');
+            break;
+        default:
+
+    }
+}
+
 // const scrollStop = function (callback) {
 //
 //     // Make sure a valid callback was provided

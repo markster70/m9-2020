@@ -7,6 +7,34 @@
                 <p class="mn-section-projects-hd-copy">Here's some of the work that we have taken care of in the last few years...</p>
             </header>
             <div class="mn-section-projects-inner carousel" id="js-projects-summary-container">
+	            <article class="mn-project-grid-item carousel-cell">
+		            <a href="/projects/berinert.php" data-content="/projects/includes/berinert-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
+			            <div class="mn-project-grid-item-img">
+				            <img src="/dist/images/project-images/project-previews/berinert-example-preview.jpg" alt="offline application development">
+			            </div>
+			            <div class="mn-project-grid-item-inner">
+				            <div class="mn-project-grid-item-title-el">
+					            <h4 class="mn-project-grid-item-title">Network Independent Application for Pharmaceutical Business</h4>
+				            </div>
+				            <div class="mn-project-grid-item-link">
+					            <p>View Case Study</p>
+					            <img src="/dist/images/project-images/project-view-detail-icon.png" alt="view project">
+				            </div>
+				            <div class="mn-project-grid-item-categories">
+					            <span>HTML5</span>
+					            <span>SCSS</span>
+					            <span>JavaScript (ES6)</span>
+					            <span>Service Worker API</span>
+					            <span>Cache API</span>
+					            <span>Google Workbox</span>
+				            </div>
+			            </div>
+		            </a>
+		            <h4 class="mn-project-grid-item-label">Berinert Edetail</h4>
+		            <div class="mn-site-nav-projects-grid-item-load-ind">
+			            <?php include $_SERVER['DOCUMENT_ROOT'] . '/site-partials/_svg-loader.html';?>
+		            </div>
+	            </article>
                 <article class="mn-project-grid-item carousel-cell">
                     <a href="/projects/pegasus.php" data-content="/projects/includes/pegasus-content.html" class="mn-project-grid-item-content mn-project-grid-item-trigger" aria-controls="case-study-wrapper">
                         <div class="mn-project-grid-item-img">
