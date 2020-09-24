@@ -164,4 +164,4 @@ gulp.task("build", gulp.series(clean, gulp.parallel(createCss, createImages, "js
 
 
 
-gulp.task("run", gulp.parallel("build",browserSync, watchFiles));
+gulp.task("run", gulp.series("build",browserSync, watchFiles));
