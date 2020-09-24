@@ -23,6 +23,7 @@
 
 <!-- note the script type here is important as an import is used within the script - modern browsers will handle this no issue -->
 <script src="dist/js/native-sw-register.js"></script>
+<script src="dist/js/m9-2020-vendor-script.min.js"></script>
 <script src="dist/js/m9-2020-concat-script.min.js"></script>
 </body>
 

@@ -17,6 +17,7 @@ const notify = require('gulp-notify');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const touch = require('gulp-touch-fd');
+const webpack = require('webpack-stream');
 
 const distDir = 'dist/';
 const devDir = 'dev/';
@@ -72,7 +73,6 @@ function createCss () {
 }
 
 
-
 function createImages() {
     // compress amy image assets so that we are nive and tidy for a prod release
     return gulp.src('dev/images/**/*.{gif,jpg,png,svg}')
@@ -82,8 +82,43 @@ function createImages() {
         .pipe(notify({ message: 'Image Compression complete', onLast: true }));
 }
 
-function lintScripts () {
-    return gulp.src(['dev/js/custom-scripts/*.js','dev/js/plugins/*.js'])
+
+function createVendorScripts() {
+
+    return gulp.src(['dev/js/vendor/*.js','dev/js/vendor/plugins/*.js','dev/js/helper-functions/*.js'])
+        .pipe(plumber({ errorHandler: function(err) {
+                notify.onError({
+                    title: "Gulp  JS Compile error in " + err.plugin,
+                    message:  err.toString()
+                })(err);
+            }}))
+        .pipe(babel({
+            presets: ['@babel/preset-env', {sourceType: "unambiguous" }]
+        }))
+        .pipe(concat('m9-2020-vendor-script.js'))
+        .pipe(gulp.dest('dist/js'))
+        .pipe(touch())
+        .pipe(rename({suffix: '.min'}))
+        .pipe(sourcemaps.init())
+        .pipe(uglify())
+        .pipe(sourcemaps.write('.'))
+        .pipe(gulp.dest(`${distDir}js`))
+        .pipe(touch())
+        .pipe(notify({ message: 'create Vendor Scripts task complete' }))
+        .pipe(browsersync.stream());
+}
+
+function copyStandaloneScripts () {
+
+    return gulp.src('dev/js/standalone/**/*.js')
+        .pipe(gulp.dest('dist/js/'));
+}
+
+function bundleM9Scripts () {
+    return gulp.src('dev/js/custom-scripts/m9d-script.js')
+        .pipe(webpack({
+            // Any configuration options...
+        }))
         .pipe(plumber({ errorHandler: function(err) {
                 notify.onError({
                     title: "Gulp  Lint error in " + err.plugin,
@@ -92,18 +127,6 @@ function lintScripts () {
             }}))
         .pipe(jshint({esnext: true}))
         .pipe(jshint.reporter('default'))
-
-}
-
-function createScripts() {
-
-    return gulp.src(['dev/js/vendor/*.js','dev/js/vendor/plugins/*.js','dev/js/helper-functions/*.js','dev/js/plugins/*.js','dev/js/custom-scripts/*.js'])
-        .pipe(plumber({ errorHandler: function(err) {
-                notify.onError({
-                    title: "Gulp  JS Compile error in " + err.plugin,
-                    message:  err.toString()
-                })(err);
-            }}))
         .pipe(babel({
             presets: ['@babel/preset-env', {sourceType: "unambiguous" }]
         }))
@@ -114,16 +137,10 @@ function createScripts() {
         .pipe(sourcemaps.init())
         .pipe(uglify())
         .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest('dist/js'))
+        .pipe(gulp.dest(`${distDir}js`))
         .pipe(touch())
-        .pipe(notify({ message: 'createScripts task complete' }))
+        .pipe(notify({ message: 'create M9 Scripts task complete' }))
         .pipe(browsersync.stream());
-}
-
-function copyStandaloneScripts () {
-
-    return gulp.src('dev/js/standalone/**/*.js')
-        .pipe(gulp.dest('dist/js/'));
 }
 
 
@@ -131,7 +148,7 @@ function copyStandaloneScripts () {
 function watchFiles() {
     gulp.watch("dev/scss/**/*", createCss);
     gulp.watch("dev/images/**/*", createImages);
-    gulp.watch("dev/js/**/*", gulp.series(lintScripts,createScripts, copyStandaloneScripts));
+    gulp.watch("dev/js/**/*", gulp.series(createVendorScripts, bundleM9Scripts, copyStandaloneScripts));
     gulp.watch("dev/fonts/**/*", copyFonts);
 
 
@@ -153,15 +170,15 @@ gulp.task('copyServiceWorker', () => {
 });
 
 
+
+
+
 // Tasks
 gulp.task("images", createImages);
 gulp.task("css", createCss);
-gulp.task("js", gulp.series(lintScripts,createScripts, copyStandaloneScripts));
+gulp.task("js", gulp.series(createVendorScripts, bundleM9Scripts, copyStandaloneScripts));
 gulp.task("clean", clean);
 
-
 gulp.task("build", gulp.series(clean, gulp.parallel(createCss, createImages, "js", copyFonts), "copyServiceWorkerDependencies", "copyServiceWorker"));
-
-
 
 gulp.task("run", gulp.series("build",browserSync, watchFiles));

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'm9d-site-cache-v1.2';
+var CACHE_NAME = 'm9d-site-cache-v1.4';
 var urlsToCache = [
     '/',
     '/dist/css/m9-2020-styles.min.css',
@@ -19,11 +19,14 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', function(event) {
+
+    self.skipWaiting();
+
     // Perform install steps
     event.waitUntil(
         caches.open(CACHE_NAME)
             .then(function(cache) {
-                console.log('Opened cache');
+                //console.log('Opened cache');
                 return cache.addAll(urlsToCache);
             })
     );
