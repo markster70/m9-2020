@@ -1,7 +1,8 @@
-var CACHE_NAME = 'm9d-site-cache-v1.4';
+var CACHE_NAME = 'm9d-site-cache-v1.5';
 var urlsToCache = [
     '/',
     '/dist/css/m9-2020-styles.min.css',
+    '/dist/js/m9-2020-vendor-script.min.js',
     '/dist/js/m9-2020-concat-script.min.js',
     'projects/includes/barclays-content.html',
     'projects/includes/berinert-content.html',
@@ -19,9 +20,6 @@ var urlsToCache = [
 ];
 
 self.addEventListener('install', function(event) {
-
-    self.skipWaiting();
-
     // Perform install steps
     event.waitUntil(
         caches.open(CACHE_NAME)
