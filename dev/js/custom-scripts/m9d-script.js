@@ -520,7 +520,10 @@ mNineDScript.start = {
 
         // am only triggering the videos for screen sizes in the 'massive' category here -
         // those most likely to have the bandwith to smoothly play the video
-        // it's for visual decoration only, so no functional need to be playe when the nav opens
+        // it's for visual decoration only, so no functional need to be play when the nav opens
+
+        // also dont wa
+
         if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss ==='xls' || !navigator.onLine) {
             return;
         }
@@ -580,6 +583,13 @@ mNineDScript.start = {
 
     },
     homeSquaresAnimation () {
+
+        // function runs a subtle shift through the visiblity
+        // of a set of images on the home page to offer
+        // very discreet movement
+        // is operated with gsap 3 timeline
+
+        // when nav is open, timeline is paused via mutation observer
 
 
         // probably only want to run this for larger screens
@@ -827,6 +837,7 @@ mNineDScript.start = {
         const bttButtons = $('.mn-project-summary-btt');
         const detailWrapper = $1('.mn-project-grid-item-cs-wrap');
         const projectCloseBtn = $1('.mn-projects-summary-detail-close');
+        const docEl = document.documentElement;
 
         // back to top button for each wrapper
 
@@ -844,6 +855,18 @@ mNineDScript.start = {
             this.csWrapperAnimation();
 
         });
+
+
+        window.addEventListener('keyup', (e) =>{
+
+            if(hasClass(docEl, 'is-projects-active')) {
+
+                if (e.key === 'Escape' || e.which === 27) {
+                    this.csWrapperAnimation();
+                }
+            }
+        });
+
 
     },
     resizeActions () {

@@ -1,4 +1,4 @@
-var CACHE_NAME = 'm9d-site-cache-v1.0';
+var CACHE_NAME = 'm9d-site-cache-v1.2';
 var urlsToCache = [
     '/',
     '/dist/css/m9-2020-styles.min.css',

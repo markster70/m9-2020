@@ -17,11 +17,6 @@ const notify = require('gulp-notify');
 const babel = require('gulp-babel');
 const sourcemaps = require('gulp-sourcemaps');
 const touch = require('gulp-touch-fd');
-const workboxBuild = require('workbox-build');
-
-
-const path = require('path');
-const fs = require('fs');
 
 const distDir = 'dist/';
 const devDir = 'dev/';

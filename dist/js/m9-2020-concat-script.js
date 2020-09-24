@@ -10103,7 +10103,8 @@ mNineDScript.start = {
   triggerVideos: function triggerVideos() {
     var ss = currScreenSize(); // am only triggering the videos for screen sizes in the 'massive' category here -
     // those most likely to have the bandwith to smoothly play the video
-    // it's for visual decoration only, so no functional need to be playe when the nav opens
+    // it's for visual decoration only, so no functional need to be play when the nav opens
+    // also dont wa
 
     if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss === 'xls' || !navigator.onLine) {
       return;
@@ -10158,6 +10159,11 @@ mNineDScript.start = {
     }
   },
   homeSquaresAnimation: function homeSquaresAnimation() {
+    // function runs a subtle shift through the visiblity
+    // of a set of images on the home page to offer
+    // very discreet movement
+    // is operated with gsap 3 timeline
+    // when nav is open, timeline is paused via mutation observer
     // probably only want to run this for larger screens
     var currSS = currScreenSize();
 
@@ -10432,7 +10438,8 @@ mNineDScript.start = {
 
     var bttButtons = $('.mn-project-summary-btt');
     var detailWrapper = $1('.mn-project-grid-item-cs-wrap');
-    var projectCloseBtn = $1('.mn-projects-summary-detail-close'); // back to top button for each wrapper
+    var projectCloseBtn = $1('.mn-projects-summary-detail-close');
+    var docEl = document.documentElement; // back to top button for each wrapper
 
     bttButtons.forEach(function (el) {
       el.addEventListener('click', function () {
@@ -10448,6 +10455,13 @@ mNineDScript.start = {
     });
     projectCloseBtn.addEventListener('click', function () {
       _this3.csWrapperAnimation();
+    });
+    window.addEventListener('keyup', function (e) {
+      if (hasClass(docEl, 'is-projects-active')) {
+        if (e.key === 'Escape' || e.which === 27) {
+          _this3.csWrapperAnimation();
+        }
+      }
     });
   },
   resizeActions: function resizeActions() {
@@ -10472,6 +10486,10 @@ mNineDScript.start = {
     window.addEventListener('resize', assessScreenSize);
   },
   setUpCarousel: function setUpCarousel() {
+    // function to initiate flickity carousel
+    // carousel is used for work portfolio at small screen only
+    // on resize the screen size is re-asesseed
+    // and carousel instantiated, or destroyed
     function initCarousel() {
       if (m9Vars.isSmallScreen) {
         //console.log('setup carousel');
@@ -10490,6 +10508,9 @@ mNineDScript.start = {
     window.addEventListener('resize', resetCarousel);
   },
   setOfflineElements: function setOfflineElements() {
+    // function to set a class on the doc el if the network is available, or not
+    // within the ajax parts of the site, images are not shown when site is off-grid to keep the cache size reasonable
+    // for a user
     var toggleNavigatorDisplay = function toggleNavigatorDisplay() {
       if (navigator.onLine) {
         addClass(document.documentElement, 'is-online');
