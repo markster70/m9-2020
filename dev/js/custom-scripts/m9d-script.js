@@ -24,7 +24,7 @@ import setOfflineElements from './ui-functions/setOfflineElements';
 const { m9Vars } = require('./appVars');
 
 
-
+// object for script
 const mNineDScript = {};
 
 

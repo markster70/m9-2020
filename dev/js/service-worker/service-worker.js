@@ -1,4 +1,4 @@
-var CACHE_NAME = 'm9d-site-cache-v1.56';
+var CACHE_NAME = 'm9d-site-cache-v1.58';
 var urlsToCache = [
     '/',
     '/dist/css/m9-2020-styles.min.css',
@@ -89,3 +89,4 @@ self.addEventListener('message', event => {
     if (event.data.action === 'skipWaiting') {
         self.skipWaiting();
     }
+});
