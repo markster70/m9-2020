@@ -82,7 +82,7 @@ function createImages() {
         .pipe(notify({ message: 'Image Compression complete', onLast: true }));
 }
 
-
+// function to bundle venbdor scripts - no linting here as causes too many issues resolving lint preferences
 function createVendorScripts() {
 
     return gulp.src(['dev/js/vendor/*.js','dev/js/vendor/plugins/*.js','dev/js/helper-functions/*.js'])
@@ -114,6 +114,7 @@ function copyStandaloneScripts () {
         .pipe(gulp.dest('dist/js/'));
 }
 
+// functon to lint, and bundle custom ui scripts, then pass to dist directory
 function bundleM9Scripts () {
     return gulp.src('dev/js/custom-scripts/m9d-script.js')
         .pipe(webpack({
@@ -168,8 +169,6 @@ gulp.task('copyServiceWorker', () => {
     return gulp.src(`${swSrc}/service-worker.js`)
         .pipe(gulp.dest('./'))
 });
-
-
 
 
 

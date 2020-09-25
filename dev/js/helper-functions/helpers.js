@@ -144,7 +144,6 @@ function detectOldIE() {
         return parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10);
     }
 
-
     // other browser
     return false;
 }
@@ -215,29 +214,3 @@ function toggleAriaExpanded (element) {
 
     }
 }
-
-// const scrollStop = function (callback) {
-//
-//     // Make sure a valid callback was provided
-//     if (!callback || typeof callback !== 'function') return;
-//
-//     // Setup scrolling variable
-//     let isScrolling;
-//
-//     // Listen for scroll events
-//     window.addEventListener('scroll', function (event) {
-//
-//         // Clear our timeout throughout the scroll
-//         window.clearTimeout(isScrolling);
-//
-//         // Set a timeout to run after scrolling ends
-//         isScrolling = setTimeout(function() {
-//
-//             // Run the callback
-//             callback();
-//
-//         }, 150);
-//
-//     }, false);
-//
-// };

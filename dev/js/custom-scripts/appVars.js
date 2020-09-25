@@ -5,5 +5,5 @@ const m9Vars = {
     flickityOpts : { "wrapAround": true }
 };
 
-
+// export here
 module.exports = { m9Vars };
