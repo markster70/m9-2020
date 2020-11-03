@@ -120,7 +120,7 @@ head {
 }
 
 
-@include breakpoint($bp-l) {
+@include breakpoint($bp-m) {
   //midi screen
   head {
     font-size: 20px;

@@ -371,6 +371,7 @@
             <span>Deploy</span>
         </h2>
     </div>
+	<!-- wrapper for case studies -->
     <aside class="mn-project-grid-item-cs-wrap" aria-live="polite" aria-expanded="false" id="case-study-wrapper">
         <nav>
             <button class="mn-projects-summary-detail-close">

@@ -16,7 +16,6 @@ function  resizeActions () {
 
         } else {
             removeClass(docEl, 'is-small-screen');
-            // this may have to be forced as scrollMagic controller update is not great at picking up these changes
 
         }
     }

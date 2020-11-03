@@ -84,7 +84,7 @@ self.addEventListener('activate', function(event) {
     );
 });
 
-
+// listener for skip waiting message that is posted as user accepts update to service worker
 self.addEventListener('message', event => {
     if (event.data.action === 'skipWaiting') {
         self.skipWaiting();

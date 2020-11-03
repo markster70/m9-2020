@@ -3,7 +3,7 @@ function triggerVideos() {
     let ss = currScreenSize();
 
     // am only triggering the videos for screen sizes in the 'massive' category here -
-    // those most likely to have the bandwith to smoothly play the video
+    // those most likely to have the bandwidth to smoothly play the video
     // it's for visual decoration only, so no functional need to be play when the nav opens
 
     // also dont wa
