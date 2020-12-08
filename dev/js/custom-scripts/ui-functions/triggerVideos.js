@@ -6,7 +6,6 @@ function triggerVideos() {
     // those most likely to have the bandwidth to smoothly play the video
     // it's for visual decoration only, so no functional need to be play when the nav opens
 
-    // also dont wa
 
     if (ss === 'ss' || ss === 'ms' || ss === 'ls' || ss ==='xls' || !navigator.onLine) {
         return;
